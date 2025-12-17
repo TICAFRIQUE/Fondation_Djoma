@@ -175,4 +175,3 @@ prevBtns.forEach((btn) =>
 );
 
 updateStep(current);
-
