@@ -1,12 +1,20 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\backend\DashboardController;
 use App\Http\Controllers\backend\AdminController;
+use App\Http\Controllers\backend\DashboardController;
 use App\Http\Controllers\backend\ModuleController;
-use App\Http\Controllers\backend\RoleController;
+use App\Http\Controllers\backend\NewsLettersController;
 use App\Http\Controllers\backend\ParametreController;
 use App\Http\Controllers\backend\PermissionController;
+use App\Http\Controllers\backend\RoleController;
+use App\Http\Controllers\backend\CommandeServiceController;
+use App\Http\Controllers\frontend\BaseController;
+use App\Http\Controllers\frontend\HebergementController;
+use App\Http\Controllers\frontend\NomDomaineController;
+use Illuminate\Support\Facades\Route;
+
+
+
 
 
 
@@ -35,7 +43,7 @@ Route::middleware(['admin'])->prefix('admin')->group(function () {
         route::get('maintenance-up', 'maintenanceUp')->name('parametre.maintenance-up');
         route::get('maintenance-down', 'maintenanceDown')->name('parametre.maintenance-down');
         route::get('optimize-clear', 'optimizeClear')->name('parametre.optimize-clear');
-         Route::get('download-backup/{file}', 'downloadBackup')->name('setting.download-backup');  // download backup db
+        Route::get('download-backup/{file}', 'downloadBackup')->name('setting.download-backup');  // download backup db
     });
 
 
@@ -74,4 +82,70 @@ Route::middleware(['admin'])->prefix('admin')->group(function () {
         route::post('update/{id}', 'update')->name('module.update');
         route::get('delete/{id}', 'delete')->name('module.delete');
     });
+
+
+    // newsletter subscribers
+    Route::prefix('newsletters')->controller(NewsLettersController::class)->group(function () {
+        route::get('', 'index')->name('newsletters.index');
+        route::post('store', 'store')->name('newsletter.store');
+        route::post('delete/{id}', 'destroy')->name('newsletters.destroy');
+        route::post('send', 'sendToAll')->name('newsletters.send');
+    });
+    // Commande Service Form Submission
+
+    Route::prefix('commande_web')->controller(CommandeServiceController::class)->group(function () {
+        Route::post('commander', 'store')->name('commande.service.store');
+        Route::get('', 'index')->name('commande.service.index');
+    });
+});
+
+
+
+
+
+
+
+
+
+
+
+// ###############################
+// Frontend Routes
+// ###############################
+Route::prefix('/')->controller(BaseController::class)->group(function () {
+    route::get('', 'index')->name('frontend.index');
+});
+
+
+Route::prefix('domaines')->group(function () {
+    Route::get('researcher', function () {
+        return view('frontend.domaines.researcher');
+    })->name('domaine.researcher');
+
+    Route::get('transfer', function () {
+        return view('frontend.domaines.transfer');
+    })->name('domaine.transfer');
+
+    Route::get('renew', function () {
+        return view('frontend.domaines.renew');
+    })->name('domaine.renew');
+
+    // Ajax routes
+    Route::post('ajax/search', [NomDomaineController::class, 'search'])
+        ->name('domaine.ajax.search');
+    Route::post('ajax/transfer', [NomDomaineController::class, 'transfer'])
+        ->name('domaine.ajax.transfer');
+    Route::post('ajax/renew', [NomDomaineController::class, 'renew'])
+        ->name('domaine.ajax.renew');
+});
+
+
+Route::prefix('hebergements')->controller(HebergementController::class)->group(function () {
+    Route::get('mutualise', 'hebergement_mutualise')->name('hebergement.mutualise');
+    Route::get('cloud', 'hebergement_cloud')->name('hebergement.cloud');
+    Route::get('windows', 'hebergement_windows')->name('hebergement.windows');
+    Route::get('linux', 'hebergement_linux')->name('hebergement.linux');
+    Route::get('commander', 'commander_hebergement')->name('hebergement.commander');
+    // inscription hebergement cloud
+    Route::get('inscription', 'inscription')->name('hebergement.inscription');
 });

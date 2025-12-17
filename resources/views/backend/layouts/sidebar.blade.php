@@ -5,7 +5,7 @@
         {{-- <h4 class="text-white"> {{config('app.name')}} </h4> --}}
         <!-- Dark Logo-->
         {{-- @if ($setting != null)
-            
+
             <!-- Light Logo-->
             <a href="#" class="logo logo-light">
                 <span class="logo-sm">
@@ -81,7 +81,22 @@
                         </a>
                     </li>
                 @endcan
+                {{-- @can('voir-newsLetters') --}}
+                <li class="nav-item">
 
+                    <a href="{{ route('newsletters.index') }}" class="nav-link menu-link"> <i
+                            class="fas fa-envelope text-muted me-1"></i><span>NewsLetters</span></a>
+                </li>
+                {{-- @endcan --}}
+
+                {{-- @can('voir-commandes') --}}
+                    <li class="nav-item">
+                        <a class="nav-link menu-link {{ Route::is('commande.service.*') ? 'active' : '' }}"
+                            href="{{ route('commande.service.index') }}">
+                            <i class=" ri-shopping-cart-2-line"></i> <span>COMMANDES</span>
+                        </a>
+                    </li>
+                {{-- @endcan --}}
 
 
 
