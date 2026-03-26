@@ -1,16 +1,20 @@
 <?php
 
+use App\Http\Controllers\AproposController;
 use App\Http\Controllers\backend\AdminController;
+use App\Http\Controllers\backend\CommandeServiceController;
 use App\Http\Controllers\backend\DashboardController;
 use App\Http\Controllers\backend\ModuleController;
 use App\Http\Controllers\backend\NewsLettersController;
 use App\Http\Controllers\backend\ParametreController;
 use App\Http\Controllers\backend\PermissionController;
 use App\Http\Controllers\backend\RoleController;
-use App\Http\Controllers\backend\CommandeServiceController;
 use App\Http\Controllers\frontend\BaseController;
 use App\Http\Controllers\frontend\HebergementController;
+use App\Http\Controllers\frontend\indexController;
 use App\Http\Controllers\frontend\NomDomaineController;
+use App\Http\Controllers\GalerieController;
+use App\Http\Controllers\SliderController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -83,8 +87,43 @@ Route::middleware(['admin'])->prefix('admin')->group(function () {
         route::delete('delete/{id}', 'delete')->name('module.delete');
     });
 
+// galerie
 
- 
+Route::prefix('admin/galerie')->group(function(){
+    Route::get('/', [GalerieController::class,'index'])->name('galerie.index');
+    Route::post('/store', [GalerieController::class,'store'])->name('galerie.store');
+    Route::put('/update/{id}', [GalerieController::class,'update'])->name('galerie.update');
+    Route::delete('/delete/{id}', [GalerieController::class,'destroy'])->name('galerie.delete');
+});
+
+// Apropos
+Route::prefix('admin/apropos')->controller(AproposController::class)->group(function(){
+    Route::get('/', 'index')->name('apropos.index');
+    Route::post('/store', 'store')->name('apropos.store');
+    Route::put('/update/{id}', 'update')->name('apropos.update');
+    Route::delete('/delete/{id}', 'destroy')->name('apropos.destroy');
+});
+
+// sliders
+Route::prefix('admin')->group(function () {
+    Route::get('/sliders', [SliderController::class, 'index'])->name('sliders.index');
+    Route::post('/sliders', [SliderController::class, 'store'])->name('sliders.store');
+    Route::put('/sliders/{slider}', [SliderController::class, 'update'])->name('sliders.update');
+    Route::delete('/sliders/{slider}', [SliderController::class, 'destroy'])->name('sliders.destroy');
+});
+});
+
+
+
+
+
+// FRONTEND 
+
+Route::controller(indexController::class)->group(function(){
+    // index
+    route::get('/', 'index')->name('index');
+    // galerie
+    route::get('/galerie', 'galerie')->name('galerie');
 });
 
 

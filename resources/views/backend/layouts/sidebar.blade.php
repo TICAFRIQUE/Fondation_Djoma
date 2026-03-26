@@ -3,12 +3,12 @@
     <!-- LOGO -->
     <div class="navbar-brand-box">
         @if ($data_parametre != null)
-            <a href="#" class="logo logo-light">
-                <span class="logo-lg">
-                    <img src="{{ $data_parametre ? URL::asset($data_parametre?->getFirstMediaUrl('logo_header')) : URL::asset('images/camera-icon.png') }}"
-                        alt="logo" width="auto" class="rounded-circle" height="60">
-                </span>
-            </a>
+        <a href="#" class="logo logo-light">
+            <span class="logo-lg">
+                <img src="{{ $data_parametre ? URL::asset($data_parametre?->getFirstMediaUrl('logo_header')) : URL::asset('images/camera-icon.png') }}"
+                    alt="logo" width="auto" class="rounded-circle" height="60">
+            </span>
+        </a>
         @endif
 
         <button type="button" class="btn btn-sm p-0 fs-20 header-item float-end btn-vertical-sm-hover"
@@ -28,61 +28,97 @@
             @endif --}}
             <ul class="navbar-nav" id="navbar-nav">
 
+                {{-- TABLEAU DE BORD --}}
                 @can('voir-tableau de bord')
-                    <li class="nav-item">
-                        <a class="nav-link menu-link {{ Route::is('dashboard.*') ? 'active' : '' }} "
-                            href="{{ route('dashboard.index') }}">
-                            <i class="ri-dashboard-2-line"></i> <span>TABLEAU DE BORD</span>
-                        </a>
-                    </li>
+                <li class="nav-item">
+                    <a class="nav-link menu-link {{ Route::is('dashboard.*') ? 'active' : '' }}"
+                        href="{{ route('dashboard.index') }}">
+                        <i class="ri-dashboard-2-line"></i> <span>TABLEAU DE BORD</span>
+                    </a>
+                </li>
                 @endcan
 
+                {{-- SLIDERS --}}
+                @can('voir-sliders')
+                <li class="nav-item">
+                    <a class="nav-link menu-link {{ Route::is('sliders.*') ? 'active' : '' }}" href="{{ route('sliders.index') }}">
+                        <i class="ri-slideshow-4-line"></i> <span>Sliders</span>
+                    </a>
+                </li>
+                @endcan
 
+                {{-- APROPOS --}}
+                @can('voir-apropos')
+                <li class="nav-item">
+                    <a class="nav-link menu-link {{ Route::is('apropos.*') ? 'active' : '' }}" href="{{ route('apropos.index') }}">
+                        <i class="ri-information-line"></i> <span>À propos</span>
+                    </a>
+                </li>
+                @endcan
 
+                {{-- GALERIE --}}
+                @can('voir-galerie')
+                <li class="nav-item">
+                    <a class="nav-link menu-link {{ Route::is('galerie.*') ? 'active' : '' }}"
+                        href="{{ route('galerie.index') }}">
+                        <i class="ri-image-line"></i> <span>GALERIE</span>
+                    </a>
+                </li>
+                @endcan
 
+                {{-- SECTION PARAMÈTRES --}}
+                @if (in_array(Auth::user()->role, ['superadmin', 'developpeur']) || Auth::user()->can('voir-parametre'))
+                <li class="nav-item">
+                    <a class="nav-link menu-link {{ Route::is('role.*') || Route::is('parametre.*') || Route::is('module.*') || Route::is('permission.*') || Route::is('admin-register.*') ? '' : 'collapsed' }}"
+                        href="#sidebarSettings" data-bs-toggle="collapse" role="button"
+                        aria-expanded="{{ Route::is('role.*') || Route::is('parametre.*') || Route::is('module.*') || Route::is('permission.*') || Route::is('admin-register.*') ? 'true' : 'false' }}"
+                        aria-controls="sidebarSettings">
+                        <i class="ri-settings-2-fill"></i> <span>Paramètres</span>
+                    </a>
 
-                @if (Auth::user()->role == 'superadmin' || Auth::user()->role == 'developpeur' || Auth::user()->can('voir-parametre'))
-                    <li class="nav-item">
-                        <a class="nav-link menu-link" href="#sidebarAuth" data-bs-toggle="collapse" role="button"
-                            aria-expanded="false" aria-controls="sidebarAuth">
-                            <i class="ri-settings-2-fill me-2"></i> <span>Paramètres</span>
-                        </a>
-                        <div class="collapse menu-dropdown {{ Route::is('role.*') || Route::is('parametre.*') || Route::is('module.*') || Route::is('permission.*') || Route::is('admin-register.*') ? 'show' : '' }}"
-                            id="sidebarAuth">
-                            <ul class="nav nav-sm flex-column">
-                                <li class="nav-item">
-                                    <a href="{{ route('parametre.index') }}"
-                                        class="nav-link {{ Route::is('parametre.*') ? 'active' : '' }}">
-                                        <i class="ri-information-line me-2"></i> Informations
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('admin-register.index') }}"
-                                        class="nav-link {{ Route::is('admin-register.*') ? 'active' : '' }}">
-                                        <i class="ri-user-settings-line me-2"></i> Utilisateurs
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('module.index') }}"
-                                        class="nav-link {{ Route::is('module.*') ? 'active' : '' }}">
-                                        <i class="ri-apps-2-line me-2"></i> Modules
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('role.index') }}"
-                                        class="nav-link {{ Route::is('role.*') ? 'active' : '' }}">
-                                        <i class="ri-user-star-line me-2"></i> Rôles
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('permission.index') }}"
-                                        class="nav-link {{ Route::is('permission.*') ? 'active' : '' }}">
-                                        <i class="ri-key-2-line me-2"></i> Permissions / Rôles
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
+                    <div class="collapse menu-dropdown {{ Route::is('role.*') || Route::is('parametre.*') || Route::is('module.*') || Route::is('permission.*') || Route::is('admin-register.*') ? 'show' : '' }}"
+                        id="sidebarSettings">
+
+                        <ul class="nav nav-sm flex-column">
+
+                            <li class="nav-item">
+                                <a href="{{ route('parametre.index') }}"
+                                    class="nav-link {{ Route::is('parametre.*') ? 'active' : '' }}">
+                                    <i class="ri-information-line me-2"></i> Informations
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="{{ route('admin-register.index') }}"
+                                    class="nav-link {{ Route::is('admin-register.*') ? 'active' : '' }}">
+                                    <i class="ri-user-settings-line me-2"></i> Utilisateurs
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="{{ route('module.index') }}"
+                                    class="nav-link {{ Route::is('module.*') ? 'active' : '' }}">
+                                    <i class="ri-apps-2-line me-2"></i> Modules
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="{{ route('role.index') }}"
+                                    class="nav-link {{ Route::is('role.*') ? 'active' : '' }}">
+                                    <i class="ri-user-star-line me-2"></i> Rôles
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="{{ route('permission.index') }}"
+                                    class="nav-link {{ Route::is('permission.*') ? 'active' : '' }}">
+                                    <i class="ri-key-2-line me-2"></i> Permissions / Rôles
+                                </a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </li>
                 @endif
 
             </ul>
