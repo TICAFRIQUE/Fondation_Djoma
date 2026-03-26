@@ -1,0 +1,3411 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Fondation Djama Éducation — Offrir l'éducation, construire l'avenir
+    </title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Open+Sans:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --djama-blue: #1f4e79;
+        --djama-blue-light: #2ca6d1;
+        --djama-orange: #f47c20;
+        --djama-red: #e53935;
+        --djama-green: #43a047;
+        --djama-yellow: #fbc02d;
+        --djama-dark: #0d2b45;
+        --djama-light-bg: #f4f8fc;
+        --font-head: "Poppins", sans-serif;
+        --font-body: "Open Sans", sans-serif;
+      }
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        font-family: var(--font-body);
+        color: #1a1a2e;
+        background: #fff;
+        overflow-x: hidden;
+      }
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-family: var(--font-head);
+      }
+
+      /* ── NAVBAR ── */
+      .navbar-djama {
+        background: rgba(255, 255, 255, 0.97);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid rgba(31, 78, 121, 0.1);
+        padding: 0.6rem 0;
+        position: sticky;
+        top: 0;
+        z-index: 1050;
+        transition: box-shadow 0.3s;
+      }
+      .navbar-djama.scrolled {
+        box-shadow: 0 2px 24px rgba(31, 78, 121, 0.1);
+      }
+      .navbar-brand-logo {
+        width: 70px;
+        height: 70px;
+        border-radius: 10px;
+        background: var(--djama-blue);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: var(--font-head);
+        font-weight: 800;
+        font-size: 18px;
+        color: #fff;
+        letter-spacing: -1px;
+        flex-shrink: 0;
+      }
+      .navbar-brand-text {
+        font-family: var(--font-head);
+        font-weight: 700;
+        font-size: 1rem;
+        color: var(--djama-blue);
+        line-height: 1.1;
+      }
+      .navbar-brand-text small {
+        font-weight: 400;
+        font-size: 0.65rem;
+        color: #6c8099;
+        display: block;
+        letter-spacing: 0.05em;
+      }
+      .nav-link-djama {
+        text-decoration: none;
+        font-family: var(--font-head);
+        font-weight: 500;
+        font-size: 0.85rem;
+        color: #3a4a5c !important;
+        padding: 0.4rem 0.8rem !important;
+        border-radius: 6px;
+        transition:
+          color 0.2s,
+          background 0.2s;
+      }
+      .nav-link-djama:hover,
+      .nav-link-djama.active {
+        color: var(--djama-blue) !important;
+        background: rgba(31, 78, 121, 0.07);
+      }
+      .btn-don {
+        background: var(--djama-orange);
+        color: #fff;
+        font-family: var(--font-head);
+        font-weight: 600;
+        font-size: 0.85rem;
+        border: none;
+        border-radius: 8px;
+        padding: 0.45rem 1.1rem;
+        transition:
+          background 0.2s,
+          transform 0.15s;
+      }
+      .btn-don:hover {
+        background: #d96a10;
+        color: #fff;
+        transform: translateY(-1px);
+      }
+
+      /* ── SLIDER HERO ── */
+      .hero-slider {
+        position: relative;
+        width: 100%;
+        overflow: hidden;
+      }
+      .slider-track {
+        display: flex;
+        transition: transform 0.65s cubic-bezier(0.4, 0, 0.2, 1);
+        will-change: transform;
+      }
+      .slide {
+        min-width: 100%;
+        position: relative;
+        min-height: 88vh;
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+      }
+      .slide-bg {
+        position: absolute;
+        inset: 0;
+        background-size: cover;
+        background-position: center;
+        transition: transform 8s ease;
+      }
+      .slide.active .slide-bg {
+        transform: scale(1.05);
+      }
+      .slide-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          to right,
+          rgba(13, 43, 69, 0.88) 0%,
+          rgba(13, 43, 69, 0.5) 60%,
+          rgba(13, 43, 69, 0.2) 100%
+        );
+      }
+      .slide-content {
+        position: relative;
+        z-index: 2;
+        width: 100%;
+      }
+      .slide-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: rgba(244, 124, 32, 0.22);
+        border: 1px solid rgba(244, 124, 32, 0.4);
+        color: #ffc78a;
+        border-radius: 30px;
+        padding: 0.3rem 1rem;
+        font-size: 0.78rem;
+        font-weight: 600;
+        font-family: var(--font-head);
+        margin-bottom: 1.2rem;
+        opacity: 0;
+        transform: translateY(20px);
+        transition:
+          opacity 0.5s 0.2s,
+          transform 0.5s 0.2s;
+      }
+      .slide.active .slide-badge {
+        opacity: 1;
+        transform: none;
+      }
+      .slide-title {
+        font-family: var(--font-head);
+        font-weight: 800;
+        font-size: clamp(1.9rem, 4.5vw, 3.2rem);
+        color: #fff;
+        line-height: 1.15;
+        margin-bottom: 1rem;
+        opacity: 0;
+        transform: translateY(24px);
+        transition:
+          opacity 0.55s 0.35s,
+          transform 0.55s 0.35s;
+      }
+      .slide.active .slide-title {
+        opacity: 1;
+        transform: none;
+      }
+      .slide-title span {
+        color: var(--djama-yellow);
+      }
+      .slide-desc {
+        font-size: 1rem;
+        color: rgba(255, 255, 255, 0.8);
+        line-height: 1.75;
+        max-width: 540px;
+        margin-bottom: 1.8rem;
+        opacity: 0;
+        transform: translateY(20px);
+        transition:
+          opacity 0.55s 0.5s,
+          transform 0.55s 0.5s;
+      }
+      .slide.active .slide-desc {
+        opacity: 1;
+        transform: none;
+      }
+      .slide-btns {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.8rem;
+        opacity: 0;
+        transform: translateY(16px);
+        transition:
+          opacity 0.5s 0.65s,
+          transform 0.5s 0.65s;
+      }
+      .slide.active .slide-btns {
+        opacity: 1;
+        transform: none;
+      }
+      .btn-slide-primary {
+        background: var(--djama-orange);
+        color: #fff;
+        font-family: var(--font-head);
+        font-weight: 700;
+        font-size: 0.9rem;
+        border: none;
+        border-radius: 10px;
+        padding: 0.7rem 1.6rem;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        transition:
+          background 0.2s,
+          transform 0.15s;
+      }
+      .btn-slide-primary:hover {
+        background: #d96a10;
+        color: #fff;
+        transform: translateY(-2px);
+      }
+      .btn-slide-secondary {
+        background: transparent;
+        color: #fff;
+        font-family: var(--font-head);
+        font-weight: 600;
+        font-size: 0.9rem;
+        border: 2px solid rgba(255, 255, 255, 0.4);
+        border-radius: 10px;
+        padding: 0.68rem 1.6rem;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        transition:
+          border-color 0.2s,
+          background 0.2s;
+      }
+      .btn-slide-secondary:hover {
+        border-color: #fff;
+        background: rgba(255, 255, 255, 0.08);
+        color: #fff;
+      }
+
+      /* Slider stats */
+      .slider-stats {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.8rem;
+        margin-top: 2rem;
+        opacity: 0;
+        transform: translateY(16px);
+        transition:
+          opacity 0.5s 0.8s,
+          transform 0.5s 0.8s;
+      }
+      .slide.active .slider-stats {
+        opacity: 1;
+        transform: none;
+      }
+      .slider-stat {
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        border-radius: 12px;
+        padding: 0.6rem 1rem;
+        text-align: center;
+        min-width: 90px;
+      }
+      .slider-stat-num {
+        font-family: var(--font-head);
+        font-weight: 800;
+        font-size: 1.4rem;
+        color: var(--djama-yellow);
+        line-height: 1;
+      }
+      .slider-stat-label {
+        font-size: 0.68rem;
+        color: rgba(255, 255, 255, 0.65);
+        margin-top: 2px;
+      }
+
+      /* Slider controls */
+      .slider-arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 10;
+        width: 46px;
+        height: 46px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.15);
+        border: 1.5px solid rgba(255, 255, 255, 0.3);
+        color: #fff;
+        font-size: 1rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition:
+          background 0.2s,
+          border-color 0.2s;
+      }
+      .slider-arrow:hover {
+        background: var(--djama-orange);
+        border-color: var(--djama-orange);
+      }
+      .slider-arrow.prev {
+        left: 20px;
+      }
+      .slider-arrow.next {
+        right: 20px;
+      }
+      .slider-dots {
+        position: absolute;
+        bottom: 22px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 8px;
+        z-index: 10;
+      }
+      .slider-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 4px;
+        background: rgba(255, 255, 255, 0.4);
+        cursor: pointer;
+        transition:
+          background 0.3s,
+          width 0.3s;
+        border: none;
+      }
+      .slider-dot.active {
+        background: var(--djama-orange);
+        width: 24px;
+      }
+      .slider-progress {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 3px;
+        background: var(--djama-orange);
+        width: 0%;
+        z-index: 10;
+        transition: width linear;
+      }
+
+      /* ── SECTION TITLES ── */
+      .section-eyebrow {
+        font-family: var(--font-head);
+        font-weight: 700;
+        font-size: 0.72rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--djama-orange);
+        margin-bottom: 0.5rem;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .section-eyebrow::before {
+        content: "";
+        display: inline-block;
+        width: 24px;
+        height: 2px;
+        background: var(--djama-orange);
+        border-radius: 2px;
+      }
+      .section-title {
+        font-family: var(--font-head);
+        font-weight: 800;
+        font-size: clamp(1.6rem, 3.5vw, 2.3rem);
+        color: var(--djama-blue);
+        line-height: 1.2;
+        margin-bottom: 1rem;
+      }
+      .section-title span {
+        color: var(--djama-orange);
+      }
+      .section-lead {
+        color: #4a5568;
+        font-size: 1rem;
+        line-height: 1.75;
+        max-width: 560px;
+      }
+
+      /* ── IMPACT CHIFFRES ── */
+      .impact-section {
+        background: var(--djama-blue);
+        position: relative;
+        overflow: hidden;
+      }
+      .impact-section::before {
+        content: "";
+        position: absolute;
+        top: -60px;
+        right: -60px;
+        width: 300px;
+        height: 300px;
+        border-radius: 50%;
+        background: rgba(44, 166, 209, 0.15);
+      }
+      .impact-num {
+        font-family: var(--font-head);
+        font-weight: 800;
+        font-size: clamp(2.2rem, 4vw, 3rem);
+        color: var(--djama-yellow);
+        line-height: 1;
+      }
+      .impact-label {
+        font-size: 0.88rem;
+        color: rgba(255, 255, 255, 0.75);
+        margin-top: 0.3rem;
+      }
+      .impact-divider {
+        width: 1px;
+        background: rgba(255, 255, 255, 0.15);
+      }
+
+      /* ── PROGRAMMES CARDS WITH IMAGE ── */
+      .prog-card {
+        background: #fff;
+        border-radius: 16px;
+        overflow: hidden;
+        border: 1px solid rgba(31, 78, 121, 0.09);
+        transition:
+          transform 0.28s,
+          box-shadow 0.28s;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+      .prog-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 20px 48px rgba(31, 78, 121, 0.13);
+      }
+      .prog-card-img {
+        position: relative;
+        height: 200px;
+        overflow: hidden;
+        background: #e8f0f7;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .prog-card-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+      }
+      .prog-card:hover .prog-card-img img {
+        transform: scale(1.06);
+      }
+      .prog-card-img-placeholder {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        font-size: 3rem;
+      }
+      .prog-card-img-placeholder span {
+        font-family: var(--font-head);
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: #7a9abb;
+      }
+      .prog-img-badge {
+        position: absolute;
+        top: 12px;
+        left: 12px;
+        font-family: var(--font-head);
+        font-size: 0.68rem;
+        font-weight: 700;
+        letter-spacing: 0.07em;
+        text-transform: uppercase;
+        padding: 0.22rem 0.7rem;
+        border-radius: 20px;
+      }
+      .prog-card-body {
+        padding: 1.3rem 1.4rem;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+      }
+      .prog-card-body h5 {
+        font-family: var(--font-head);
+        font-weight: 700;
+        font-size: 1rem;
+        color: var(--djama-blue);
+        margin-bottom: 0.5rem;
+      }
+      .prog-card-body p {
+        font-size: 0.86rem;
+        color: #5a6a7a;
+        line-height: 1.7;
+        flex: 1;
+        margin-bottom: 1.1rem;
+      }
+      .prog-card-features {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        margin-bottom: 1.2rem;
+      }
+      .prog-card-features li {
+        font-size: 0.81rem;
+        color: #5a6a7a;
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        list-style: none;
+        padding: 0;
+      }
+      .prog-card-features li i {
+        color: var(--djama-green);
+        flex-shrink: 0;
+      }
+      .btn-prog {
+        font-family: var(--font-head);
+        font-weight: 600;
+        font-size: 0.82rem;
+        border-radius: 8px;
+        padding: 0.55rem 1.2rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        text-decoration: none;
+        transition: all 0.2s;
+        border: none;
+        cursor: pointer;
+        align-self: flex-start;
+      }
+      .btn-prog-blue {
+        background: var(--djama-blue);
+        color: #fff;
+      }
+      .btn-prog-blue:hover {
+        background: #163a5c;
+        color: #fff;
+        transform: translateY(-1px);
+      }
+      .btn-prog-outline {
+        background: transparent;
+        color: var(--djama-blue);
+        border: 1.5px solid var(--djama-blue);
+      }
+      .btn-prog-outline:hover {
+        background: var(--djama-blue);
+        color: #fff;
+      }
+
+      /* ── RÉALISATIONS CARDS WITH IMAGE ── */
+      .real-card {
+        background: #fff;
+        border-radius: 14px;
+        overflow: hidden;
+        border: 1px solid rgba(31, 78, 121, 0.09);
+        transition:
+          transform 0.25s,
+          box-shadow 0.25s;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+      .real-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 14px 36px rgba(31, 78, 121, 0.11);
+      }
+      .real-card-img {
+        height: 180px;
+        overflow: hidden;
+        position: relative;
+        background: #e8f0f7;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .real-card-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s;
+      }
+      .real-card:hover .real-card-img img {
+        transform: scale(1.06);
+      }
+      .real-card-img-ph {
+        font-size: 2.8rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 6px;
+      }
+      .real-card-img-ph span {
+        font-family: var(--font-head);
+        font-size: 0.72rem;
+        color: #7a9abb;
+        font-weight: 600;
+      }
+      .real-year-badge {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        background: var(--djama-blue);
+        color: #fff;
+        font-family: var(--font-head);
+        font-size: 0.7rem;
+        font-weight: 700;
+        padding: 0.2rem 0.6rem;
+        border-radius: 6px;
+      }
+      .real-card-body {
+        padding: 1.1rem 1.2rem;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+      }
+      .real-card-body h6 {
+        font-family: var(--font-head);
+        font-weight: 700;
+        font-size: 0.93rem;
+        color: var(--djama-blue);
+        margin-bottom: 0.4rem;
+      }
+      .real-card-body p {
+        font-size: 0.83rem;
+        color: #5a6a7a;
+        line-height: 1.65;
+        flex: 1;
+        margin-bottom: 1rem;
+      }
+
+      /* ── PROJETS CARDS WITH IMAGE ── */
+      .projet-card-img {
+        background: #fff;
+        border-radius: 14px;
+        overflow: hidden;
+        border: 1px solid rgba(31, 78, 121, 0.09);
+        transition:
+          transform 0.25s,
+          box-shadow 0.25s;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+      .projet-card-img:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 14px 36px rgba(31, 78, 121, 0.11);
+      }
+      .projet-img-wrap {
+        height: 185px;
+        overflow: hidden;
+        position: relative;
+        background: #e8f0f7;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .projet-img-wrap img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s;
+      }
+      .projet-card-img:hover .projet-img-wrap img {
+        transform: scale(1.06);
+      }
+      .projet-img-ph {
+        font-size: 2.6rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 6px;
+      }
+      .projet-img-ph span {
+        font-family: var(--font-head);
+        font-size: 0.72rem;
+        color: #7a9abb;
+        font-weight: 600;
+      }
+      .status-badge {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        font-size: 0.68rem;
+        font-weight: 700;
+        font-family: var(--font-head);
+        padding: 0.22rem 0.7rem;
+        border-radius: 20px;
+        display: inline-block;
+      }
+      .projet-body {
+        padding: 1.2rem;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+      }
+      .projet-body h6 {
+        font-family: var(--font-head);
+        font-weight: 700;
+        font-size: 0.95rem;
+        color: var(--djama-blue);
+        margin-bottom: 0.4rem;
+      }
+      .projet-body p {
+        font-size: 0.83rem;
+        color: #5a6a7a;
+        line-height: 1.65;
+        flex: 1;
+        margin-bottom: 0.9rem;
+      }
+      .progress-djama {
+        height: 7px;
+        border-radius: 10px;
+        background: #e8f0f7;
+        overflow: hidden;
+      }
+      .progress-djama-bar {
+        height: 100%;
+        border-radius: 10px;
+        background: linear-gradient(
+          90deg,
+          var(--djama-blue-light),
+          var(--djama-blue)
+        );
+      }
+      .projet-meta {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.75rem;
+        color: #8a9aaa;
+        margin-top: 0.4rem;
+        margin-bottom: 1rem;
+      }
+
+      /* ── MÉDIATHÈQUE ── */
+      .media-section {
+        background: var(--djama-light-bg);
+      }
+      .media-tab-btn {
+        background: transparent;
+        border: 1px solid rgba(31, 78, 121, 0.15);
+        color: #4a5a6a;
+        font-family: var(--font-head);
+        font-weight: 600;
+        font-size: 0.82rem;
+        border-radius: 8px;
+        padding: 0.45rem 1rem;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+      .media-tab-btn.active,
+      .media-tab-btn:hover {
+        background: var(--djama-blue);
+        color: #fff;
+        border-color: var(--djama-blue);
+      }
+      .media-card {
+        background: #fff;
+        border-radius: 14px;
+        overflow: hidden;
+        border: 1px solid rgba(31, 78, 121, 0.08);
+        transition:
+          transform 0.2s,
+          box-shadow 0.2s;
+      }
+      .media-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.09);
+      }
+      .media-thumb {
+        height: 130px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2.6rem;
+      }
+      .media-info {
+        padding: 0.85rem 1rem;
+      }
+      .media-info h6 {
+        font-family: var(--font-head);
+        font-weight: 700;
+        font-size: 0.85rem;
+        color: var(--djama-blue);
+        margin-bottom: 0.2rem;
+      }
+      .media-info span {
+        font-size: 0.73rem;
+        color: #8a9aaa;
+      }
+
+      /* ── ACTUALITÉS WITH IMAGE ── */
+      .actu-card {
+        background: #fff;
+        border-radius: 14px;
+        overflow: hidden;
+        border: 1px solid rgba(31, 78, 121, 0.08);
+        transition:
+          transform 0.2s,
+          box-shadow 0.2s;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+      .actu-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 14px 36px rgba(0, 0, 0, 0.1);
+      }
+      .actu-img {
+        height: 185px;
+        overflow: hidden;
+        position: relative;
+        background: #e8f0f7;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .actu-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s;
+      }
+      .actu-card:hover .actu-img img {
+        transform: scale(1.05);
+      }
+      .actu-img-ph {
+        font-size: 2.5rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 6px;
+      }
+      .actu-img-ph span {
+        font-family: var(--font-head);
+        font-size: 0.7rem;
+        color: #7a9abb;
+        font-weight: 600;
+      }
+      .actu-cat-badge {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        font-family: var(--font-head);
+        font-size: 0.68rem;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        padding: 0.22rem 0.7rem;
+        border-radius: 20px;
+      }
+      .actu-body {
+        padding: 1.2rem 1.3rem;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+      }
+      .actu-body h6 {
+        font-family: var(--font-head);
+        font-weight: 700;
+        font-size: 0.95rem;
+        color: var(--djama-blue);
+        line-height: 1.4;
+        margin-bottom: 0.4rem;
+      }
+      .actu-body p {
+        font-size: 0.83rem;
+        color: #5a6a7a;
+        line-height: 1.6;
+        flex: 1;
+        margin-bottom: 1rem;
+      }
+      .actu-footer-bar {
+        padding: 0.75rem 1.3rem;
+        border-top: 1px solid rgba(0, 0, 0, 0.05);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .actu-date-txt {
+        font-size: 0.75rem;
+        color: #9aacbe;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+      }
+
+      /* ── TÉMOIGNAGES ── */
+      .temoignage-card {
+        background: #fff;
+        border-radius: 16px;
+        border: 1px solid rgba(31, 78, 121, 0.08);
+        padding: 1.6rem;
+        transition: box-shadow 0.2s;
+        height: 100%;
+      }
+      .temoignage-card:hover {
+        box-shadow: 0 12px 32px rgba(31, 78, 121, 0.09);
+      }
+      .temoignage-quote {
+        font-size: 2.4rem;
+        color: var(--djama-orange);
+        line-height: 1;
+        font-family: Georgia, serif;
+        margin-bottom: 0.5rem;
+      }
+      .temoignage-text {
+        font-size: 0.9rem;
+        color: #4a5568;
+        line-height: 1.75;
+        font-style: italic;
+        margin-bottom: 1rem;
+      }
+      .temoignage-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: var(--djama-blue);
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: var(--font-head);
+        font-weight: 700;
+        font-size: 0.9rem;
+        flex-shrink: 0;
+      }
+      .temoignage-name {
+        font-family: var(--font-head);
+        font-weight: 700;
+        font-size: 0.88rem;
+        color: var(--djama-blue);
+      }
+      .temoignage-role {
+        font-size: 0.75rem;
+        color: #8a9aaa;
+      }
+
+      /* ── AGIR SOUTENIR ── */
+      .agir-card {
+        background: #fff;
+        border-radius: 16px;
+        border: 1px solid rgba(31, 78, 121, 0.08);
+        padding: 1.8rem 1.5rem;
+        text-align: center;
+        height: 100%;
+        transition:
+          transform 0.25s,
+          box-shadow 0.25s,
+          border-color 0.25s;
+      }
+      .agir-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 16px 40px rgba(31, 78, 121, 0.1);
+        border-color: rgba(44, 166, 209, 0.25);
+      }
+      .agir-icon {
+        width: 64px;
+        height: 64px;
+        border-radius: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.8rem;
+        margin: 0 auto 1rem;
+      }
+      .agir-card h5 {
+        font-family: var(--font-head);
+        font-weight: 700;
+        font-size: 1rem;
+        color: var(--djama-blue);
+        margin-bottom: 0.5rem;
+      }
+      .agir-card p {
+        font-size: 0.85rem;
+        color: #5a6a7a;
+        line-height: 1.65;
+        margin-bottom: 1.2rem;
+      }
+      .btn-agir {
+        font-family: var(--font-head);
+        font-weight: 600;
+        font-size: 0.82rem;
+        border-radius: 8px;
+        padding: 0.5rem 1.2rem;
+        transition:
+          transform 0.15s,
+          box-shadow 0.15s;
+        display: inline-block;
+        text-decoration: none;
+      }
+      .btn-agir:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+      }
+
+      /* ── ÉQUIPE ── */
+      .equipe-card {
+        text-align: center;
+        padding: 1.5rem 1rem;
+        border-radius: 14px;
+        background: #fff;
+        border: 1px solid rgba(31, 78, 121, 0.07);
+        transition:
+          box-shadow 0.2s,
+          transform 0.2s;
+      }
+      .equipe-card:hover {
+        box-shadow: 0 10px 28px rgba(31, 78, 121, 0.09);
+        transform: translateY(-2px);
+      }
+      .equipe-avatar {
+        width: 72px;
+        height: 72px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: var(--font-head);
+        font-weight: 800;
+        font-size: 1.3rem;
+        margin: 0 auto 0.9rem;
+        border: 3px solid rgba(31, 78, 121, 0.12);
+      }
+      .equipe-card h6 {
+        font-family: var(--font-head);
+        font-weight: 700;
+        font-size: 0.9rem;
+        color: var(--djama-blue);
+        margin-bottom: 0.15rem;
+      }
+      .equipe-card span {
+        font-size: 0.78rem;
+        color: #8a9aaa;
+      }
+
+      /* ── CTA BANDE ── */
+      .cta-bande {
+        background: linear-gradient(
+          135deg,
+          var(--djama-orange) 0%,
+          #e86010 100%
+        );
+        position: relative;
+        overflow: hidden;
+      }
+      .cta-bande::before {
+        content: "";
+        position: absolute;
+        right: -40px;
+        top: -40px;
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.08);
+      }
+      .cta-bande h2 {
+        font-family: var(--font-head);
+        font-weight: 800;
+        color: #fff;
+      }
+      .cta-bande p {
+        color: rgba(255, 255, 255, 0.85);
+      }
+      .btn-cta-white {
+        background: #fff;
+        color: var(--djama-orange);
+        font-family: var(--font-head);
+        font-weight: 700;
+        font-size: 0.9rem;
+        border: none;
+        border-radius: 10px;
+        padding: 0.7rem 1.8rem;
+        transition:
+          transform 0.15s,
+          box-shadow 0.2s;
+      }
+      .btn-cta-white:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+        color: var(--djama-orange);
+      }
+
+      /* ── FOOTER ── */
+      .footer-djama {
+        background: var(--djama-dark);
+        color: rgba(255, 255, 255, 0.75);
+      }
+      .footer-brand {
+        font-family: var(--font-head);
+        font-weight: 800;
+        font-size: 1.2rem;
+        color: #fff;
+      }
+      .footer-slogan {
+        font-size: 0.8rem;
+        color: var(--djama-yellow);
+        font-style: italic;
+        margin-top: 0.2rem;
+      }
+      .footer-title {
+        font-family: var(--font-head);
+        font-weight: 700;
+        color: #fff;
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+        letter-spacing: 0.04em;
+      }
+      .footer-link {
+        display: block;
+        color: rgba(255, 255, 255, 0.65);
+        font-size: 0.84rem;
+        text-decoration: none;
+        margin-bottom: 0.45rem;
+        transition: color 0.2s;
+      }
+      .footer-link:hover {
+        color: var(--djama-yellow);
+      }
+      .footer-divider {
+        border-color: rgba(255, 255, 255, 0.08);
+      }
+      .footer-copy {
+        font-size: 0.78rem;
+        color: rgba(255, 255, 255, 0.4);
+      }
+      .social-btn {
+        width: 36px;
+        height: 36px;
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 0.95rem;
+        text-decoration: none;
+        transition:
+          background 0.2s,
+          color 0.2s;
+      }
+      .social-btn:hover {
+        background: var(--djama-orange);
+        color: #fff;
+        border-color: var(--djama-orange);
+      }
+
+      /* ── UTILITIES ── */
+      .section-pad {
+        padding: 80px 0;
+      }
+      .section-pad-sm {
+        padding: 60px 0;
+      }
+      .btn-more {
+        font-family: var(--font-head);
+        font-weight: 600;
+        font-size: 0.82rem;
+        color: var(--djama-blue-light);
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        transition: gap 0.2s;
+      }
+      .btn-more:hover {
+        gap: 9px;
+        color: var(--djama-blue);
+      }
+
+      @media (max-width: 991px) {
+        .slide {
+          min-height: 70vh;
+        }
+        .slider-arrow {
+          display: none;
+        }
+      }
+      @media (max-width: 767px) {
+        .section-pad {
+          padding: 52px 0;
+        }
+        .slide {
+          min-height: 88vh;
+        }
+        .slide-overlay {
+          background: linear-gradient(
+            to bottom,
+            rgba(13, 43, 69, 0.75) 0%,
+            rgba(13, 43, 69, 0.65) 100%
+          );
+        }
+        .slider-stat-num {
+          font-size: 1.2rem;
+        }
+      }
+
+      /* ── IMAGE PLACEHOLDER COLORS ── */
+      .img-blue {
+        background: linear-gradient(135deg, #1f4e79 0%, #2ca6d1 100%);
+      }
+      .img-green {
+        background: linear-gradient(135deg, #1b5e20 0%, #43a047 100%);
+      }
+      .img-orange {
+        background: linear-gradient(135deg, #e65100 0%, #f47c20 100%);
+      }
+      .img-purple {
+        background: linear-gradient(135deg, #4527a0 0%, #7e57c2 100%);
+      }
+      .img-teal {
+        background: linear-gradient(135deg, #006064 0%, #26c6da 100%);
+      }
+      .img-red {
+        background: linear-gradient(135deg, #b71c1c 0%, #e53935 100%);
+      }
+      .img-gold {
+        background: linear-gradient(135deg, #f57f17 0%, #fbc02d 100%);
+      }
+      .img-ph-icon {
+        font-size: 3.2rem;
+      }
+      .img-ph-label {
+        font-family: var(--font-head);
+        font-size: 0.72rem;
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.7);
+        margin-top: 6px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ════ NAVBAR ════ -->
+    <nav class="navbar navbar-expand-lg navbar-djama" id="mainNav">
+      <div class="container">
+        <a
+          class="navbar-brand d-flex align-items-center gap-2 text-decoration-none"
+          href="#"
+        >
+      <img src="/logo.jpeg" class="navbar-brand-logo" alt="">
+          <div class="navbar-brand-text">
+            Fondation Djama<small>Éducation</small>
+          </div>
+        </a>
+        <button
+          class="navbar-toggler border-0"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navMenu"
+        >
+          <i
+            class="bi bi-list"
+            style="font-size: 1.5rem; color: var(--djama-blue)"
+          ></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navMenu">
+          <ul
+            class="navbar-nav ms-auto align-items-lg-center gap-1 py-2 py-lg-0"
+          >
+            <li class="nav-item">
+              <a class="nav-link-djama active" href="#">Accueil</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link-djama" href="#apropos">À propos</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link-djama" href="#programmes">Programmes</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link-djama" href="#realisations">Réalisations</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link-djama" href="#projets">Projets</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link-djama" href="#mediatheque">Médiathèque</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link-djama" href="#actualites">Actualités</a>
+            </li>
+            <li class="nav-item ms-lg-2">
+              <a href="#agir" class="btn btn-don"
+                ><i
+                  class="bi bi-heart-fill me-1"
+                  style="font-size: 0.75rem"
+                ></i>
+                Faire un don</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- ════ HERO SLIDER ════ -->
+    <div class="hero-slider" id="heroSlider">
+      <div class="slider-track" id="sliderTrack">
+        <!-- Slide 1 -->
+        <div class="slide active" id="slide-0">
+          <div
+            class="slide-bg img-blue"
+            style="
+              background-image: url(&quot;https://images.unsplash.com/photo-1617854818583-09e7f077a156?w=1400&auto=format&fit=crop&quot;);
+            "
+          ></div>
+          <div class="slide-overlay"></div>
+          <div class="slide-content">
+            <div class="container py-5">
+              <div class="row">
+                <div class="col-lg-7 col-xl-6">
+                  <div class="slide-badge">
+                    <i class="bi bi-award-fill"></i> Fondée en 2013 · Abidjan,
+                    Côte d'Ivoire
+                  </div>
+                  <h1 class="slide-title">
+                    Offrir l'éducation,<br /><span>construire l'avenir</span>
+                  </h1>
+                  <p class="slide-desc">
+                    La Fondation Djama Éducation œuvre pour la scolarisation des
+                    jeunes filles de l'Est du pays, l'autonomie économique et le
+                    développement des communautés.
+                  </p>
+                  <div class="slide-btns">
+                    <a href="#agir" class="btn-slide-primary"
+                      ><i class="bi bi-heart-fill"></i> Soutenir la cause</a
+                    >
+                    <a href="#programmes" class="btn-slide-secondary"
+                      >Nos programmes <i class="bi bi-arrow-right"></i
+                    ></a>
+                  </div>
+                  <div class="slider-stats">
+                    <div class="slider-stat">
+                      <div class="slider-stat-num">+500</div>
+                      <div class="slider-stat-label">Filles scolarisées</div>
+                    </div>
+                    <div class="slider-stat">
+                      <div class="slider-stat-num">12</div>
+                      <div class="slider-stat-label">Ans d'action</div>
+                    </div>
+                    <div class="slider-stat">
+                      <div class="slider-stat-num">+80</div>
+                      <div class="slider-stat-label">Micro-projets</div>
+                    </div>
+                    <div class="slider-stat">
+                      <div class="slider-stat-num">+200</div>
+                      <div class="slider-stat-label">Familles aidées</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="slide" id="slide-1">
+          <div
+            class="slide-bg img-green"
+            style="
+              background-image: url(&quot;https://images.unsplash.com/photo-1509062522246-3755977927d7?w=1400&auto=format&fit=crop&quot;);
+            "
+          ></div>
+          <div class="slide-overlay"></div>
+          <div class="slide-content">
+            <div class="container py-5">
+              <div class="row">
+                <div class="col-lg-7 col-xl-6">
+                  <div class="slide-badge">
+                    <i class="bi bi-book-fill"></i> Programme Éducation
+                  </div>
+                  <h1 class="slide-title">
+                    Chaque fille mérite<br /><span>d'aller à l'école</span>
+                  </h1>
+                  <p class="slide-desc">
+                    Nous finançons la scolarité, les fournitures et le soutien
+                    scolaire de centaines de jeunes filles dans les zones
+                    rurales de l'Est de la Côte d'Ivoire.
+                  </p>
+                  <div class="slide-btns">
+                    <a href="#agir" class="btn-slide-primary"
+                      ><i class="bi bi-gift-fill"></i> Parrainer une élève</a
+                    >
+                    <a href="#programmes" class="btn-slide-secondary"
+                      >En savoir plus <i class="bi bi-arrow-right"></i
+                    ></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="slide" id="slide-2">
+          <div
+            class="slide-bg img-orange"
+            style="
+              background-image: url(&quot;https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=1400&auto=format&fit=crop&quot;);
+            "
+          ></div>
+          <div class="slide-overlay"></div>
+          <div class="slide-content">
+            <div class="container py-5">
+              <div class="row">
+                <div class="col-lg-7 col-xl-6">
+                  <div class="slide-badge">
+                    <i class="bi bi-people-fill"></i> Autonomisation économique
+                  </div>
+                  <h1 class="slide-title">
+                    Des micro-projets qui<br /><span>changent des vies</span>
+                  </h1>
+                  <p class="slide-desc">
+                    Grâce au financement de micro-entreprises, des dizaines de
+                    jeunes femmes ont créé leur propre activité et sont devenues
+                    autonomes financièrement.
+                  </p>
+                  <div class="slide-btns">
+                    <a href="#agir" class="btn-slide-primary"
+                      ><i class="bi bi-cash-coin"></i> Contribuer</a
+                    >
+                    <a href="#realisations" class="btn-slide-secondary"
+                      >Voir les réalisations <i class="bi bi-arrow-right"></i
+                    ></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 4 -->
+        <div class="slide" id="slide-3">
+          <div
+            class="slide-bg img-teal"
+            style="
+              background-image: url(&quot;https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1400&auto=format&fit=crop&quot;);
+            "
+          ></div>
+          <div class="slide-overlay"></div>
+          <div class="slide-content">
+            <div class="container py-5">
+              <div class="row">
+                <div class="col-lg-7 col-xl-6">
+                  <div class="slide-badge">
+                    <i class="bi bi-heart-pulse-fill"></i> Programme Santé
+                  </div>
+                  <h1 class="slide-title">
+                    Santé et bien-être<br /><span>pour tous</span>
+                  </h1>
+                  <p class="slide-desc">
+                    Campagnes médicales, projets agricoles, distribution
+                    alimentaire — nous répondons aux besoins urgents des
+                    populations les plus vulnérables.
+                  </p>
+                  <div class="slide-btns">
+                    <a href="#projets" class="btn-slide-primary"
+                      ><i class="bi bi-clipboard2-pulse"></i> Nos projets</a
+                    >
+                    <a href="#agir" class="btn-slide-secondary"
+                      >Nous rejoindre <i class="bi bi-arrow-right"></i
+                    ></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /slider-track -->
+
+      <!-- Arrows -->
+      <button class="slider-arrow prev" id="sliderPrev">
+        <i class="bi bi-chevron-left"></i>
+      </button>
+      <button class="slider-arrow next" id="sliderNext">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+
+      <!-- Dots -->
+      <div class="slider-dots" id="sliderDots">
+        <button class="slider-dot active"></button>
+        <button class="slider-dot"></button>
+        <button class="slider-dot"></button>
+        <button class="slider-dot"></button>
+      </div>
+
+      <!-- Progress bar -->
+      <div class="slider-progress" id="sliderProgress"></div>
+    </div>
+
+    <!-- ════ IMPACT CHIFFRES ════ -->
+    <section class="impact-section section-pad-sm">
+      <div class="container">
+        <div class="row justify-content-center text-center gy-4">
+          <div class="col-6 col-md-3">
+            <div class="impact-num">+500</div>
+            <div class="impact-label">Jeunes filles<br />scolarisées</div>
+          </div>
+          <div class="col-1 d-none d-md-block impact-divider"></div>
+          <div class="col-6 col-md-3">
+            <div class="impact-num">+80</div>
+            <div class="impact-label">Micro-projets<br />financés</div>
+          </div>
+          <div class="col-1 d-none d-md-block impact-divider"></div>
+          <div class="col-6 col-md-3">
+            <div class="impact-num">12</div>
+            <div class="impact-label">Années<br />d'engagement</div>
+          </div>
+          <div class="col-1 d-none d-md-block impact-divider"></div>
+          <div class="col-6 col-md-3">
+            <div class="impact-num">+200</div>
+            <div class="impact-label">Familles<br />assistées</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════ À PROPOS ════ -->
+    <section class="section-pad" id="apropos">
+      <div class="container">
+        <div class="row align-items-center gy-5">
+          <div class="col-lg-5">
+            <div class="section-eyebrow">À propos</div>
+            <h2 class="section-title">
+              Une fondation au service<br />des <span>plus vulnérables</span>
+            </h2>
+            <p class="section-lead mb-4">
+              Créée le 30 janvier 2013 à Abidjan Cocody, la Fondation Djama
+              Éducation s'engage pour l'accès à l'éducation, la santé et
+              l'autonomie, avec une attention particulière pour les jeunes
+              filles de l'Est du pays.
+            </p>
+            <div class="d-flex flex-column gap-2 mb-4">
+              <div
+                class="d-flex align-items-center gap-2"
+                style="font-size: 0.88rem; color: #4a5568"
+              >
+                <i
+                  class="bi bi-geo-alt-fill"
+                  style="color: var(--djama-orange)"
+                ></i>
+                Riviera 2 les Jardins, en face de la Mosquée — Abidjan Cocody
+              </div>
+              <div
+                class="d-flex align-items-center gap-2"
+                style="font-size: 0.88rem; color: #4a5568"
+              >
+                <i
+                  class="bi bi-envelope-fill"
+                  style="color: var(--djama-orange)"
+                ></i>
+                23 B.P 1990 Abidjan 23
+              </div>
+              <div
+                class="d-flex align-items-center gap-2"
+                style="font-size: 0.88rem; color: #4a5568"
+              >
+                <i
+                  class="bi bi-calendar-fill"
+                  style="color: var(--djama-orange)"
+                ></i>
+                Fondée le 30 janvier 2013
+              </div>
+            </div>
+            <a href="#agir" class="btn btn-don px-4">Nous rejoindre</a>
+          </div>
+          <div class="col-lg-7">
+            <div class="row g-3">
+              <div class="col-6">
+                <div class="real-card">
+                  <div class="real-card-img img-blue">
+                    <div class="img-ph-icon">📚</div>
+                    <div class="img-ph-label">Éducation</div>
+                  </div>
+                  <div class="real-card-body">
+                    <h6>Scolarisation des filles</h6>
+                    <p>
+                      Promouvoir l'accès à l'éducation pour les jeunes filles de
+                      l'Est.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="real-card">
+                  <div class="real-card-img img-green">
+                    <div class="img-ph-icon">🌱</div>
+                    <div class="img-ph-label">Économie</div>
+                  </div>
+                  <div class="real-card-body">
+                    <h6>Lutte contre la pauvreté</h6>
+                    <p>Financement de micro-projets pour l'autonomisation.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="real-card">
+                  <div class="real-card-img img-gold">
+                    <div class="img-ph-icon">🏥</div>
+                    <div class="img-ph-label">Santé</div>
+                  </div>
+                  <div class="real-card-body">
+                    <h6>Santé & Alimentation</h6>
+                    <p>
+                      Répondre aux besoins sanitaires urgents des populations.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="real-card">
+                  <div class="real-card-img img-purple">
+                    <div class="img-ph-icon">🤝</div>
+                    <div class="img-ph-label">Social</div>
+                  </div>
+                  <div class="real-card-body">
+                    <h6>Assistance sociale</h6>
+                    <p>Aide aux personnes vulnérables de nos communautés.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════ PROGRAMMES ════ -->
+    <section
+      class="section-pad"
+      id="programmes"
+      style="background: var(--djama-light-bg)"
+    >
+      <div class="container">
+        <div class="text-center mb-5">
+          <div class="section-eyebrow justify-content-center">
+            Nos programmes
+          </div>
+          <h2 class="section-title">
+            Des actions concrètes<br />sur le <span>terrain</span>
+          </h2>
+          <p class="section-lead mx-auto text-center">
+            Chaque programme est conçu pour répondre aux besoins spécifiques des
+            populations que nous accompagnons.
+          </p>
+        </div>
+        <div class="row g-4">
+          <!-- Programme 1 -->
+          <div class="col-md-6 col-lg-4">
+            <div class="prog-card">
+              <div class="prog-card-img img-blue">
+                <img
+                  src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=600&auto=format&fit=crop"
+                  alt="Scolarisation des filles"
+                  onerror="
+                    this.style.display = 'none';
+                    this.nextElementSibling.style.display = 'flex';
+                  "
+                />
+                <div
+                  class="prog-card-img-placeholder"
+                  style="
+                    display: none;
+                    flex-direction: column;
+                    align-items: center;
+                  "
+                >
+                  📚<span>Éducation des filles</span>
+                </div>
+                <span
+                  class="prog-img-badge"
+                  style="background: #e3f2fd; color: #1565c0"
+                  >Éducation</span
+                >
+              </div>
+              <div class="prog-card-body">
+                <h5>Scolarisation des jeunes filles</h5>
+                <p>
+                  Accès à l'école pour toutes les filles de l'Est du pays, avec
+                  suivi scolaire et accompagnement des familles pour garantir la
+                  continuité scolaire.
+                </p>
+                <ul class="prog-card-features">
+                  <li>
+                    <i class="bi bi-check-circle-fill"></i> Frais de scolarité
+                    pris en charge
+                  </li>
+                  <li>
+                    <i class="bi bi-check-circle-fill"></i> Fournitures
+                    scolaires offertes
+                  </li>
+                  <li>
+                    <i class="bi bi-check-circle-fill"></i> Suivi et soutien
+                    pédagogique
+                  </li>
+                </ul>
+                <a href="#" class="btn-prog btn-prog-blue"
+                  >En savoir plus <i class="bi bi-arrow-right"></i
+                ></a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Programme 2 -->
+          <div class="col-md-6 col-lg-4">
+            <div class="prog-card">
+              <div class="prog-card-img img-green">
+                <img
+                  src="https://images.unsplash.com/photo-1556742400-b5b7c512e9b3?w=600&auto=format&fit=crop"
+                  alt="Micro-projets"
+                  onerror="
+                    this.style.display = 'none';
+                    this.nextElementSibling.style.display = 'flex';
+                  "
+                />
+                <div
+                  class="prog-card-img-placeholder"
+                  style="
+                    display: none;
+                    flex-direction: column;
+                    align-items: center;
+                  "
+                >
+                  🌱<span>Micro-projets</span>
+                </div>
+                <span
+                  class="prog-img-badge"
+                  style="background: #e8f5e9; color: #2e7d32"
+                  >Économie</span
+                >
+              </div>
+              <div class="prog-card-body">
+                <h5>Financement de micro-projets</h5>
+                <p>
+                  Soutien financier et accompagnement des jeunes filles
+                  porteuses de projets générateurs de revenus durables pour leur
+                  communauté.
+                </p>
+                <ul class="prog-card-features">
+                  <li>
+                    <i class="bi bi-check-circle-fill"></i> Microcrédit sans
+                    intérêt
+                  </li>
+                  <li>
+                    <i class="bi bi-check-circle-fill"></i> Formation
+                    entrepreneuriale
+                  </li>
+                  <li>
+                    <i class="bi bi-check-circle-fill"></i> Suivi
+                    post-financement
+                  </li>
+                </ul>
+                <a href="#" class="btn-prog btn-prog-blue"
+                  >En savoir plus <i class="bi bi-arrow-right"></i
+                ></a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Programme 3 -->
+          <div class="col-md-6 col-lg-4">
+            <div class="prog-card">
+              <div class="prog-card-img img-gold">
+                <img
+                  src="https://images.unsplash.com/photo-1584820927498-cfe5211fd8bf?w=600&auto=format&fit=crop"
+                  alt="Santé"
+                  onerror="
+                    this.style.display = 'none';
+                    this.nextElementSibling.style.display = 'flex';
+                  "
+                />
+                <div
+                  class="prog-card-img-placeholder"
+                  style="
+                    display: none;
+                    flex-direction: column;
+                    align-items: center;
+                  "
+                >
+                  🏥<span>Santé & Alimentation</span>
+                </div>
+                <span
+                  class="prog-img-badge"
+                  style="background: #fff8e1; color: #f57f17"
+                  >Santé</span
+                >
+              </div>
+              <div class="prog-card-body">
+                <h5>Santé, agriculture & alimentation</h5>
+                <p>
+                  Réponse aux besoins urgents des populations : accès aux soins
+                  médicaux, sécurité alimentaire et projets agricoles
+                  communautaires.
+                </p>
+                <ul class="prog-card-features">
+                  <li>
+                    <i class="bi bi-check-circle-fill"></i> Consultations
+                    médicales gratuites
+                  </li>
+                  <li>
+                    <i class="bi bi-check-circle-fill"></i> Projets agricoles
+                    communautaires
+                  </li>
+                  <li>
+                    <i class="bi bi-check-circle-fill"></i> Distribution
+                    alimentaire d'urgence
+                  </li>
+                </ul>
+                <a href="#" class="btn-prog btn-prog-blue"
+                  >En savoir plus <i class="bi bi-arrow-right"></i
+                ></a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Programme 4 -->
+          <div class="col-md-6 col-lg-4">
+            <div class="prog-card">
+              <div class="prog-card-img img-red">
+                <img
+                  src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&auto=format&fit=crop"
+                  alt="Personnes vulnérables"
+                  onerror="
+                    this.style.display = 'none';
+                    this.nextElementSibling.style.display = 'flex';
+                  "
+                />
+                <div
+                  class="prog-card-img-placeholder"
+                  style="
+                    display: none;
+                    flex-direction: column;
+                    align-items: center;
+                  "
+                >
+                  🤝<span>Assistance sociale</span>
+                </div>
+                <span
+                  class="prog-img-badge"
+                  style="background: #fce4ec; color: #880e4f"
+                  >Social</span
+                >
+              </div>
+              <div class="prog-card-body">
+                <h5>Assistance aux personnes vulnérables</h5>
+                <p>
+                  Aide d'urgence et accompagnement durable pour les personnes en
+                  situation de grande vulnérabilité sociale ou économique.
+                </p>
+                <ul class="prog-card-features">
+                  <li>
+                    <i class="bi bi-check-circle-fill"></i> Aide alimentaire
+                    d'urgence
+                  </li>
+                  <li>
+                    <i class="bi bi-check-circle-fill"></i> Accompagnement
+                    psychosocial
+                  </li>
+                </ul>
+                <a href="#" class="btn-prog btn-prog-blue"
+                  >En savoir plus <i class="bi bi-arrow-right"></i
+                ></a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Programme 5 -->
+          <div class="col-md-6 col-lg-4">
+            <div class="prog-card">
+              <div class="prog-card-img img-purple">
+                <img
+                  src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=600&auto=format&fit=crop"
+                  alt="Alphabétisation adultes"
+                  onerror="
+                    this.style.display = 'none';
+                    this.nextElementSibling.style.display = 'flex';
+                  "
+                />
+                <div
+                  class="prog-card-img-placeholder"
+                  style="
+                    display: none;
+                    flex-direction: column;
+                    align-items: center;
+                  "
+                >
+                  📖<span>Alphabétisation</span>
+                </div>
+                <span
+                  class="prog-img-badge"
+                  style="background: #ede7f6; color: #4527a0"
+                  >Formation</span
+                >
+              </div>
+              <div class="prog-card-body">
+                <h5>Alphabétisation des adultes</h5>
+                <p>
+                  Cours d'alphabétisation et de formation continue pour adultes
+                  afin de favoriser leur épanouissement et leur participation à
+                  la société.
+                </p>
+                <ul class="prog-card-features">
+                  <li>
+                    <i class="bi bi-check-circle-fill"></i> Cours du soir et
+                    week-end
+                  </li>
+                  <li>
+                    <i class="bi bi-check-circle-fill"></i> Formateurs bénévoles
+                    qualifiés
+                  </li>
+                </ul>
+                <a href="#" class="btn-prog btn-prog-blue"
+                  >En savoir plus <i class="bi bi-arrow-right"></i
+                ></a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Programme 6 — CTA Parrainage -->
+          <div class="col-md-6 col-lg-4">
+            <div
+              class="prog-card"
+              style="background: var(--djama-blue); border-color: transparent"
+            >
+              <div class="prog-card-img img-teal">
+                <img
+                  src="https://images.unsplash.com/photo-1595475207225-428b62bda831?w=600&auto=format&fit=crop"
+                  alt="Parrainage"
+                  onerror="
+                    this.style.display = 'none';
+                    this.nextElementSibling.style.display = 'flex';
+                  "
+                />
+                <div
+                  class="prog-card-img-placeholder"
+                  style="
+                    display: none;
+                    flex-direction: column;
+                    align-items: center;
+                  "
+                >
+                  👧<span>Parrainage</span>
+                </div>
+                <span
+                  class="prog-img-badge"
+                  style="background: rgba(244, 124, 32, 0.25); color: #ffc78a"
+                  >Parrainage</span
+                >
+              </div>
+              <div class="prog-card-body">
+                <h5 style="color: #fff">Parrainer une élève</h5>
+                <p style="color: rgba(255, 255, 255, 0.75)">
+                  Prenez en charge le parcours scolaire d'une jeune fille et
+                  suivez son évolution personnellement tout au long de l'année.
+                </p>
+                <a
+                  href="#agir"
+                  class="btn-prog btn-don w-100 text-center justify-content-center mt-auto"
+                >
+                  <i class="bi bi-heart-fill"></i> Je parraine une élève
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════ RÉALISATIONS ════ -->
+    <section class="section-pad" id="realisations">
+      <div class="container">
+        <div class="row align-items-center mb-5">
+          <div class="col-lg-6">
+            <div class="section-eyebrow">Nos réalisations</div>
+            <h2 class="section-title">
+              Ce que nous avons<br /><span>accompli ensemble</span>
+            </h2>
+          </div>
+          <div class="col-lg-6">
+            <p class="section-lead">
+              Depuis 2013, des actions concrètes et mesurables transforment la
+              vie de centaines de familles.
+            </p>
+          </div>
+        </div>
+        <div class="row g-4">
+          <div class="col-sm-6 col-lg-4">
+            <div class="real-card">
+              <div class="real-card-img img-blue">
+                <img
+                  src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=600&auto=format&fit=crop"
+                  alt="Salles de classe"
+                  onerror="
+                    this.style.display = 'none';
+                    this.nextElementSibling.style.display = 'flex';
+                  "
+                />
+                <div
+                  class="real-card-img-ph"
+                  style="
+                    display: none;
+                    flex-direction: column;
+                    align-items: center;
+                  "
+                >
+                  🏫<span>Salles de classe</span>
+                </div>
+                <div class="real-year-badge">2018–2023</div>
+              </div>
+              <div class="real-card-body">
+                <h6>Salles de classe construites</h6>
+                <p>
+                  3 salles construites et équipées dans la région Est,
+                  bénéficiant à plus de 150 élèves par an.
+                </p>
+                <a href="#" class="btn-more"
+                  >En savoir plus <i class="bi bi-arrow-right"></i
+                ></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-6 col-lg-4">
+            <div class="real-card">
+              <div class="real-card-img img-green">
+                <img
+                  src="https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=600&auto=format&fit=crop"
+                  alt="Bourses scolaires"
+                  onerror="
+                    this.style.display = 'none';
+                    this.nextElementSibling.style.display = 'flex';
+                  "
+                />
+                <div
+                  class="real-card-img-ph"
+                  style="
+                    display: none;
+                    flex-direction: column;
+                    align-items: center;
+                  "
+                >
+                  👧<span>Bourses scolaires</span>
+                </div>
+                <div class="real-year-badge">2013–2024</div>
+              </div>
+              <div class="real-card-body">
+                <h6>Bourses scolaires attribuées</h6>
+                <p>
+                  Plus de 500 bourses remises à des jeunes filles méritantes et
+                  démunies depuis la création.
+                </p>
+                <a href="#" class="btn-more"
+                  >En savoir plus <i class="bi bi-arrow-right"></i
+                ></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-6 col-lg-4">
+            <div class="real-card">
+              <div class="real-card-img img-orange">
+                <img
+                  src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&auto=format&fit=crop"
+                  alt="Micro-projets"
+                  onerror="
+                    this.style.display = 'none';
+                    this.nextElementSibling.style.display = 'flex';
+                  "
+                />
+                <div
+                  class="real-card-img-ph"
+                  style="
+                    display: none;
+                    flex-direction: column;
+                    align-items: center;
+                  "
+                >
+                  💼<span>Micro-projets</span>
+                </div>
+                <div class="real-year-badge">2015–2024</div>
+              </div>
+              <div class="real-card-body">
+                <h6>Micro-projets financés</h6>
+                <p>
+                  83 micro-entreprises créées et accompagnées, générant des
+                  revenus durables pour des jeunes femmes.
+                </p>
+                <a href="#" class="btn-more"
+                  >En savoir plus <i class="bi bi-arrow-right"></i
+                ></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-6 col-lg-4">
+            <div class="real-card">
+              <div class="real-card-img img-red">
+                <img
+                  src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=600&auto=format&fit=crop"
+                  alt="Campagnes médicales"
+                  onerror="
+                    this.style.display = 'none';
+                    this.nextElementSibling.style.display = 'flex';
+                  "
+                />
+                <div
+                  class="real-card-img-ph"
+                  style="
+                    display: none;
+                    flex-direction: column;
+                    align-items: center;
+                  "
+                >
+                  🏥<span>Campagnes médicales</span>
+                </div>
+                <div class="real-year-badge">2016–2024</div>
+              </div>
+              <div class="real-card-body">
+                <h6>Campagnes médicales</h6>
+                <p>
+                  6 campagnes de santé organisées, touchant plus de 1 200
+                  bénéficiaires dans les villages reculés.
+                </p>
+                <a href="#" class="btn-more"
+                  >En savoir plus <i class="bi bi-arrow-right"></i
+                ></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-6 col-lg-4">
+            <div class="real-card">
+              <div class="real-card-img img-purple">
+                <img
+                  src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=600&auto=format&fit=crop"
+                  alt="Adultes alphabétisés"
+                  onerror="
+                    this.style.display = 'none';
+                    this.nextElementSibling.style.display = 'flex';
+                  "
+                />
+                <div
+                  class="real-card-img-ph"
+                  style="
+                    display: none;
+                    flex-direction: column;
+                    align-items: center;
+                  "
+                >
+                  📖<span>Alphabétisation</span>
+                </div>
+                <div class="real-year-badge">2014–2024</div>
+              </div>
+              <div class="real-card-body">
+                <h6>Adultes alphabétisés</h6>
+                <p>
+                  120 adultes ont appris à lire et écrire grâce aux cours
+                  d'alphabétisation de la fondation.
+                </p>
+                <a href="#" class="btn-more"
+                  >En savoir plus <i class="bi bi-arrow-right"></i
+                ></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-6 col-lg-4">
+            <div class="real-card">
+              <div class="real-card-img img-teal">
+                <img
+                  src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=600&auto=format&fit=crop"
+                  alt="Projets agricoles"
+                  onerror="
+                    this.style.display = 'none';
+                    this.nextElementSibling.style.display = 'flex';
+                  "
+                />
+                <div
+                  class="real-card-img-ph"
+                  style="
+                    display: none;
+                    flex-direction: column;
+                    align-items: center;
+                  "
+                >
+                  🌾<span>Agriculture</span>
+                </div>
+                <div class="real-year-badge">2019–2024</div>
+              </div>
+              <div class="real-card-body">
+                <h6>Projets agricoles</h6>
+                <p>
+                  4 coopératives agricoles mises en place pour améliorer la
+                  sécurité alimentaire des communautés rurales.
+                </p>
+                <a href="#" class="btn-more"
+                  >En savoir plus <i class="bi bi-arrow-right"></i
+                ></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════ PROJETS EN COURS ════ -->
+    <section
+      class="section-pad"
+      id="projets"
+      style="background: var(--djama-light-bg)"
+    >
+      <div class="container">
+        <div class="text-center mb-5">
+          <div class="section-eyebrow justify-content-center">
+            Projets en cours
+          </div>
+          <h2 class="section-title">
+            Initiatives <span>actuellement</span> sur le terrain
+          </h2>
+        </div>
+        <div class="row g-4">
+          <div class="col-md-6 col-lg-4">
+            <div class="projet-card-img">
+              <div class="projet-img-wrap img-blue">
+                <img
+                  src="https://images.unsplash.com/photo-1592595896616-c37162298647?w=600&auto=format&fit=crop"
+                  alt="École Bondoukou"
+                  onerror="
+                    this.style.display = 'none';
+                    this.nextElementSibling.style.display = 'flex';
+                  "
+                />
+                <div
+                  class="projet-img-ph"
+                  style="
+                    display: none;
+                    flex-direction: column;
+                    align-items: center;
+                  "
+                >
+                  🏫<span>Construction</span>
+                </div>
+                <span
+                  class="status-badge"
+                  style="background: #e8f5e9; color: #2e7d32"
+                  >En cours</span
+                >
+              </div>
+              <div class="projet-body">
+                <h6>Construction d'une école à Bondoukou</h6>
+                <p>
+                  Financement et construction d'un nouveau bâtiment scolaire de
+                  4 classes dans la région du Gontougo.
+                </p>
+                <div class="progress-djama">
+                  <div class="progress-djama-bar" style="width: 72%"></div>
+                </div>
+                <div class="projet-meta">
+                  <span>Avancement : 72%</span><span>Fin : Juin 2025</span>
+                </div>
+                <a href="#" class="btn-prog btn-prog-outline"
+                  >En savoir plus <i class="bi bi-arrow-right"></i
+                ></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4">
+            <div class="projet-card-img">
+              <div class="projet-img-wrap img-orange">
+                <img
+                  src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=600&auto=format&fit=crop"
+                  alt="Micro-crédits"
+                  onerror="
+                    this.style.display = 'none';
+                    this.nextElementSibling.style.display = 'flex';
+                  "
+                />
+                <div
+                  class="projet-img-ph"
+                  style="
+                    display: none;
+                    flex-direction: column;
+                    align-items: center;
+                  "
+                >
+                  💼<span>Micro-crédits</span>
+                </div>
+                <span
+                  class="status-badge"
+                  style="background: #fff8e1; color: #f57f17"
+                  >En financement</span
+                >
+              </div>
+              <div class="projet-body">
+                <h6>Programme de micro-crédits 2025</h6>
+                <p>
+                  Nouveau cycle de financement pour 30 jeunes femmes
+                  entrepreneures dans 3 régions de Côte d'Ivoire.
+                </p>
+                <div class="progress-djama">
+                  <div class="progress-djama-bar" style="width: 45%"></div>
+                </div>
+                <div class="projet-meta">
+                  <span>Financé : 45%</span><span>Objectif : 15M FCFA</span>
+                </div>
+                <a href="#" class="btn-prog btn-prog-outline"
+                  >En savoir plus <i class="bi bi-arrow-right"></i
+                ></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4">
+            <div class="projet-card-img">
+              <div class="projet-img-wrap img-teal">
+                <img
+                  src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&auto=format&fit=crop"
+                  alt="Caravane médicale"
+                  onerror="
+                    this.style.display = 'none';
+                    this.nextElementSibling.style.display = 'flex';
+                  "
+                />
+                <div
+                  class="projet-img-ph"
+                  style="
+                    display: none;
+                    flex-direction: column;
+                    align-items: center;
+                  "
+                >
+                  🏥<span>Santé</span>
+                </div>
+                <span
+                  class="status-badge"
+                  style="background: #e3f2fd; color: #1565c0"
+                  >Bientôt lancé</span
+                >
+              </div>
+              <div class="projet-body">
+                <h6>Caravane médicale — Zone rurale Est</h6>
+                <p>
+                  Campagne mobile de santé couvrant 8 villages de la région Est
+                  : consultations, vaccinations et sensibilisation.
+                </p>
+                <div class="progress-djama">
+                  <div class="progress-djama-bar" style="width: 20%"></div>
+                </div>
+                <div class="projet-meta">
+                  <span>Préparation : 20%</span
+                  ><span>Démarrage : Sept. 2025</span>
+                </div>
+                <a href="#" class="btn-prog btn-prog-outline"
+                  >En savoir plus <i class="bi bi-arrow-right"></i
+                ></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════ MÉDIATHÈQUE ════ -->
+    <!-- <section class="media-section section-pad" id="mediatheque">
+      <div class="container">
+        <div class="row align-items-center mb-4">
+          <div class="col-lg-6">
+            <div class="section-eyebrow">Médiathèque</div>
+            <h2 class="section-title">
+              Photos, vidéos<br />&amp; <span>documents</span>
+            </h2>
+          </div>
+          <div
+            class="col-lg-6 d-flex flex-wrap gap-2 justify-content-lg-end mt-3 mt-lg-0"
+          >
+            <button
+              class="media-tab-btn active"
+              onclick="filterMedia(this, 'all')"
+            >
+              Tout voir
+            </button>
+            <button class="media-tab-btn" onclick="filterMedia(this, 'photos')">
+              Photos
+            </button>
+            <button class="media-tab-btn" onclick="filterMedia(this, 'videos')">
+              Vidéos
+            </button>
+            <button class="media-tab-btn" onclick="filterMedia(this, 'docs')">
+              Documents
+            </button>
+          </div>
+        </div>
+        <div class="row g-3" id="mediaGrid">
+          <div class="col-6 col-md-4 col-lg-3 media-item" data-cat="photos">
+            <div class="media-card">
+              <div class="media-thumb" style="background: #e3f2fd">📸</div>
+              <div class="media-info">
+                <h6>Rentrée scolaire 2024</h6>
+                <span>Photo · Jan 2024</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-6 col-md-4 col-lg-3 media-item" data-cat="videos">
+            <div class="media-card">
+              <div class="media-thumb" style="background: #fce4ec">🎥</div>
+              <div class="media-info">
+                <h6>Témoignage d'Aminata</h6>
+                <span>Vidéo · 4 min</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-6 col-md-4 col-lg-3 media-item" data-cat="docs">
+            <div class="media-card">
+              <div class="media-thumb" style="background: #fff8e1">📄</div>
+              <div class="media-info">
+                <h6>Rapport annuel 2023</h6>
+                <span>PDF · 2.4 Mo</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-6 col-md-4 col-lg-3 media-item" data-cat="photos">
+            <div class="media-card">
+              <div class="media-thumb" style="background: #e8f5e9">📸</div>
+              <div class="media-info">
+                <h6>Remise de fournitures</h6>
+                <span>Photo · Mars 2024</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-6 col-md-4 col-lg-3 media-item" data-cat="videos">
+            <div class="media-card">
+              <div class="media-thumb" style="background: #ede7f6">🎥</div>
+              <div class="media-info">
+                <h6>Campagne médicale 2023</h6>
+                <span>Vidéo · 7 min</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-6 col-md-4 col-lg-3 media-item" data-cat="docs">
+            <div class="media-card">
+              <div class="media-thumb" style="background: #e1f5fe">📋</div>
+              <div class="media-info">
+                <h6>Brochure de présentation</h6>
+                <span>PDF · 1.1 Mo</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-6 col-md-4 col-lg-3 media-item" data-cat="photos">
+            <div class="media-card">
+              <div class="media-thumb" style="background: #fce4ec">📸</div>
+              <div class="media-info">
+                <h6>Inauguration salle Bondoukou</h6>
+                <span>Photo · Juin 2023</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-6 col-md-4 col-lg-3 media-item" data-cat="docs">
+            <div class="media-card">
+              <div class="media-thumb" style="background: #fff8e1">📑</div>
+              <div class="media-info">
+                <h6>Statuts de la fondation</h6>
+                <span>PDF · 0.8 Mo</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="text-center mt-4">
+          <a
+            href="#"
+            class="btn"
+            style="
+              border: 1.5px solid var(--djama-blue);
+              color: var(--djama-blue);
+              font-family: var(--font-head);
+              font-weight: 600;
+              border-radius: 10px;
+              padding: 0.6rem 1.8rem;
+            "
+          >
+            Voir toute la médiathèque <i class="bi bi-arrow-right ms-1"></i>
+          </a>
+        </div>
+      </div>
+    </section> -->
+
+    <!-- ════ TÉMOIGNAGES ════ -->
+    <section class="section-pad" id="temoignages">
+      <div class="container">
+        <div class="text-center mb-5">
+          <div class="section-eyebrow justify-content-center">Témoignages</div>
+          <h2 class="section-title">Des vies <span>transformées</span></h2>
+        </div>
+        <div class="row g-4">
+          <div class="col-md-6 col-lg-4">
+            <div class="temoignage-card">
+              <div class="temoignage-quote">"</div>
+              <p class="temoignage-text">
+                Grâce à la Fondation Djama, j'ai pu retourner à l'école.
+                Aujourd'hui je suis en classe de troisième et je rêve de devenir
+                médecin.
+              </p>
+              <div class="d-flex align-items-center gap-3">
+                <div class="temoignage-avatar">AF</div>
+                <div>
+                  <div class="temoignage-name">Aminata F.</div>
+                  <div class="temoignage-role">Élève, 15 ans — Bondoukou</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <div class="temoignage-card">
+              <div class="temoignage-quote">"</div>
+              <p class="temoignage-text">
+                Le micro-crédit reçu m'a permis d'ouvrir mon commerce de
+                couture. Aujourd'hui j'emploie deux autres femmes du village.
+              </p>
+              <div class="d-flex align-items-center gap-3">
+                <div
+                  class="temoignage-avatar"
+                  style="background: var(--djama-green)"
+                >
+                  MK
+                </div>
+                <div>
+                  <div class="temoignage-name">Mariam K.</div>
+                  <div class="temoignage-role">
+                    Bénéficiaire micro-projet — Abengourou
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <div class="temoignage-card">
+              <div class="temoignage-quote">"</div>
+              <p class="temoignage-text">
+                Nous avons appris à lire à 45 ans. Mon mari et moi pouvons
+                maintenant lire les ordonnances médicales de nos enfants.
+              </p>
+              <div class="d-flex align-items-center gap-3">
+                <div
+                  class="temoignage-avatar"
+                  style="background: var(--djama-orange)"
+                >
+                  YD
+                </div>
+                <div>
+                  <div class="temoignage-name">Yah D.</div>
+                  <div class="temoignage-role">
+                    Cours d'alphabétisation — Gontougo
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════ ACTUALITÉS ════ -->
+    <section
+      class="section-pad"
+      id="actualites"
+      style="background: var(--djama-light-bg)"
+    >
+      <div class="container">
+        <div class="row align-items-center mb-5">
+          <div class="col-lg-7">
+            <div class="section-eyebrow">Actualités</div>
+            <h2 class="section-title">
+              Restez informés<br />de nos <span>actions</span>
+            </h2>
+          </div>
+          <div class="col-lg-5 text-lg-end mt-3 mt-lg-0">
+            <a
+              href="#"
+              style="
+                font-family: var(--font-head);
+                font-weight: 600;
+                color: var(--djama-blue);
+                text-decoration: none;
+                font-size: 0.88rem;
+              "
+              >Toutes les actualités <i class="bi bi-arrow-right ms-1"></i
+            ></a>
+          </div>
+        </div>
+        <div class="row g-4">
+          <div class="col-md-6 col-lg-4">
+            <div class="actu-card">
+              <div class="actu-img img-blue">
+                <img
+                  src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=600&auto=format&fit=crop"
+                  alt="Rentrée scolaire"
+                  onerror="
+                    this.style.display = 'none';
+                    this.nextElementSibling.style.display = 'flex';
+                  "
+                />
+                <div
+                  class="actu-img-ph"
+                  style="
+                    display: none;
+                    flex-direction: column;
+                    align-items: center;
+                  "
+                >
+                  📚<span>Éducation</span>
+                </div>
+                <span
+                  class="actu-cat-badge"
+                  style="background: #e3f2fd; color: #1565c0"
+                  >Éducation</span
+                >
+              </div>
+              <div class="actu-body">
+                <h6>Rentrée 2024 : 120 nouvelles bourses attribuées</h6>
+                <p>
+                  La fondation a remis des bourses scolaires à 120 jeunes filles
+                  lors de la cérémonie de rentrée à Bondoukou.
+                </p>
+                <a href="#" class="btn-prog btn-prog-outline mt-auto"
+                  >Lire l'article <i class="bi bi-arrow-right"></i
+                ></a>
+              </div>
+              <div class="actu-footer-bar">
+                <span class="actu-date-txt"
+                  ><i class="bi bi-calendar3"></i>15 Oct. 2024</span
+                >
+                <span style="font-size: 0.75rem; color: #9aacbe"
+                  >5 min de lecture</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4">
+            <div class="actu-card">
+              <div class="actu-img img-teal">
+                <img
+                  src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&auto=format&fit=crop"
+                  alt="Caravane médicale"
+                  onerror="
+                    this.style.display = 'none';
+                    this.nextElementSibling.style.display = 'flex';
+                  "
+                />
+                <div
+                  class="actu-img-ph"
+                  style="
+                    display: none;
+                    flex-direction: column;
+                    align-items: center;
+                  "
+                >
+                  🏥<span>Santé</span>
+                </div>
+                <span
+                  class="actu-cat-badge"
+                  style="background: #e8f5e9; color: #2e7d32"
+                  >Santé</span
+                >
+              </div>
+              <div class="actu-body">
+                <h6>Caravane médicale : plus de 400 consultations gratuites</h6>
+                <p>
+                  Notre caravane a sillonné 5 villages de la région Est pour
+                  offrir des soins gratuits aux populations.
+                </p>
+                <a href="#" class="btn-prog btn-prog-outline mt-auto"
+                  >Lire l'article <i class="bi bi-arrow-right"></i
+                ></a>
+              </div>
+              <div class="actu-footer-bar">
+                <span class="actu-date-txt"
+                  ><i class="bi bi-calendar3"></i>3 Août 2024</span
+                >
+                <span style="font-size: 0.75rem; color: #9aacbe"
+                  >4 min de lecture</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4">
+            <div class="actu-card">
+              <div class="actu-img img-orange">
+                <img
+                  src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=600&auto=format&fit=crop"
+                  alt="Micro-crédits"
+                  onerror="
+                    this.style.display = 'none';
+                    this.nextElementSibling.style.display = 'flex';
+                  "
+                />
+                <div
+                  class="actu-img-ph"
+                  style="
+                    display: none;
+                    flex-direction: column;
+                    align-items: center;
+                  "
+                >
+                  💼<span>Économie</span>
+                </div>
+                <span
+                  class="actu-cat-badge"
+                  style="background: #fff8e1; color: #f57f17"
+                  >Économie</span
+                >
+              </div>
+              <div class="actu-body">
+                <h6>Remise de micro-crédits à 15 jeunes entrepreneures</h6>
+                <p>
+                  15 jeunes femmes ont reçu leur financement pour démarrer ou
+                  développer leur activité génératrice de revenus.
+                </p>
+                <a href="#" class="btn-prog btn-prog-outline mt-auto"
+                  >Lire l'article <i class="bi bi-arrow-right"></i
+                ></a>
+              </div>
+              <div class="actu-footer-bar">
+                <span class="actu-date-txt"
+                  ><i class="bi bi-calendar3"></i>20 Juin 2024</span
+                >
+                <span style="font-size: 0.75rem; color: #9aacbe"
+                  >3 min de lecture</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════ AGIR & SOUTENIR ════ -->
+    <section class="section-pad" id="agir" style="background: #fff">
+      <div class="container">
+        <div class="text-center mb-5">
+          <div class="section-eyebrow justify-content-center">
+            Agir & Soutenir
+          </div>
+          <h2 class="section-title">
+            Choisissez votre<br /><span>façon d'aider</span>
+          </h2>
+        </div>
+        <div class="row g-4">
+          <div class="col-sm-6 col-lg-3">
+            <div class="agir-card">
+              <div class="agir-icon" style="background: #fff3e0">💰</div>
+              <h5>Faire un don</h5>
+              <p>
+                Votre contribution finance directement la scolarité, les
+                fournitures et les soins des bénéficiaires.
+              </p>
+              <a
+                href="#"
+                class="btn-agir"
+                style="background: var(--djama-orange); color: #fff"
+                >Faire un don</a
+              >
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-3">
+            <div class="agir-card">
+              <div class="agir-icon" style="background: #e8f5e9">👧</div>
+              <h5>Parrainer une élève</h5>
+              <p>
+                Prenez en charge une jeune fille et suivez son parcours scolaire
+                personnellement.
+              </p>
+              <a
+                href="#"
+                class="btn-agir"
+                style="background: var(--djama-green); color: #fff"
+                >Je parraine</a
+              >
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-3">
+            <div class="agir-card">
+              <div class="agir-icon" style="background: #e3f2fd">🤝</div>
+              <h5>Devenir bénévole</h5>
+              <p>
+                Offrez votre temps et vos compétences : enseignement, conseil,
+                logistique ou terrain.
+              </p>
+              <a
+                href="#"
+                class="btn-agir"
+                style="background: var(--djama-blue); color: #fff"
+                >Je m'engage</a
+              >
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-3">
+            <div class="agir-card">
+              <div class="agir-icon" style="background: #ede7f6">🏢</div>
+              <h5>Partenariat</h5>
+              <p>
+                Associez votre entreprise ou ONG à notre mission et financez un
+                programme complet.
+              </p>
+              <a
+                href="#contact"
+                class="btn-agir"
+                style="
+                  border: 1.5px solid var(--djama-blue);
+                  color: var(--djama-blue);
+                "
+                >Nous contacter</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════ ÉQUIPE ════ -->
+    <section
+      class="section-pad"
+      id="equipe"
+      style="background: var(--djama-light-bg)"
+    >
+      <div class="container">
+        <div class="text-center mb-5">
+          <div class="section-eyebrow justify-content-center">Notre équipe</div>
+          <h2 class="section-title">
+            Les femmes et hommes qui <span>portent la mission</span>
+          </h2>
+        </div>
+        <div class="row g-4 justify-content-center">
+          <div class="col-6 col-md-4 col-lg-3">
+            <div class="equipe-card">
+              <div
+                class="equipe-avatar"
+                style="background: #e3f2fd; color: var(--djama-blue)"
+              >
+                OA
+              </div>
+              <h6>Mlle Ouattara Abran Fatoumata</h6>
+              <span>Présidente</span>
+            </div>
+          </div>
+          <div class="col-6 col-md-4 col-lg-3">
+            <div class="equipe-card">
+              <div
+                class="equipe-avatar"
+                style="background: #e8f5e9; color: var(--djama-green)"
+              >
+                OM
+              </div>
+              <h6>Mlle Ouattara Affoua Mandinan</h6>
+              <span>Vice-Présidente</span>
+            </div>
+          </div>
+          <div class="col-6 col-md-4 col-lg-3">
+            <div class="equipe-card">
+              <div
+                class="equipe-avatar"
+                style="background: #fff8e1; color: #f57f17"
+              >
+                OY
+              </div>
+              <h6>Mlle Ouattara Yah Mariame</h6>
+              <span>Secrétaire Générale</span>
+            </div>
+          </div>
+          <div class="col-6 col-md-4 col-lg-3">
+            <div class="equipe-card">
+              <div
+                class="equipe-avatar"
+                style="background: #ede7f6; color: #4527a0"
+              >
+                AA
+              </div>
+              <h6>M. Adaman Amara</h6>
+              <span>Trésorier Général</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════ CTA BANDE ════ -->
+    <section class="cta-bande section-pad-sm">
+      <div class="container text-center position-relative">
+        <h2 class="mb-2">Ensemble, construisons un avenir meilleur</h2>
+        <p class="mb-4">
+          Votre soutien, quelle que soit sa forme, change concrètement des vies.
+        </p>
+        <div class="d-flex flex-wrap justify-content-center gap-3">
+          <a href="#agir" class="btn-cta-white btn"
+            ><i
+              class="bi bi-heart-fill me-2"
+              style="color: var(--djama-orange)"
+            ></i
+            >Faire un don maintenant</a
+          >
+          <a
+            href="#contact"
+            class="btn"
+            style="
+              background: rgba(255, 255, 255, 0.15);
+              color: #fff;
+              border: 2px solid rgba(255, 255, 255, 0.4);
+              border-radius: 10px;
+              font-family: var(--font-head);
+              font-weight: 600;
+              padding: 0.7rem 1.8rem;
+            "
+            >Nous contacter</a
+          >
+        </div>
+      </div>
+    </section>
+
+    <!-- ════ CONTACT ════ -->
+    <section class="section-pad" id="contact">
+      <div class="container">
+        <div class="row gy-5">
+          <div class="col-lg-5">
+            <div class="section-eyebrow">Contact</div>
+            <h2 class="section-title">
+              Parlons de<br /><span>votre engagement</span>
+            </h2>
+            <p
+              style="
+                color: #4a5568;
+                font-size: 0.92rem;
+                line-height: 1.75;
+                margin-bottom: 1.5rem;
+              "
+            >
+              Vous souhaitez faire un don, devenir partenaire ou simplement en
+              savoir plus ? Notre équipe vous répond.
+            </p>
+            <div class="d-flex flex-column gap-3">
+              <div class="d-flex align-items-start gap-3">
+                <div
+                  style="
+                    width: 38px;
+                    height: 38px;
+                    border-radius: 10px;
+                    background: #e3f2fd;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    flex-shrink: 0;
+                  "
+                >
+                  <i
+                    class="bi bi-geo-alt-fill"
+                    style="color: var(--djama-blue)"
+                  ></i>
+                </div>
+                <div>
+                  <div
+                    style="
+                      font-family: var(--font-head);
+                      font-weight: 700;
+                      font-size: 0.88rem;
+                      color: var(--djama-blue);
+                    "
+                  >
+                    Siège social
+                  </div>
+                  <div style="font-size: 0.83rem; color: #5a6a7a">
+                    Riviera 2 les Jardins, en face de la Mosquée<br />Abidjan
+                    Cocody — 23 B.P 1990 Abidjan 23
+                  </div>
+                </div>
+              </div>
+              <div class="d-flex align-items-start gap-3">
+                <div
+                  style="
+                    width: 38px;
+                    height: 38px;
+                    border-radius: 10px;
+                    background: #e8f5e9;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    flex-shrink: 0;
+                  "
+                >
+                  <i
+                    class="bi bi-calendar-check-fill"
+                    style="color: var(--djama-green)"
+                  ></i>
+                </div>
+                <div>
+                  <div
+                    style="
+                      font-family: var(--font-head);
+                      font-weight: 700;
+                      font-size: 0.88rem;
+                      color: var(--djama-blue);
+                    "
+                  >
+                    Fondée le
+                  </div>
+                  <div style="font-size: 0.83rem; color: #5a6a7a">
+                    30 janvier 2013
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-7">
+            <div
+              style="
+                background: #fff;
+                border: 1px solid rgba(31, 78, 121, 0.1);
+                border-radius: 16px;
+                padding: 2rem;
+              "
+            >
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label
+                    style="
+                      font-family: var(--font-head);
+                      font-weight: 600;
+                      font-size: 0.82rem;
+                      color: var(--djama-blue);
+                      margin-bottom: 6px;
+                      display: block;
+                    "
+                    >Nom complet</label
+                  ><input
+                    type="text"
+                    class="form-control"
+                    placeholder="Votre nom"
+                    style="
+                      border-radius: 10px;
+                      border-color: rgba(31, 78, 121, 0.15);
+                      font-size: 0.88rem;
+                    "
+                  />
+                </div>
+                <div class="col-md-6">
+                  <label
+                    style="
+                      font-family: var(--font-head);
+                      font-weight: 600;
+                      font-size: 0.82rem;
+                      color: var(--djama-blue);
+                      margin-bottom: 6px;
+                      display: block;
+                    "
+                    >Email</label
+                  ><input
+                    type="email"
+                    class="form-control"
+                    placeholder="votre@email.com"
+                    style="
+                      border-radius: 10px;
+                      border-color: rgba(31, 78, 121, 0.15);
+                      font-size: 0.88rem;
+                    "
+                  />
+                </div>
+                <div class="col-12">
+                  <label
+                    style="
+                      font-family: var(--font-head);
+                      font-weight: 600;
+                      font-size: 0.82rem;
+                      color: var(--djama-blue);
+                      margin-bottom: 6px;
+                      display: block;
+                    "
+                    >Objet</label
+                  >
+                  <select
+                    class="form-select"
+                    style="
+                      border-radius: 10px;
+                      border-color: rgba(31, 78, 121, 0.15);
+                      font-size: 0.88rem;
+                    "
+                  >
+                    <option>Je souhaite faire un don</option>
+                    <option>Je veux parrainer une élève</option>
+                    <option>Je veux devenir bénévole</option>
+                    <option>Proposition de partenariat</option>
+                    <option>Autre demande</option>
+                  </select>
+                </div>
+                <div class="col-12">
+                  <label
+                    style="
+                      font-family: var(--font-head);
+                      font-weight: 600;
+                      font-size: 0.82rem;
+                      color: var(--djama-blue);
+                      margin-bottom: 6px;
+                      display: block;
+                    "
+                    >Message</label
+                  ><textarea
+                    class="form-control"
+                    rows="4"
+                    placeholder="Votre message..."
+                    style="
+                      border-radius: 10px;
+                      border-color: rgba(31, 78, 121, 0.15);
+                      font-size: 0.88rem;
+                      resize: none;
+                    "
+                  ></textarea>
+                </div>
+                <div class="col-12">
+                  <button
+                    class="btn btn-don w-100 py-3"
+                    style="font-size: 0.92rem"
+                  >
+                    <i class="bi bi-send-fill me-2"></i>Envoyer le message
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════ FOOTER ════ -->
+    <footer class="footer-djama py-5">
+      <div class="container">
+        <div class="row gy-4">
+          <div class="col-lg-4">
+            <div class="d-flex align-items-center gap-2 mb-2">
+              <div
+                class="navbar-brand-logo"
+                style="background: rgba(255, 255, 255, 0.12)"
+              >
+                DE
+              </div>
+              <div class="footer-brand">Fondation Djama Éducation</div>
+            </div>
+            <div class="footer-slogan">
+              « Offrir l'éducation, construire l'avenir »
+            </div>
+            <p
+              style="
+                font-size: 0.82rem;
+                color: rgba(255, 255, 255, 0.55);
+                margin-top: 1rem;
+                line-height: 1.7;
+              "
+            >
+              Fondée en 2013, la Fondation Djama œuvre pour l'éducation,
+              l'autonomie et la santé des populations vulnérables de Côte
+              d'Ivoire.
+            </p>
+            <div class="d-flex gap-2 mt-3">
+              <a href="#" class="social-btn"><i class="bi bi-facebook"></i></a>
+              <a href="#" class="social-btn"><i class="bi bi-instagram"></i></a>
+              <a href="#" class="social-btn"><i class="bi bi-twitter-x"></i></a>
+              <a href="#" class="social-btn"><i class="bi bi-linkedin"></i></a>
+              <a href="#" class="social-btn"><i class="bi bi-youtube"></i></a>
+            </div>
+          </div>
+          <div class="col-6 col-lg-2">
+            <div class="footer-title">Navigation</div>
+            <a class="footer-link" href="#">Accueil</a>
+            <a class="footer-link" href="#apropos">À propos</a>
+            <a class="footer-link" href="#programmes">Programmes</a>
+            <a class="footer-link" href="#realisations">Réalisations</a>
+            <a class="footer-link" href="#projets">Projets</a>
+          </div>
+          <div class="col-6 col-lg-2">
+            <div class="footer-title">Ressources</div>
+            <a class="footer-link" href="#mediatheque">Médiathèque</a>
+            <a class="footer-link" href="#actualites">Actualités</a>
+            <a class="footer-link" href="#temoignages">Témoignages</a>
+            <a class="footer-link" href="#equipe">Équipe</a>
+            <a class="footer-link" href="#contact">Contact</a>
+          </div>
+          <div class="col-lg-4">
+            <div class="footer-title">Agir maintenant</div>
+            <p
+              style="
+                font-size: 0.82rem;
+                color: rgba(255, 255, 255, 0.55);
+                margin-bottom: 1rem;
+                line-height: 1.7;
+              "
+            >
+              Rejoignez notre communauté et recevez nos actualités terrain.
+            </p>
+            <div class="input-group" style="max-width: 320px">
+              <input
+                type="email"
+                class="form-control"
+                placeholder="Votre email"
+                style="
+                  border-radius: 10px 0 0 10px;
+                  background: rgba(255, 255, 255, 0.08);
+                  border: 1px solid rgba(255, 255, 255, 0.15);
+                  color: #fff;
+                  font-size: 0.85rem;
+                "
+              />
+              <button class="btn btn-don" style="border-radius: 0 10px 10px 0">
+                S'inscrire
+              </button>
+            </div>
+            <div class="mt-3">
+              <a
+                href="#agir"
+                class="btn btn-don"
+                style="
+                  max-width: 320px;
+                  width: 100%;
+                  display: block;
+                  text-align: center;
+                "
+                ><i class="bi bi-heart-fill me-2"></i>Faire un don</a
+              >
+            </div>
+          </div>
+        </div>
+        <hr class="footer-divider my-4" />
+        <div
+          class="d-flex flex-wrap justify-content-between align-items-center gap-2"
+        >
+          <div class="footer-copy">
+            © 2025 Fondation Djama Éducation. Tous droits réservés. · Siège :
+            Abidjan Cocody, Riviera 2
+          </div>
+          <div class="d-flex gap-3">
+            <a
+              href="#"
+              style="
+                font-size: 0.75rem;
+                color: rgba(255, 255, 255, 0.35);
+                text-decoration: none;
+              "
+              >Mentions légales</a
+            >
+            <a
+              href="#"
+              style="
+                font-size: 0.75rem;
+                color: rgba(255, 255, 255, 0.35);
+                text-decoration: none;
+              "
+              >Politique de confidentialité</a
+            >
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      /* ── NAVBAR SCROLL ── */
+      const nav = document.getElementById("mainNav");
+      window.addEventListener("scroll", () =>
+        nav.classList.toggle("scrolled", window.scrollY > 30),
+      );
+
+      /* ── SLIDER ── */
+      const SLIDES_COUNT = 4;
+      const AUTO_DELAY = 5500;
+      let current = 0,
+        timer = null,
+        progressTimer = null;
+
+      const track = document.getElementById("sliderTrack");
+      const dots = document.querySelectorAll(".slider-dot");
+      const progress = document.getElementById("sliderProgress");
+
+      function goTo(idx) {
+        document.getElementById("slide-" + current).classList.remove("active");
+        dots[current].classList.remove("active");
+        current = (idx + SLIDES_COUNT) % SLIDES_COUNT;
+        document.getElementById("slide-" + current).classList.add("active");
+        dots[current].classList.add("active");
+        track.style.transform = "translateX(-" + current * 100 + "%)";
+        resetProgress();
+      }
+
+      function next() {
+        goTo(current + 1);
+      }
+      function prev() {
+        goTo(current - 1);
+      }
+
+      function resetProgress() {
+        clearInterval(timer);
+        progress.style.transition = "none";
+        progress.style.width = "0%";
+        setTimeout(() => {
+          progress.style.transition = "width " + AUTO_DELAY + "ms linear";
+          progress.style.width = "100%";
+        }, 30);
+        timer = setTimeout(next, AUTO_DELAY);
+      }
+
+      document.getElementById("sliderNext").addEventListener("click", () => {
+        next();
+      });
+      document.getElementById("sliderPrev").addEventListener("click", () => {
+        prev();
+      });
+      dots.forEach((dot, i) => dot.addEventListener("click", () => goTo(i)));
+
+      /* Touch / swipe */
+      let touchStartX = 0;
+      const slider = document.getElementById("heroSlider");
+      slider.addEventListener(
+        "touchstart",
+        (e) => {
+          touchStartX = e.touches[0].clientX;
+        },
+        { passive: true },
+      );
+      slider.addEventListener("touchend", (e) => {
+        const diff = touchStartX - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 50) diff > 0 ? next() : prev();
+      });
+
+      /* Keyboard */
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowRight") next();
+        if (e.key === "ArrowLeft") prev();
+      });
+
+      /* Start */
+      resetProgress();
+
+      /* ── MEDIA FILTER ── */
+      function filterMedia(btn, cat) {
+        document
+          .querySelectorAll(".media-tab-btn")
+          .forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+        document.querySelectorAll(".media-item").forEach((item) => {
+          item.style.display =
+            cat === "all" || item.dataset.cat === cat ? "" : "none";
+        });
+      }
+    </script>
+  </body>
+</html>
