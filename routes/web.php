@@ -14,6 +14,7 @@ use App\Http\Controllers\frontend\HebergementController;
 use App\Http\Controllers\frontend\indexController;
 use App\Http\Controllers\frontend\NomDomaineController;
 use App\Http\Controllers\GalerieController;
+use App\Http\Controllers\RealisationController;
 use App\Http\Controllers\SliderController;
 use Illuminate\Support\Facades\Route;
 
@@ -87,30 +88,42 @@ Route::middleware(['admin'])->prefix('admin')->group(function () {
         route::delete('delete/{id}', 'delete')->name('module.delete');
     });
 
-// galerie
+    // galerie
 
-Route::prefix('admin/galerie')->group(function(){
-    Route::get('/', [GalerieController::class,'index'])->name('galerie.index');
-    Route::post('/store', [GalerieController::class,'store'])->name('galerie.store');
-    Route::put('/update/{id}', [GalerieController::class,'update'])->name('galerie.update');
-    Route::delete('/delete/{id}', [GalerieController::class,'destroy'])->name('galerie.delete');
-});
+    Route::prefix('admin/galerie')->group(function () {
+        Route::get('/', [GalerieController::class, 'index'])->name('galerie.index');
+        Route::post('/store', [GalerieController::class, 'store'])->name('galerie.store');
+        Route::put('/update/{id}', [GalerieController::class, 'update'])->name('galerie.update');
+        Route::delete('/delete/{id}', [GalerieController::class, 'destroy'])->name('galerie.delete');
+    });
 
-// Apropos
-Route::prefix('admin/apropos')->controller(AproposController::class)->group(function(){
-    Route::get('/', 'index')->name('apropos.index');
-    Route::post('/store', 'store')->name('apropos.store');
-    Route::put('/update/{id}', 'update')->name('apropos.update');
-    Route::delete('/delete/{id}', 'destroy')->name('apropos.destroy');
-});
+    // Apropos
+    Route::prefix('admin/apropos')->controller(AproposController::class)->group(function () {
+        Route::get('/', 'index')->name('apropos.index');
+        Route::post('/store', 'store')->name('apropos.store');
+        Route::put('/update/{id}', 'update')->name('apropos.update');
+        Route::delete('/delete/{id}', 'destroy')->name('apropos.destroy');
+    });
 
-// sliders
-Route::prefix('admin')->group(function () {
-    Route::get('/sliders', [SliderController::class, 'index'])->name('sliders.index');
-    Route::post('/sliders', [SliderController::class, 'store'])->name('sliders.store');
-    Route::put('/sliders/{slider}', [SliderController::class, 'update'])->name('sliders.update');
-    Route::delete('/sliders/{slider}', [SliderController::class, 'destroy'])->name('sliders.destroy');
-});
+    // sliders
+    Route::prefix('admin')->group(function () {
+        Route::get('/sliders', [SliderController::class, 'index'])->name('sliders.index');
+        Route::post('/sliders', [SliderController::class, 'store'])->name('sliders.store');
+        Route::put('/sliders/{slider}', [SliderController::class, 'update'])->name('sliders.update');
+        Route::delete('/sliders/{slider}', [SliderController::class, 'destroy'])->name('sliders.destroy');
+    });
+
+    // Nos Realisations
+
+    Route::prefix('admin')->group(function () {
+        Route::get('/realisations', [RealisationController::class, 'index'])->name('realisations.index');
+        Route::post('/realisations', [RealisationController::class, 'store'])->name('realisations.store');
+        Route::put('/realisations/{realisation}', [RealisationController::class, 'update'])->name('realisations.update');
+        Route::delete('/realisations/{realisation}', [RealisationController::class, 'destroy'])->name('realisations.destroy');
+        Route::post('/realisations/reorder', [RealisationController::class, 'reorder'])->name('realisations.reorder');
+    });
+
+    Route::get('/realisations/{slug}', [RealisationController::class, 'show'])->name('realisations.show');
 });
 
 
@@ -119,23 +132,9 @@ Route::prefix('admin')->group(function () {
 
 // FRONTEND 
 
-Route::controller(indexController::class)->group(function(){
+Route::controller(indexController::class)->group(function () {
     // index
     route::get('/', 'index')->name('index');
     // galerie
     route::get('/galerie', 'galerie')->name('galerie');
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-

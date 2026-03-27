@@ -66,6 +66,16 @@
                 </li>
                 @endcan
 
+                {{-- REALISATIONS --}}
+                @can('voir-realisations')
+                <li class="nav-item">
+                    <a class="nav-link menu-link {{ Route::is('realisations.*') ? 'active' : '' }}"
+                        href="{{ route('realisations.index') }}">
+                        <i class="ri-award-line"></i> <span>Réalisations</span>
+                    </a>
+                </li>
+                @endcan
+
                 {{-- SECTION PARAMÈTRES --}}
                 @if (in_array(Auth::user()->role, ['superadmin', 'developpeur']) || Auth::user()->can('voir-parametre'))
                 <li class="nav-item">

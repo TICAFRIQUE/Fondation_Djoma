@@ -2006,106 +2006,8 @@
   </section>
 
   <!-- ════ RÉALISATIONS — cards images ════ -->
-  <section class="section-pad" id="realisations">
-    <div class="container">
-      <div class="row align-items-center mb-5">
-        <div class="col-lg-6">
-          <div class="section-eyebrow">Nos réalisations</div>
-          <h2 class="section-title">Ce que nous avons<br /><span>accompli ensemble</span></h2>
-        </div>
-        <div class="col-lg-6">
-          <p class="section-lead">Depuis 2013, des actions concrètes et mesurables transforment des centaines de vies.</p>
-        </div>
-      </div>
-      <div class="row g-4">
-        <div class="col-sm-6 col-lg-4">
-          <div class="real-card">
-            <div class="real-card-img img-blue">
-              <img src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=600&auto=format&fit=crop" alt="Salles de classe" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
-              <div class="real-card-img-ph" style="display:none;flex-direction:column;align-items:center;">🏫<span>Salles de classe</span></div>
-              <div class="real-year-badge">2018–2023</div>
-            </div>
-            <div class="real-card-body">
-              <h6>Salles de classe construites</h6>
-              <p>3 salles construites et équipées dans la région Est, bénéficiant à plus de 150 élèves par an.</p>
-              <a href="#" class="btn-more">En savoir plus <i class="bi bi-arrow-right"></i></a>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-6 col-lg-4">
-          <div class="real-card">
-            <div class="real-card-img img-green">
-              <img src="https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=600&auto=format&fit=crop" alt="Bourses scolaires" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
-              <div class="real-card-img-ph" style="display:none;flex-direction:column;align-items:center;">👧<span>Bourses scolaires</span></div>
-              <div class="real-year-badge">2013–2024</div>
-            </div>
-            <div class="real-card-body">
-              <h6>Bourses scolaires attribuées</h6>
-              <p>Plus de 500 bourses remises à des jeunes filles méritantes et démunies depuis la création.</p>
-              <a href="#" class="btn-more">En savoir plus <i class="bi bi-arrow-right"></i></a>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-6 col-lg-4">
-          <div class="real-card">
-            <div class="real-card-img img-orange">
-              <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&auto=format&fit=crop" alt="Micro-projets" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
-              <div class="real-card-img-ph" style="display:none;flex-direction:column;align-items:center;">💼<span>Micro-projets</span></div>
-              <div class="real-year-badge">2015–2024</div>
-            </div>
-            <div class="real-card-body">
-              <h6>Micro-projets financés</h6>
-              <p>83 micro-entreprises créées et accompagnées, générant des revenus durables pour des jeunes femmes.</p>
-              <a href="#" class="btn-more">En savoir plus <i class="bi bi-arrow-right"></i></a>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-6 col-lg-4">
-          <div class="real-card">
-            <div class="real-card-img img-red">
-              <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=600&auto=format&fit=crop" alt="Campagnes médicales" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
-              <div class="real-card-img-ph" style="display:none;flex-direction:column;align-items:center;">🏥<span>Campagnes médicales</span></div>
-              <div class="real-year-badge">2016–2024</div>
-            </div>
-            <div class="real-card-body">
-              <h6>Campagnes médicales</h6>
-              <p>6 campagnes organisées, touchant plus de 1 200 bénéficiaires dans les villages reculés.</p>
-              <a href="#" class="btn-more">En savoir plus <i class="bi bi-arrow-right"></i></a>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-6 col-lg-4">
-          <div class="real-card">
-            <div class="real-card-img img-purple">
-              <img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=600&auto=format&fit=crop" alt="Alphabétisation" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
-              <div class="real-card-img-ph" style="display:none;flex-direction:column;align-items:center;">📖<span>Alphabétisation</span></div>
-              <div class="real-year-badge">2014–2024</div>
-            </div>
-            <div class="real-card-body">
-              <h6>Adultes alphabétisés</h6>
-              <p>120 adultes ont appris à lire et écrire grâce aux cours de la fondation.</p>
-              <a href="#" class="btn-more">En savoir plus <i class="bi bi-arrow-right"></i></a>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-6 col-lg-4">
-          <div class="real-card">
-            <div class="real-card-img img-teal">
-              <img src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=600&auto=format&fit=crop" alt="Agriculture" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
-              <div class="real-card-img-ph" style="display:none;flex-direction:column;align-items:center;">🌾<span>Agriculture</span></div>
-              <div class="real-year-badge">2019–2024</div>
-            </div>
-            <div class="real-card-body">
-              <h6>Coopératives agricoles</h6>
-              <p>4 coopératives mises en place pour améliorer la sécurité alimentaire des communautés rurales.</p>
-              <a href="#" class="btn-more">En savoir plus <i class="bi bi-arrow-right"></i></a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
 
+ 
   <!-- ════ PROJETS EN COURS — CARROUSEL ════ -->
   <section class="section-pad" id="projets" style="background:var(--djama-light-bg);">
     <div class="container">
@@ -2149,7 +2051,7 @@
             <div class="projet-card-img">
               <div class="projet-img-wrap img-orange">
                 <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=600&auto=format&fit=crop" alt="Micro-crédits" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
-                <div class="projet-img-ph" style="display:none;flex-direction:column;align-items:center;">💼<span>Micro-crédits</span></div>
+                <div class="projet-img-ph" style="display:none;flex-direction:column;align-items:center;">💼<span></span></div>
                 <span class="status-badge" style="background:#FFF8E1;color:#F57F17;">En financement</span>
               </div>
               <div class="projet-body">
