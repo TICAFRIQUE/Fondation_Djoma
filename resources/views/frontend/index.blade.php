@@ -2007,23 +2007,196 @@
 
   <!-- ════ RÉALISATIONS — cards images ════ -->
 
- 
-  <!-- ════ PROJETS EN COURS — CARROUSEL ════ -->
-  <section class="section-pad" id="projets" style="background:var(--djama-light-bg);">
+  <!-- <section class="section-pad" id="realisations">
+  <div class="container">
+    <div class="row align-items-center mb-5">
+      <div class="col-lg-6">
+        <div class="section-eyebrow">Nos réalisations</div>
+        <h2 class="section-title">Ce que nous avons<br/><span>accompli ensemble</span></h2>
+      </div>
+      <div class="col-lg-6">
+        <p class="section-lead">Depuis 2013, des actions concrètes et mesurables transforment des centaines de vies.</p>
+      </div>
+    </div>
+    <div class="row g-4">
+      <div class="col-sm-6 col-lg-4">
+        <div class="real-card">
+          <div class="real-card-img img-blue">
+            <img src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=600&auto=format&fit=crop" alt="Salles de classe" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"/>
+            <div class="real-card-img-ph" style="display:none;flex-direction:column;align-items:center;">🏫<span>Salles de classe</span></div>
+            <div class="real-year-badge">2018–2023</div>
+          </div>
+          <div class="real-card-body">
+            <h6>Salles de classe construites</h6>
+            <p>3 salles construites et équipées dans la région Est, bénéficiant à plus de 150 élèves par an.</p>
+            <a href="#" class="btn-more">En savoir plus <i class="bi bi-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-4">
+        <div class="real-card">
+          <div class="real-card-img img-green">
+            <img src="https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=600&auto=format&fit=crop" alt="Bourses scolaires" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"/>
+            <div class="real-card-img-ph" style="display:none;flex-direction:column;align-items:center;">👧<span>Bourses scolaires</span></div>
+            <div class="real-year-badge">2013–2024</div>
+          </div>
+          <div class="real-card-body">
+            <h6>Bourses scolaires attribuées</h6>
+            <p>Plus de 500 bourses remises à des jeunes filles méritantes et démunies depuis la création.</p>
+            <a href="#" class="btn-more">En savoir plus <i class="bi bi-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-4">
+        <div class="real-card">
+          <div class="real-card-img img-orange">
+            <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&auto=format&fit=crop" alt="Micro-projets" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"/>
+            <div class="real-card-img-ph" style="display:none;flex-direction:column;align-items:center;">💼<span>Micro-projets</span></div>
+            <div class="real-year-badge">2015–2024</div>
+          </div>
+          <div class="real-card-body">
+            <h6>Micro-projets financés</h6>
+            <p>83 micro-entreprises créées et accompagnées, générant des revenus durables pour des jeunes femmes.</p>
+            <a href="#" class="btn-more">En savoir plus <i class="bi bi-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-4">
+        <div class="real-card">
+          <div class="real-card-img img-red">
+            <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=600&auto=format&fit=crop" alt="Campagnes médicales" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"/>
+            <div class="real-card-img-ph" style="display:none;flex-direction:column;align-items:center;">🏥<span>Campagnes médicales</span></div>
+            <div class="real-year-badge">2016–2024</div>
+          </div>
+          <div class="real-card-body">
+            <h6>Campagnes médicales</h6>
+            <p>6 campagnes organisées, touchant plus de 1 200 bénéficiaires dans les villages reculés.</p>
+            <a href="#" class="btn-more">En savoir plus <i class="bi bi-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-4">
+        <div class="real-card">
+          <div class="real-card-img img-purple">
+            <img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=600&auto=format&fit=crop" alt="Alphabétisation" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"/>
+            <div class="real-card-img-ph" style="display:none;flex-direction:column;align-items:center;">📖<span>Alphabétisation</span></div>
+            <div class="real-year-badge">2014–2024</div>
+          </div>
+          <div class="real-card-body">
+            <h6>Adultes alphabétisés</h6>
+            <p>120 adultes ont appris à lire et écrire grâce aux cours de la fondation.</p>
+            <a href="#" class="btn-more">En savoir plus <i class="bi bi-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-4">
+        <div class="real-card">
+          <div class="real-card-img img-teal">
+            <img src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=600&auto=format&fit=crop" alt="Agriculture" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"/>
+            <div class="real-card-img-ph" style="display:none;flex-direction:column;align-items:center;">🌾<span>Agriculture</span></div>
+            <div class="real-year-badge">2019–2024</div>
+          </div>
+          <div class="real-card-body">
+            <h6>Coopératives agricoles</h6>
+            <p>4 coopératives mises en place pour améliorer la sécurité alimentaire des communautés rurales.</p>
+            <a href="#" class="btn-more">En savoir plus <i class="bi bi-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> -->
+
+  <section class="section-pad" id="realisations">
     <div class="container">
-      <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-5">
-        <div>
+
+      <div class="row align-items-center mb-5">
+        <div class="col-lg-6">
+          <div class="section-eyebrow">Nos réalisations</div>
+          <h2 class="section-title">
+            Ce que nous avons<br /><span>accompli ensemble</span>
+          </h2>
+        </div>
+        <div class="col-lg-6">
+          <p class="section-lead">
+            Depuis {{ $realisations->first() && $realisations->first()->date_start 
+    ? \Carbon\Carbon::parse($realisations->first()->date_start)->format('Y') 
+    : '2013'}},
+            des actions concrètes transforment des vies.
+          </p>
+        </div>
+      </div>
+
+      <div class="row g-4">
+
+        @foreach($realisations as $item)
+        <div class="col-sm-6 col-lg-4">
+
+          <div class="real-card">
+
+            {{-- IMAGE --}}
+            <div class="real-card-img">
+
+              @if($item->image)
+              <img src="{{ asset('storage/'.$item->image) }}"
+                alt="{{ $item->title }}"
+                onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+              @endif
+
+              {{-- FALLBACK --}}
+              <div class="real-card-img-ph"
+                style="{{ $item->image ? 'display:none;' : 'display:flex;' }} flex-direction:column;align-items:center;">
+                📌
+                <span>{{ $item->title }}</span>
+              </div>
+
+              {{-- BADGE DATE --}}
+              <div class="real-year-badge">
+                {{ $item->date_start ? \Carbon\Carbon::parse($item->date_start)->format('Y') : '' }}
+                @if($item->date_end)
+                – {{ \Carbon\Carbon::parse($item->date_end)->format('Y') }}
+                @endif
+              </div>
+
+            </div>
+
+            {{-- CONTENT --}}
+            <div class="real-card-body">
+              <h6>{{ $item->title }}</h6>
+
+              <p>
+                {{ \Illuminate\Support\Str::limit($item->description, 120) }}
+              </p>
+
+              <a href="{{ route('realisations.show', $item->slug) }}" class="btn-more">
+                En savoir plus <i class="bi bi-arrow-right"></i>
+              </a>
+            </div>
+
+          </div>
+
+        </div>
+        @endforeach
+
+      </div>
+    </div>
+  </section>
+  <!-- ════ PROJETS EN COURS — CARROUSEL ════ -->
+  <!-- <section class="section-pad" id="projets" style="background:var(--djama-light-bg);"> -->
+  <!-- <div class="container"> -->
+  <!-- <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-5"> -->
+  <!-- <div>
           <div class="section-eyebrow">Projets en cours</div>
           <h2 class="section-title mb-0">Initiatives <span>sur le terrain</span></h2>
-        </div>
-        <div class="d-flex align-items-center gap-3">
+        </div> -->
+  <!-- <div class="d-flex align-items-center gap-3">
           <a href="#" class="btn-prog btn-prog-outline">Voir tous les projets <i class="bi bi-arrow-right"></i></a>
           <div class="d-flex gap-2">
             <button class="projets-nav-btn" id="projetPrev"><i class="bi bi-chevron-left"></i></button>
             <button class="projets-nav-btn" id="projetNext"><i class="bi bi-chevron-right"></i></button>
-          </div>
-        </div>
-      </div>
+          </div> -->
+  <!-- </div> -->
+  <!-- </div>
 
       <div class="projets-carousel-wrap" id="projetsWrap">
         <div class="projets-carousel-track" id="projetsTrack">
@@ -2034,8 +2207,8 @@
                 <img src="https://images.unsplash.com/photo-1592595896616-c37162298647?w=600&auto=format&fit=crop" alt="École Bondoukou" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
                 <div class="projet-img-ph" style="display:none;flex-direction:column;align-items:center;">🏫<span>Construction</span></div>
                 <span class="status-badge" style="background:#E8F5E9;color:#2E7D32;">En cours</span>
-              </div>
-              <div class="projet-body">
+              </div> -->
+  <!-- <div class="projet-body">
                 <h6>Construction d'une école à Bondoukou</h6>
                 <p>Bâtiment scolaire de 4 classes dans la région du Gontougo pour accueillir 160 élèves.</p>
                 <div class="progress-djama">
@@ -2045,9 +2218,9 @@
                 <a href="#" class="btn-prog btn-prog-outline">En savoir plus <i class="bi bi-arrow-right"></i></a>
               </div>
             </div>
-          </div>
+          </div> -->
 
-          <div class="projet-slide">
+  <!-- <div class="projet-slide">
             <div class="projet-card-img">
               <div class="projet-img-wrap img-orange">
                 <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=600&auto=format&fit=crop" alt="Micro-crédits" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
@@ -2059,8 +2232,8 @@
                 <p>Nouveau cycle de financement pour 30 jeunes femmes entrepreneures dans 3 régions.</p>
                 <div class="progress-djama">
                   <div class="progress-djama-bar" style="width:45%;"></div>
-                </div>
-                <div class="projet-meta"><span>Financé : 45%</span><span>Objectif : 15M FCFA</span></div>
+                </div> -->
+  <!-- <div class="projet-meta"><span>Financé : 45%</span><span>Objectif : 15M FCFA</span></div>
                 <a href="#" class="btn-prog btn-prog-outline">En savoir plus <i class="bi bi-arrow-right"></i></a>
               </div>
             </div>
@@ -2073,8 +2246,8 @@
                 <div class="projet-img-ph" style="display:none;flex-direction:column;align-items:center;">🏥<span>Santé</span></div>
                 <span class="status-badge" style="background:#E3F2FD;color:#1565C0;">Bientôt lancé</span>
               </div>
-              <div class="projet-body">
-                <h6>Caravane médicale — Zone rurale Est</h6>
+              <div class="projet-body"> -->
+  <!-- <h6>Caravane médicale — Zone rurale Est</h6>
                 <p>Campagne mobile de santé couvrant 8 villages : consultations, vaccinations, sensibilisation.</p>
                 <div class="progress-djama">
                   <div class="progress-djama-bar" style="width:20%;"></div>
@@ -2083,9 +2256,9 @@
                 <a href="#" class="btn-prog btn-prog-outline">En savoir plus <i class="bi bi-arrow-right"></i></a>
               </div>
             </div>
-          </div>
+          </div> -->
 
-          <div class="projet-slide">
+  <!-- <div class="projet-slide">
             <div class="projet-card-img">
               <div class="projet-img-wrap img-green">
                 <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?w=600&auto=format&fit=crop" alt="Bourses 2025" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
@@ -2097,8 +2270,8 @@
                 <p>Attribution de 150 nouvelles bourses pour la prochaine rentrée scolaire dans 4 régions.</p>
                 <div class="progress-djama">
                   <div class="progress-djama-bar" style="width:60%;"></div>
-                </div>
-                <div class="projet-meta"><span>Sélection : 60%</span><span>Rentrée oct. 2025</span></div>
+                </div> -->
+  <!-- <div class="projet-meta"><span>Sélection : 60%</span><span>Rentrée oct. 2025</span></div>
                 <a href="#" class="btn-prog btn-prog-outline">En savoir plus <i class="bi bi-arrow-right"></i></a>
               </div>
             </div>
@@ -2110,8 +2283,8 @@
                 <img src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=600&auto=format&fit=crop" alt="Coopérative agricole" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
                 <div class="projet-img-ph" style="display:none;flex-direction:column;align-items:center;">🌾<span>Agriculture</span></div>
                 <span class="status-badge" style="background:#FFF8E1;color:#F57F17;">En financement</span>
-              </div>
-              <div class="projet-body">
+              </div> -->
+  <!-- <div class="projet-body">
                 <h6>Coopérative agricole féminine</h6>
                 <p>Création d'une 5ème coopérative agricole entièrement gérée par des femmes dans la région de l'Est.</p>
                 <div class="progress-djama">
@@ -2124,14 +2297,121 @@
           </div>
 
         </div>
-      </div>
+      </div> -->
 
-      <!-- Dots carrousel projets -->
-      <div class="d-flex justify-content-center gap-2 mt-4" id="projetDots">
+  <!-- Dots carrousel projets -->
+  <!-- <div class="d-flex justify-content-center gap-2 mt-4" id="projetDots">
         <button class="slider-dot active" style="background:rgba(31,78,121,0.25);" onclick="goProjet(0)"></button>
         <button class="slider-dot" style="background:rgba(31,78,121,0.25);" onclick="goProjet(1)"></button>
         <button class="slider-dot" style="background:rgba(31,78,121,0.25);" onclick="goProjet(2)"></button>
       </div>
+    </div>
+  </section> -->
+  <section class="section-pad" id="projets" style="background:var(--djama-light-bg);">
+    <div class="container">
+
+      <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-5">
+        <div>
+          <div class="section-eyebrow">Projets en cours</div>
+          <h2 class="section-title mb-0">Initiatives <span>sur le terrain</span></h2>
+        </div>
+
+        <div class="d-flex align-items-center gap-3">
+          <a href="" class="btn-prog btn-prog-outline">
+            Voir tous les projets <i class="bi bi-arrow-right"></i>
+          </a>
+
+          <div class="d-flex gap-2">
+            <button class="projets-nav-btn" id="projetPrev"><i class="bi bi-chevron-left"></i></button>
+            <button class="projets-nav-btn" id="projetNext"><i class="bi bi-chevron-right"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="projets-carousel-wrap" id="projetsWrap">
+        <div class="projets-carousel-track" id="projetsTrack">
+
+          @foreach($projets as $item)
+          <div class="projet-slide">
+
+            <div class="projet-card-img">
+
+              <div class="projet-img-wrap">
+
+                {{-- IMAGE --}}
+                @if($item->image)
+                <img src="{{ asset('storage/'.$item->image) }}"
+                  alt="{{ $item->title }}"
+                  onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+                @endif
+
+                {{-- FALLBACK --}}
+                <div class="projet-img-ph"
+                  style="{{ $item->image ? 'display:none;' : 'display:flex;' }} flex-direction:column;align-items:center;">
+                  📌
+                  <span>{{ $item->title }}</span>
+                </div>
+
+                {{-- STATUS --}}
+                <span class="status-badge"
+                  style="
+                  @if($item->status == 'en_cours') background:#E8F5E9;color:#2E7D32;
+                  @elseif($item->status == 'financement') background:#FFF8E1;color:#F57F17;
+                  @elseif($item->status == 'bientot') background:#E3F2FD;color:#1565C0;
+                  @endif
+                ">
+                  {{ ucfirst(str_replace('_',' ', $item->status)) }}
+                </span>
+
+              </div>
+
+              {{-- BODY --}}
+              <div class="projet-body">
+
+                <h6>{{ $item->title }}</h6>
+
+                <p>
+                  {{ \Illuminate\Support\Str::limit($item->description, 120) }}
+                </p>
+
+                {{-- PROGRESS --}}
+                <div class="progress-djama">
+                  <div class="progress-djama-bar"
+                    style="width:{{ $item->progress }}%;"></div>
+                </div>
+
+                <div class="projet-meta">
+                  <span>{{ $item->progress }}%</span>
+
+                  <span>
+                    {{ $item->date_end ? $item->date_end->format('M Y') : '' }}
+                  </span>
+                </div>
+
+                <a href="{{ route('projets.show', $item->slug) }}"
+                  class="btn-prog btn-prog-outline">
+                  En savoir plus <i class="bi bi-arrow-right"></i>
+                </a>
+
+              </div>
+
+            </div>
+
+          </div>
+          @endforeach
+
+        </div>
+      </div>
+
+      {{-- DOTS --}}
+      <div class="d-flex justify-content-center gap-2 mt-4" id="projetDots">
+        @foreach($projets as $key => $item)
+        <button class="slider-dot {{ $key == 0 ? 'active' : '' }}"
+          onclick="goProjet({{ $key }})">
+        </button>
+        @endforeach
+      </div>
+
     </div>
   </section>
 
@@ -2211,7 +2491,7 @@
   </section>
 
   <!-- ════ MÉDIATHÈQUE ════ -->
-  <section class="media-section section-pad" id="mediatheque">
+  <!-- <section class="media-section section-pad" id="mediatheque">
     <div class="container">
       <div class="row align-items-center mb-4">
         <div class="col-lg-6">
@@ -2221,9 +2501,9 @@
         <div class="col-lg-6 d-flex flex-wrap gap-2 justify-content-lg-end mt-3 mt-lg-0">
           <button class="media-tab-btn active" onclick="filterMedia(this,'all')">Tout voir</button>
           <button class="media-tab-btn" onclick="filterMedia(this,'photos')">Photos</button>
-          <button class="media-tab-btn" onclick="filterMedia(this,'videos')">Vidéos</button>
+          <button class="media-tab-btn" onclick="filterMedia(this,'videos')">Vidéos</button> -->
           <!-- <button class="media-tab-btn" onclick="filterMedia(this,'docs')">Documents</button> -->
-        </div>
+        <!-- </div>
       </div>
       <div class="row g-3" id="mediaGrid">
         <div class="col-6 col-md-4 col-lg-3 media-item" data-cat="photos">
@@ -2241,7 +2521,7 @@
               <h6>Témoignage d'Aminata</h6><span>Vidéo · 4 min</span>
             </div>
           </div>
-        </div>
+        </div> -->
         <!-- <div class="col-6 col-md-4 col-lg-3 media-item" data-cat="docs">
           <div class="media-card">
             <div class="media-thumb" style="background:#FFF8E1;">📄</div>
@@ -2250,7 +2530,7 @@
             </div>
           </div>
         </div> -->
-        <div class="col-6 col-md-4 col-lg-3 media-item" data-cat="photos">
+        <!-- <div class="col-6 col-md-4 col-lg-3 media-item" data-cat="photos">
           <div class="media-card">
             <div class="media-thumb" style="background:#E8F5E9;">📸</div>
             <div class="media-info">
@@ -2265,7 +2545,7 @@
               <h6>Campagne médicale 2023</h6><span>Vidéo · 7 min</span>
             </div>
           </div>
-        </div>
+        </div> -->
         <!--  <div class="col-6 col-md-4 col-lg-3 media-item" data-cat="docs">
           <div class="media-card">
             <div class="media-thumb" style="background:#E1F5FE;">📋</div>
@@ -2338,13 +2618,13 @@
                       <div class="temoignage-name">Yah D.</div>
                       <div class="temoignage-role">Cours d'alphabétisation — Gontougo</div>
                     </div>
+                 
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </section>
-
         <!-- ════ ACTUALITÉS ════ -->
         <section class="section-pad" id="actualites" style="background:var(--djama-light-bg);">
           <div class="container">

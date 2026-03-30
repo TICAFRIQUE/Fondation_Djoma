@@ -10,5 +10,5 @@ class Galerie extends Model
     use HasFactory;
 
     // Autoriser l'insertion de ces champs
-    protected $fillable = ['title', 'path', 'type'];
+   protected $fillable = ['title', 'path', 'type'];
 }

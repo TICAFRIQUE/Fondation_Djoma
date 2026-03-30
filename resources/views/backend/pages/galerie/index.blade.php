@@ -154,8 +154,8 @@ Galerie
                     </div>
 
                     <div class="mb-3">
-                        <label>Image</label>
-                        <input type="file" name="image" class="form-control" required>
+                        <label>Media</label>
+                        <input type="file" name="media" class="form-control" required>
                     </div>
 
                 </div>

@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Storage;
 
 class GalerieController extends Controller
 {
-    // CONTROLLER
     public function index()
     {
         $images = Galerie::latest()->get();
@@ -18,13 +17,14 @@ class GalerieController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'media' => 'required|file|mimes:jpg,jpeg,png,mp4,mov,avi|max:20000', // 20Mo max
-            'title' => 'nullable|string'
+            'media' => 'required|file|mimes:jpg,jpeg,png,mp4,mov,avi|max:2048',
+            'title' => 'nullable|string|max:255'
         ]);
 
         if ($request->hasFile('media')) {
             $file = $request->file('media');
             $extension = $file->getClientOriginalExtension();
+
             $type = in_array($extension, ['mp4', 'mov', 'avi']) ? 'video' : 'image';
 
             $path = $file->store('galerie', 'public');
@@ -43,14 +43,21 @@ class GalerieController extends Controller
     {
         $galerie = Galerie::findOrFail($id);
 
+        $request->validate([
+            'media' => 'nullable|file|mimes:jpg,jpeg,png,mp4,mov,avi|max:2048',
+            'title' => 'nullable|string|max:255'
+        ]);
+
         if ($request->hasFile('media')) {
-            // Supprimer l'ancien fichier
-            if (Storage::disk('public')->exists($galerie->path)) {
+
+            // supprimer ancien fichier
+            if ($galerie->path && Storage::disk('public')->exists($galerie->path)) {
                 Storage::disk('public')->delete($galerie->path);
             }
 
             $file = $request->file('media');
             $extension = $file->getClientOriginalExtension();
+
             $galerie->type = in_array($extension, ['mp4', 'mov', 'avi']) ? 'video' : 'image';
             $galerie->path = $file->store('galerie', 'public');
         }
@@ -60,9 +67,18 @@ class GalerieController extends Controller
 
         return back()->with('success', 'Média modifié');
     }
+
     public function destroy($id)
     {
-        Galerie::findOrFail($id)->delete();
-        return back();
+        $galerie = Galerie::findOrFail($id);
+
+        // supprimer fichier
+        if ($galerie->path && Storage::disk('public')->exists($galerie->path)) {
+            Storage::disk('public')->delete($galerie->path);
+        }
+
+        $galerie->delete();
+
+        return back()->with('success', 'Média supprimé');
     }
 }

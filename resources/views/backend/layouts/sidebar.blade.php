@@ -75,6 +75,15 @@
                     </a>
                 </li>
                 @endcan
+                <!-- projets -->
+                 @can('voir-projets')
+                <li class="nav-item">
+                    <a class="nav-link menu-link {{ Route::is('projets.*') ? 'active' : '' }}"
+                        href="{{ route('projets.index') }}">
+                        <i class="ri-briefcase-line"></i> <span>Projets</span>
+                    </a>
+                </li>
+                @endcan
 
                 {{-- SECTION PARAMÈTRES --}}
                 @if (in_array(Auth::user()->role, ['superadmin', 'developpeur']) || Auth::user()->can('voir-parametre'))

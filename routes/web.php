@@ -14,6 +14,7 @@ use App\Http\Controllers\frontend\HebergementController;
 use App\Http\Controllers\frontend\indexController;
 use App\Http\Controllers\frontend\NomDomaineController;
 use App\Http\Controllers\GalerieController;
+use App\Http\Controllers\ProjetController;
 use App\Http\Controllers\RealisationController;
 use App\Http\Controllers\SliderController;
 use Illuminate\Support\Facades\Route;
@@ -100,8 +101,8 @@ Route::middleware(['admin'])->prefix('admin')->group(function () {
     // Apropos
     Route::prefix('admin/apropos')->controller(AproposController::class)->group(function () {
         Route::get('/', 'index')->name('apropos.index');
-        Route::post('/store', 'store')->name('apropos.store');
-        Route::put('/update/{id}', 'update')->name('apropos.update');
+        Route::post('/store', 'storeApropos')->name('apropos.store');
+        Route::put('/update/{id}', 'updateApropos')->name('apropos.update');
         Route::delete('/delete/{id}', 'destroy')->name('apropos.destroy');
     });
 
@@ -123,7 +124,14 @@ Route::middleware(['admin'])->prefix('admin')->group(function () {
         Route::post('/realisations/reorder', [RealisationController::class, 'reorder'])->name('realisations.reorder');
     });
 
-    Route::get('/realisations/{slug}', [RealisationController::class, 'show'])->name('realisations.show');
+    // Nos projets
+    Route::get('/projets', [ProjetController::class, 'index']) ->name('projets.index');
+
+    Route::post('/projets', [ProjetController::class, 'store'])->name('projets.store');
+
+    Route::put('/projets/{id}', [ProjetController::class, 'update'])->name('projets.update');
+
+    Route::delete('/projets/{id}', [ProjetController::class, 'destroy'])->name('projets.destroy');
 });
 
 
@@ -137,4 +145,10 @@ Route::controller(indexController::class)->group(function () {
     route::get('/', 'index')->name('index');
     // galerie
     route::get('/galerie', 'galerie')->name('galerie');
+
+    //une realisation
+    Route::get('/realisations/{slug}', 'showRealisation')->name('realisations.show');
+
+    // un projet
+    Route::get('/projets/{slug}', 'showProjet')->name('projets.show');
 });

@@ -16,5 +16,6 @@ class Apropos extends Model
     protected $fillable = [
         'image',
         'title',
+        'nombre_eleves_soutenus',
     ];
 }

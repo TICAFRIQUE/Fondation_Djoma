@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('image');             // Chemin de l'image (requis)
             $table->string('title')->nullable(); // Titre (optionnel)
+            $table->integer('nombre_eleves_soutenus')->nullable(); // Nombre d'élèves soutenus (optionnel)
             $table->timestamps();
         });
     }

@@ -6,23 +6,29 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('galeries', function (Blueprint $table) {
             $table->id();
+
             $table->string('title')->nullable();
-            $table->string('path');
-            $table->enum('type', ['image', 'video'])->default('image'); // Nouveau champ
+
+            $table->string('path', 500); // plus sécurisé pour chemins longs
+
+            $table->string('type')->default('image'); 
+            // image | video (plus flexible que enum)
+
+            $table->integer('position')->default(0); 
+            // pour trier les images
+
             $table->timestamps();
+
+            // index (performance)
+            $table->index('type');
+            $table->index('created_at');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('galeries');

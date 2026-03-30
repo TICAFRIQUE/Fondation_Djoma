@@ -26,7 +26,9 @@ class AproposController extends Controller
     {
         $request->validate([
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+            'nombre_eleves_soutenus' => 'nullable|integer',
             'title' => 'nullable|string|max:255',
+            
         ]);
 
         $path = $request->file('image')->store('apropos', 'public');
@@ -66,17 +68,17 @@ class AproposController extends Controller
         return redirect()->back()->with('success', 'Image mise à jour avec succès.');
     }
 
-//    public function destroy($id)
-// {
-//     $apropos = Apropos::findOrFail($id);
+   public function destroy($id)
+{
+    $apropos = Apropos::findOrFail($id);
     
-//     // Supprimer le fichier physique si nécessaire
-//     if ($apropos->image) {
-//         \Storage::disk('public')->delete($apropos->image);
-//     }
+    // Supprimer le fichier physique si nécessaire
+    if ($apropos->image) {
+        \Storage::disk('public')->delete($apropos->image);
+    }
 
-//     $apropos->delete();
+    $apropos->delete();
 
-//     return redirect()->back()->with('success', 'Image supprimée avec succès.');
-// }
+    return redirect()->back()->with('success', 'Image supprimée avec succès.');
+}
 }
