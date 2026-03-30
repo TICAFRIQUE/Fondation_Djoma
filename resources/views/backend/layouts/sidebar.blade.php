@@ -84,7 +84,34 @@
                     </a>
                 </li>
                 @endcan
+                <!-- Messages -->
+                @can('voir-messages')
+                <li class="nav-item">
+                    <a class="nav-link menu-link {{ Route::is('messages.*') ? 'active' : '' }}"
+                        href="{{ route('messages.index') }}">
+                        <i class="ri-mail-line"></i> <span>Messages</span>
+                    </a>
+                </li>
+                @endcan
 
+                    {{-- NEWS --}}  
+                @can('voir-actualites')
+                <li class="nav-item">
+                    <a class="nav-link menu-link {{ Route::is('news.*') ? '         active' : '' }}"
+                        href="{{ route('news.index') }}">
+                        <i class="ri-newspaper-line"></i> <span>Actualités</span>
+                    </a>
+                </li>
+                @endcan 
+                <!-- Programmes  -->
+                @can('voir-programmes')
+                <li class="nav-item">
+                    <a class="nav-link menu-link {{ Route::is('programmes.*') ? 'active' : '' }}"
+                        href="{{ route('programmes.index') }}">
+                        <i class="ri-briefcase-line"></i> <span>Programmes</span>
+                    </a>
+                </li>
+                @endcan
                 {{-- SECTION PARAMÈTRES --}}
                 @if (in_array(Auth::user()->role, ['superadmin', 'developpeur']) || Auth::user()->can('voir-parametre'))
                 <li class="nav-item">

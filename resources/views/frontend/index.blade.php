@@ -1927,13 +1927,76 @@
   <!-- ════ PROGRAMMES — bannière verticale + liste ════ -->
   <section class="section-pad" id="programmes" style="background:var(--djama-light-bg);">
     <div class="container">
+
+      <div class="text-center mb-5">
+        <div class="section-eyebrow justify-content-center">Nos programmes</div>
+        <h2 class="section-title">Des actions concrètes<br />sur le <span>terrain</span></h2>
+      </div>
+
+      <div class="programmes-split">
+
+        @php $banner = $programmes->first(); @endphp
+
+        <div class="programmes-banner">
+
+          @if($banner && $banner->image)
+          <img src="{{ asset('storage/'.$banner->image) }}" alt="{{ $banner->title }}">
+          @else
+          <img src="{{ asset('assets/images/Nos_programmes.jpg') }}" alt="Programmes">
+          @endif
+
+          <div class="programmes-banner-overlay"></div>
+
+          <div class="programmes-banner-content">
+            <div class="badge">
+              {{ $programmes->count() }} programmes actifs
+            </div>
+
+            <h3>{{ $banner->title ?? 'Nos programmes' }}</h3>
+            <p>{{ $banner->description ?? 'Découvrez nos actions sur le terrain.' }}</p>
+
+            <a href="#agir" class="btn-slide-primary">
+              <i class="bi bi-heart-fill"></i> Soutenir un programme
+            </a>
+          </div>
+
+        </div>
+
+        <!-- LISTE -->
+        <div class="programmes-list">
+          @foreach($programmes as $prog)
+          <div class="prog-list-item">
+
+            <div class="prog-list-num"
+              style="background:{{ $prog->color_bg }};color:{{ $prog->color_text }};">
+              {{ $loop->iteration }}
+            </div>
+
+            <div>
+              <h6>{{ $prog->title }}</h6>
+              <p>{{ $prog->description }}</p>
+
+              <a href="{{ route('projets.show', $prog->slug) }}" class="prog-list-link">
+                En savoir plus <i class="bi bi-arrow-right"></i>
+              </a>
+            </div>
+
+          </div>
+          @endforeach
+        </div>
+
+      </div>
+    </div>
+  </section>
+  <!-- <section class="section-pad" id="programmes" style="background:var(--djama-light-bg);">
+    <div class="container">
       <div class="text-center mb-5">
         <div class="section-eyebrow justify-content-center">Nos programmes</div>
         <h2 class="section-title">Des actions concrètes<br />sur le <span>terrain</span></h2>
       </div>
       <div class="programmes-split">
 
-        <!-- Bannière verticale gauche -->
+       
         <div class="programmes-banner">
           <img src="{{ asset('assets/images/Nos_programmes.jpg') }}"
             alt="Programmes Fondation Djama"
@@ -1949,7 +2012,7 @@
           </div>
         </div>
 
-        <!-- Liste des programmes -->
+     
         <div class="programmes-list">
           <div class="prog-list-item">
             <div class="prog-list-num" style="background:#E3F2FD;color:#1565C0;">1</div>
@@ -2003,7 +2066,7 @@
 
       </div>
     </div>
-  </section>
+  </section> -->
 
   <!-- ════ RÉALISATIONS — cards images ════ -->
 
@@ -2181,132 +2244,7 @@
       </div>
     </div>
   </section>
-  <!-- ════ PROJETS EN COURS — CARROUSEL ════ -->
-  <!-- <section class="section-pad" id="projets" style="background:var(--djama-light-bg);"> -->
-  <!-- <div class="container"> -->
-  <!-- <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-5"> -->
-  <!-- <div>
-          <div class="section-eyebrow">Projets en cours</div>
-          <h2 class="section-title mb-0">Initiatives <span>sur le terrain</span></h2>
-        </div> -->
-  <!-- <div class="d-flex align-items-center gap-3">
-          <a href="#" class="btn-prog btn-prog-outline">Voir tous les projets <i class="bi bi-arrow-right"></i></a>
-          <div class="d-flex gap-2">
-            <button class="projets-nav-btn" id="projetPrev"><i class="bi bi-chevron-left"></i></button>
-            <button class="projets-nav-btn" id="projetNext"><i class="bi bi-chevron-right"></i></button>
-          </div> -->
-  <!-- </div> -->
-  <!-- </div>
 
-      <div class="projets-carousel-wrap" id="projetsWrap">
-        <div class="projets-carousel-track" id="projetsTrack">
-
-          <div class="projet-slide">
-            <div class="projet-card-img">
-              <div class="projet-img-wrap img-blue">
-                <img src="https://images.unsplash.com/photo-1592595896616-c37162298647?w=600&auto=format&fit=crop" alt="École Bondoukou" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
-                <div class="projet-img-ph" style="display:none;flex-direction:column;align-items:center;">🏫<span>Construction</span></div>
-                <span class="status-badge" style="background:#E8F5E9;color:#2E7D32;">En cours</span>
-              </div> -->
-  <!-- <div class="projet-body">
-                <h6>Construction d'une école à Bondoukou</h6>
-                <p>Bâtiment scolaire de 4 classes dans la région du Gontougo pour accueillir 160 élèves.</p>
-                <div class="progress-djama">
-                  <div class="progress-djama-bar" style="width:72%;"></div>
-                </div>
-                <div class="projet-meta"><span>Avancement : 72%</span><span>Fin : Juin 2025</span></div>
-                <a href="#" class="btn-prog btn-prog-outline">En savoir plus <i class="bi bi-arrow-right"></i></a>
-              </div>
-            </div>
-          </div> -->
-
-  <!-- <div class="projet-slide">
-            <div class="projet-card-img">
-              <div class="projet-img-wrap img-orange">
-                <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=600&auto=format&fit=crop" alt="Micro-crédits" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
-                <div class="projet-img-ph" style="display:none;flex-direction:column;align-items:center;">💼<span></span></div>
-                <span class="status-badge" style="background:#FFF8E1;color:#F57F17;">En financement</span>
-              </div>
-              <div class="projet-body">
-                <h6>Programme de micro-crédits 2025</h6>
-                <p>Nouveau cycle de financement pour 30 jeunes femmes entrepreneures dans 3 régions.</p>
-                <div class="progress-djama">
-                  <div class="progress-djama-bar" style="width:45%;"></div>
-                </div> -->
-  <!-- <div class="projet-meta"><span>Financé : 45%</span><span>Objectif : 15M FCFA</span></div>
-                <a href="#" class="btn-prog btn-prog-outline">En savoir plus <i class="bi bi-arrow-right"></i></a>
-              </div>
-            </div>
-          </div>
-
-          <div class="projet-slide">
-            <div class="projet-card-img">
-              <div class="projet-img-wrap img-teal">
-                <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&auto=format&fit=crop" alt="Caravane médicale" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
-                <div class="projet-img-ph" style="display:none;flex-direction:column;align-items:center;">🏥<span>Santé</span></div>
-                <span class="status-badge" style="background:#E3F2FD;color:#1565C0;">Bientôt lancé</span>
-              </div>
-              <div class="projet-body"> -->
-  <!-- <h6>Caravane médicale — Zone rurale Est</h6>
-                <p>Campagne mobile de santé couvrant 8 villages : consultations, vaccinations, sensibilisation.</p>
-                <div class="progress-djama">
-                  <div class="progress-djama-bar" style="width:20%;"></div>
-                </div>
-                <div class="projet-meta"><span>Préparation : 20%</span><span>Sept. 2025</span></div>
-                <a href="#" class="btn-prog btn-prog-outline">En savoir plus <i class="bi bi-arrow-right"></i></a>
-              </div>
-            </div>
-          </div> -->
-
-  <!-- <div class="projet-slide">
-            <div class="projet-card-img">
-              <div class="projet-img-wrap img-green">
-                <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?w=600&auto=format&fit=crop" alt="Bourses 2025" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
-                <div class="projet-img-ph" style="display:none;flex-direction:column;align-items:center;">🎓<span>Bourses 2025</span></div>
-                <span class="status-badge" style="background:#E8F5E9;color:#2E7D32;">En cours</span>
-              </div>
-              <div class="projet-body">
-                <h6>Bourses scolaires 2025–2026</h6>
-                <p>Attribution de 150 nouvelles bourses pour la prochaine rentrée scolaire dans 4 régions.</p>
-                <div class="progress-djama">
-                  <div class="progress-djama-bar" style="width:60%;"></div>
-                </div> -->
-  <!-- <div class="projet-meta"><span>Sélection : 60%</span><span>Rentrée oct. 2025</span></div>
-                <a href="#" class="btn-prog btn-prog-outline">En savoir plus <i class="bi bi-arrow-right"></i></a>
-              </div>
-            </div>
-          </div>
-
-          <div class="projet-slide">
-            <div class="projet-card-img">
-              <div class="projet-img-wrap img-purple">
-                <img src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=600&auto=format&fit=crop" alt="Coopérative agricole" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
-                <div class="projet-img-ph" style="display:none;flex-direction:column;align-items:center;">🌾<span>Agriculture</span></div>
-                <span class="status-badge" style="background:#FFF8E1;color:#F57F17;">En financement</span>
-              </div> -->
-  <!-- <div class="projet-body">
-                <h6>Coopérative agricole féminine</h6>
-                <p>Création d'une 5ème coopérative agricole entièrement gérée par des femmes dans la région de l'Est.</p>
-                <div class="progress-djama">
-                  <div class="progress-djama-bar" style="width:30%;"></div>
-                </div>
-                <div class="projet-meta"><span>Financé : 30%</span><span>Objectif : 8M FCFA</span></div>
-                <a href="#" class="btn-prog btn-prog-outline">En savoir plus <i class="bi bi-arrow-right"></i></a>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div> -->
-
-  <!-- Dots carrousel projets -->
-  <!-- <div class="d-flex justify-content-center gap-2 mt-4" id="projetDots">
-        <button class="slider-dot active" style="background:rgba(31,78,121,0.25);" onclick="goProjet(0)"></button>
-        <button class="slider-dot" style="background:rgba(31,78,121,0.25);" onclick="goProjet(1)"></button>
-        <button class="slider-dot" style="background:rgba(31,78,121,0.25);" onclick="goProjet(2)"></button>
-      </div>
-    </div>
-  </section> -->
   <section class="section-pad" id="projets" style="background:var(--djama-light-bg);">
     <div class="container">
 
@@ -2317,7 +2255,7 @@
         </div>
 
         <div class="d-flex align-items-center gap-3">
-          <a href="" class="btn-prog btn-prog-outline">
+          <a href="{{ route('projets.all') }}" class="btn-prog btn-prog-outline">
             Voir tous les projets <i class="bi bi-arrow-right"></i>
           </a>
 
@@ -2374,14 +2312,10 @@
                   {{ \Illuminate\Support\Str::limit($item->description, 120) }}
                 </p>
 
-                {{-- PROGRESS --}}
-                <div class="progress-djama">
-                  <div class="progress-djama-bar"
-                    style="width:{{ $item->progress }}%;"></div>
-                </div>
+
 
                 <div class="projet-meta">
-                  <span>{{ $item->progress }}%</span>
+                  <span></span>
 
                   <span>
                     {{ $item->date_end ? $item->date_end->format('M Y') : '' }}
@@ -2502,8 +2436,8 @@
           <button class="media-tab-btn active" onclick="filterMedia(this,'all')">Tout voir</button>
           <button class="media-tab-btn" onclick="filterMedia(this,'photos')">Photos</button>
           <button class="media-tab-btn" onclick="filterMedia(this,'videos')">Vidéos</button> -->
-          <!-- <button class="media-tab-btn" onclick="filterMedia(this,'docs')">Documents</button> -->
-        <!-- </div>
+  <!-- <button class="media-tab-btn" onclick="filterMedia(this,'docs')">Documents</button> -->
+  <!-- </div>
       </div>
       <div class="row g-3" id="mediaGrid">
         <div class="col-6 col-md-4 col-lg-3 media-item" data-cat="photos">
@@ -2522,7 +2456,7 @@
             </div>
           </div>
         </div> -->
-        <!-- <div class="col-6 col-md-4 col-lg-3 media-item" data-cat="docs">
+  <!-- <div class="col-6 col-md-4 col-lg-3 media-item" data-cat="docs">
           <div class="media-card">
             <div class="media-thumb" style="background:#FFF8E1;">📄</div>
             <div class="media-info">
@@ -2530,7 +2464,7 @@
             </div>
           </div>
         </div> -->
-        <!-- <div class="col-6 col-md-4 col-lg-3 media-item" data-cat="photos">
+  <!-- <div class="col-6 col-md-4 col-lg-3 media-item" data-cat="photos">
           <div class="media-card">
             <div class="media-thumb" style="background:#E8F5E9;">📸</div>
             <div class="media-info">
@@ -2546,7 +2480,7 @@
             </div>
           </div>
         </div> -->
-        <!--  <div class="col-6 col-md-4 col-lg-3 media-item" data-cat="docs">
+  <!--  <div class="col-6 col-md-4 col-lg-3 media-item" data-cat="docs">
           <div class="media-card">
             <div class="media-thumb" style="background:#E1F5FE;">📋</div>
             <div class="media-info">
@@ -2574,383 +2508,476 @@
     </div>
   </section>
 
-  <!-- ════ TÉMOIGNAGES ════ -->
-        <section class="section-pad" id="temoignages">
-          <div class="container">
-            <div class="text-center mb-5">
-              <div class="section-eyebrow justify-content-center">Témoignages</div>
-              <h2 class="section-title">Des vies <span>transformées</span></h2>
-            </div>
-            <div class="row g-4">
-              <div class="col-md-6 col-lg-4">
-                <div class="temoignage-card">
-                  <div class="temoignage-quote">"</div>
-                  <p class="temoignage-text">Grâce à la Fondation Djama, j'ai pu retourner à l'école. Aujourd'hui je suis en troisième et je rêve de devenir médecin.</p>
-                  <div class="d-flex align-items-center gap-3">
-                    <div class="temoignage-avatar">AF</div>
-                    <div>
-                      <div class="temoignage-name">Aminata F.</div>
-                      <div class="temoignage-role">Élève, 15 ans — Bondoukou</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6 col-lg-4">
-                <div class="temoignage-card">
-                  <div class="temoignage-quote">"</div>
-                  <p class="temoignage-text">Le micro-crédit m'a permis d'ouvrir mon commerce de couture. Aujourd'hui j'emploie deux autres femmes du village.</p>
-                  <div class="d-flex align-items-center gap-3">
-                    <div class="temoignage-avatar" style="background:var(--djama-green);">MK</div>
-                    <div>
-                      <div class="temoignage-name">Mariam K.</div>
-                      <div class="temoignage-role">Bénéficiaire micro-projet — Abengourou</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6 col-lg-4">
-                <div class="temoignage-card">
-                  <div class="temoignage-quote">"</div>
-                  <p class="temoignage-text">Nous avons appris à lire à 45 ans. Mon mari et moi pouvons maintenant lire les ordonnances médicales de nos enfants.</p>
-                  <div class="d-flex align-items-center gap-3">
-                    <div class="temoignage-avatar" style="background:var(--djama-orange);">YD</div>
-                    <div>
-                      <div class="temoignage-name">Yah D.</div>
-                      <div class="temoignage-role">Cours d'alphabétisation — Gontougo</div>
-                    </div>
-                 
-                  </div>
-                </div>
+ <!-- TÉMOIGNAGES -->
+  <section class="section-pad" id="temoignages">
+    <div class="container">
+      <div class="text-center mb-5">
+        <div class="section-eyebrow justify-content-center">Témoignages</div>
+        <h2 class="section-title">Des vies <span>transformées</span></h2>
+      </div>
+      <div class="row g-4">
+        <div class="col-md-6 col-lg-4">
+          <div class="temoignage-card">
+            <div class="temoignage-quote">"</div>
+            <p class="temoignage-text">Grâce à la Fondation Djama, j'ai pu retourner à l'école. Aujourd'hui je suis en troisième et je rêve de devenir médecin.</p>
+            <div class="d-flex align-items-center gap-3">
+              <div class="temoignage-avatar">AF</div>
+              <div>
+                <div class="temoignage-name">Aminata F.</div>
+                <div class="temoignage-role">Élève, 15 ans — Bondoukou</div>
               </div>
             </div>
           </div>
-        </section>
-        <!-- ════ ACTUALITÉS ════ -->
-        <section class="section-pad" id="actualites" style="background:var(--djama-light-bg);">
-          <div class="container">
-            <div class="row align-items-center mb-5">
-              <div class="col-lg-7">
-                <div class="section-eyebrow">Actualités</div>
-                <h2 class="section-title mb-0">Restez informés<br />de nos <span>actions</span></h2>
-              </div>
-              <div class="col-lg-5 text-lg-end mt-3 mt-lg-0"><a href="#" style="font-family:var(--font-head);font-weight:600;color:var(--djama-blue);text-decoration:none;font-size:.88rem;">Toutes les actualités <i class="bi bi-arrow-right ms-1"></i></a></div>
-            </div>
-            <div class="row g-4">
-              <div class="col-md-6 col-lg-4">
-                <div class="actu-card">
-                  <div class="actu-img img-blue"><img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=600&auto=format&fit=crop" alt="Rentrée" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
-                    <div class="actu-img-ph" style="display:none;flex-direction:column;align-items:center;">📚<span>Éducation</span></div><span class="actu-cat-badge" style="background:#E3F2FD;color:#1565C0;">Éducation</span>
-                  </div>
-                  <div class="actu-body">
-                    <h6>Rentrée 2024 : 120 nouvelles bourses attribuées</h6>
-                    <p>La fondation a remis des bourses scolaires à 120 jeunes filles lors de la cérémonie de rentrée à Bondoukou.</p><a href="#" class="btn-prog btn-prog-outline mt-auto">Lire l'article <i class="bi bi-arrow-right"></i></a>
-                  </div>
-                  <div class="actu-footer-bar"><span class="actu-date-txt"><i class="bi bi-calendar3"></i>15 Oct. 2024</span><span style="font-size:.75rem;color:#9aacbe;">5 min</span></div>
-                </div>
-              </div>
-              <div class="col-md-6 col-lg-4">
-                <div class="actu-card">
-                  <div class="actu-img img-teal"><img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&auto=format&fit=crop" alt="Caravane" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
-                    <div class="actu-img-ph" style="display:none;flex-direction:column;align-items:center;">🏥<span>Santé</span></div><span class="actu-cat-badge" style="background:#E8F5E9;color:#2E7D32;">Santé</span>
-                  </div>
-                  <div class="actu-body">
-                    <h6>Caravane médicale : plus de 400 consultations gratuites</h6>
-                    <p>Notre caravane a sillonné 5 villages de la région Est pour offrir des soins gratuits aux populations.</p><a href="#" class="btn-prog btn-prog-outline mt-auto">Lire l'article <i class="bi bi-arrow-right"></i></a>
-                  </div>
-                  <div class="actu-footer-bar"><span class="actu-date-txt"><i class="bi bi-calendar3"></i>3 Août 2024</span><span style="font-size:.75rem;color:#9aacbe;">4 min</span></div>
-                </div>
-              </div>
-              <div class="col-md-6 col-lg-4">
-                <div class="actu-card">
-                  <div class="actu-img img-orange"><img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=600&auto=format&fit=crop" alt="Micro-crédits" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
-                    <div class="actu-img-ph" style="display:none;flex-direction:column;align-items:center;">💼<span>Économie</span></div><span class="actu-cat-badge" style="background:#FFF8E1;color:#F57F17;">Économie</span>
-                  </div>
-                  <div class="actu-body">
-                    <h6>Remise de micro-crédits à 15 jeunes entrepreneures</h6>
-                    <p>15 jeunes femmes ont reçu leur financement pour démarrer ou développer leur activité génératrice de revenus.</p><a href="#" class="btn-prog btn-prog-outline mt-auto">Lire l'article <i class="bi bi-arrow-right"></i></a>
-                  </div>
-                  <div class="actu-footer-bar"><span class="actu-date-txt"><i class="bi bi-calendar3"></i>20 Juin 2024</span><span style="font-size:.75rem;color:#9aacbe;">3 min</span></div>
-                </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="temoignage-card">
+            <div class="temoignage-quote">"</div>
+            <p class="temoignage-text">Le micro-crédit m'a permis d'ouvrir mon commerce de couture. Aujourd'hui j'emploie deux autres femmes du village.</p>
+            <div class="d-flex align-items-center gap-3">
+              <div class="temoignage-avatar" style="background:var(--djama-green);">MK</div>
+              <div>
+                <div class="temoignage-name">Mariam K.</div>
+                <div class="temoignage-role">Bénéficiaire micro-projet — Abengourou</div>
               </div>
             </div>
           </div>
-        </section>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="temoignage-card">
+            <div class="temoignage-quote">"</div>
+            <p class="temoignage-text">Nous avons appris à lire à 45 ans. Mon mari et moi pouvons maintenant lire les ordonnances médicales de nos enfants.</p>
+            <div class="d-flex align-items-center gap-3">
+              <div class="temoignage-avatar" style="background:var(--djama-orange);">YD</div>
+              <div>
+                <div class="temoignage-name">Yah D.</div>
+                <div class="temoignage-role">Cours d'alphabétisation — Gontougo</div>
+              </div>
 
-        <!-- ════ AGIR & SOUTENIR ════ -->
-        <section class="section-pad" id="agir">
-          <div class="container">
-            <div class="text-center mb-5">
-              <div class="section-eyebrow justify-content-center">Agir & Soutenir</div>
-              <h2 class="section-title">Choisissez votre<br /><span>façon d'aider</span></h2>
-            </div>
-            <div class="row g-4">
-              <div class="col-sm-6 col-lg-3">
-                <div class="agir-card">
-                  <div class="agir-icon" style="background:#FFF3E0;">💰</div>
-                  <h5>Faire un don</h5>
-                  <p>Votre contribution finance directement la scolarité, les fournitures et les soins des bénéficiaires.</p><a href="#" class="btn-agir" style="background:var(--djama-orange);color:#fff;">Faire un don</a>
-                </div>
-              </div>
-              <div class="col-sm-6 col-lg-3">
-                <div class="agir-card">
-                  <div class="agir-icon" style="background:#E8F5E9;">👧</div>
-                  <h5>Parrainer une élève</h5>
-                  <p>Prenez en charge une jeune fille et suivez son parcours scolaire personnellement tout au long de l'année.</p><a href="#" class="btn-agir" style="background:var(--djama-green);color:#fff;">Je parraine</a>
-                </div>
-              </div>
-              <div class="col-sm-6 col-lg-3">
-                <div class="agir-card">
-                  <div class="agir-icon" style="background:#E3F2FD;">🤝</div>
-                  <h5>Devenir bénévole</h5>
-                  <p>Offrez votre temps et vos compétences : enseignement, conseil, logistique ou terrain.</p><a href="#" class="btn-agir" style="background:var(--djama-blue);color:#fff;">Je m'engage</a>
-                </div>
-              </div>
-              <div class="col-sm-6 col-lg-3">
-                <div class="agir-card">
-                  <div class="agir-icon" style="background:#EDE7F6;">🏢</div>
-                  <h5>Partenariat</h5>
-                  <p>Associez votre entreprise ou ONG à notre mission et financez un programme complet.</p><a href="#contact" class="btn-agir" style="border:1.5px solid var(--djama-blue);color:var(--djama-blue);">Nous contacter</a>
-                </div>
-              </div>
             </div>
           </div>
-        </section>
-
-        <!-- ════ ÉQUIPE ════ -->
-        <section class="section-pad" id="equipe" style="background:var(--djama-light-bg);">
-          <div class="container">
-            <div class="text-center mb-5">
-              <div class="section-eyebrow justify-content-center">Notre équipe</div>
-              <h2 class="section-title">Les femmes et hommes qui <span>portent la mission</span></h2>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ════ ACTUALITÉS ════ -->
+  <!-- <section class="section-pad" id="actualites" style="background:var(--djama-light-bg);">
+    <div class="container">
+      <div class="row align-items-center mb-5">
+        <div class="col-lg-7">
+          <div class="section-eyebrow">Actualités</div>
+          <h2 class="section-title mb-0">Restez informés<br />de nos <span>actions</span></h2>
+        </div>
+        <div class="col-lg-5 text-lg-end mt-3 mt-lg-0"><a href="{{ route('news.all') }}" style="font-family:var(--font-head);font-weight:600;color:var(--djama-blue);text-decoration:none;font-size:.88rem;">Toutes les actualités <i class="bi bi-arrow-right ms-1"></i></a></div>
+      </div>
+      <div class="row g-4">
+        <div class="col-md-6 col-lg-4">
+          <div class="actu-card">
+            <div class="actu-img img-blue"><img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=600&auto=format&fit=crop" alt="Rentrée" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+              <div class="actu-img-ph" style="display:none;flex-direction:column;align-items:center;">📚<span>Éducation</span></div><span class="actu-cat-badge" style="background:#E3F2FD;color:#1565C0;">Éducation</span>
             </div>
-            <div class="row g-4 justify-content-center">
-              <div class="col-6 col-md-4 col-lg-3">
-                <div class="equipe-card">
-                  <div class="equipe-avatar" style="background:#E3F2FD;color:var(--djama-blue);">OA</div>
-                  <h6>Mlle Ouattara Abran Fatoumata</h6><span>Présidente</span>
-                </div>
-              </div>
-              <div class="col-6 col-md-4 col-lg-3">
-                <div class="equipe-card">
-                  <div class="equipe-avatar" style="background:#E8F5E9;color:var(--djama-green);">OM</div>
-                  <h6>Mlle Ouattara Affoua Mandinan</h6><span>Vice-Présidente</span>
-                </div>
-              </div>
-              <div class="col-6 col-md-4 col-lg-3">
-                <div class="equipe-card">
-                  <div class="equipe-avatar" style="background:#FFF8E1;color:#F57F17;">OY</div>
-                  <h6>Mlle Ouattara Yah Mariame</h6><span>Secrétaire Générale</span>
-                </div>
-              </div>
-              <div class="col-6 col-md-4 col-lg-3">
-                <div class="equipe-card">
-                  <div class="equipe-avatar" style="background:#EDE7F6;color:#4527A0;">AA</div>
-                  <h6>M. Adaman Amara</h6><span>Trésorier Général</span>
-                </div>
-              </div>
+            <div class="actu-body">
+              <h6>Rentrée 2024 : 120 nouvelles bourses attribuées</h6>
+              <p>La fondation a remis des bourses scolaires à 120 jeunes filles lors de la cérémonie de rentrée à Bondoukou.</p><a href="#" class="btn-prog btn-prog-outline mt-auto">Lire l'article <i class="bi bi-arrow-right"></i></a>
             </div>
+            <div class="actu-footer-bar"><span class="actu-date-txt"><i class="bi bi-calendar3"></i>15 Oct. 2024</span><span style="font-size:.75rem;color:#9aacbe;">5 min</span></div>
           </div>
-        </section>
-
-        <!-- ════ CTA BANDE ════ -->
-        <section class="cta-bande section-pad-sm">
-          <div class="container text-center position-relative">
-            <h2 class="mb-2">Ensemble, construisons un avenir meilleur</h2>
-            <p class="mb-4">Votre soutien, quelle que soit sa forme, change concrètement des vies.</p>
-            <div class="d-flex flex-wrap justify-content-center gap-3">
-              <a href="#agir" class="btn-cta-white btn"><i class="bi bi-heart-fill me-2" style="color:var(--djama-orange);"></i>Faire un don maintenant</a>
-              <a href="#contact" class="btn" style="background:rgba(255,255,255,0.15);color:#fff;border:2px solid rgba(255,255,255,0.4);border-radius:10px;font-family:var(--font-head);font-weight:600;padding:.7rem 1.8rem;">Nous contacter</a>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="actu-card">
+            <div class="actu-img img-teal"><img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&auto=format&fit=crop" alt="Caravane" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+              <div class="actu-img-ph" style="display:none;flex-direction:column;align-items:center;">🏥<span>Santé</span></div><span class="actu-cat-badge" style="background:#E8F5E9;color:#2E7D32;">Santé</span>
             </div>
+            <div class="actu-body">
+              <h6>Caravane médicale : plus de 400 consultations gratuites</h6>
+              <p>Notre caravane a sillonné 5 villages de la région Est pour offrir des soins gratuits aux populations.</p><a href="#" class="btn-prog btn-prog-outline mt-auto">Lire l'article <i class="bi bi-arrow-right"></i></a>
+            </div>
+            <div class="actu-footer-bar"><span class="actu-date-txt"><i class="bi bi-calendar3"></i>3 Août 2024</span><span style="font-size:.75rem;color:#9aacbe;">4 min</span></div>
           </div>
-        </section>
-
-        <!-- ════ CONTACT ════ -->
-        <section class="section-pad" id="contact">
-          <div class="container">
-            <div class="row gy-5">
-              <div class="col-lg-5">
-                <div class="section-eyebrow">Contact</div>
-                <h2 class="section-title">Parlons de<br /><span>votre engagement</span></h2>
-                <p style="color:#4a5568;font-size:.92rem;line-height:1.75;margin-bottom:1.5rem;">Vous souhaitez faire un don, devenir partenaire ou simplement en savoir plus ? Notre équipe vous répond.</p>
-                <div class="d-flex flex-column gap-3">
-                  <div class="d-flex align-items-start gap-3">
-                    <div style="width:38px;height:38px;border-radius:10px;background:#E3F2FD;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="bi bi-geo-alt-fill" style="color:var(--djama-blue);"></i></div>
-                    <div>
-                      <div style="font-family:var(--font-head);font-weight:700;font-size:.88rem;color:var(--djama-blue);">Siège social</div>
-                      <div style="font-size:.83rem;color:#5a6a7a;">Riviera 2 les Jardins, en face de la Mosquée<br />Abidjan Cocody — 23 B.P 1990 Abidjan 23</div>
-                    </div>
-                  </div>
-                  <div class="d-flex align-items-start gap-3">
-                    <div style="width:38px;height:38px;border-radius:10px;background:#E8F5E9;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="bi bi-calendar-check-fill" style="color:var(--djama-green);"></i></div>
-                    <div>
-                      <div style="font-family:var(--font-head);font-weight:700;font-size:.88rem;color:var(--djama-blue);">Fondée le</div>
-                      <div style="font-size:.83rem;color:#5a6a7a;">30 janvier 2013</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-7">
-                <div style="background:#fff;border:1px solid rgba(31,78,121,0.10);border-radius:16px;padding:2rem;">
-                  <div class="row g-3">
-                    <div class="col-md-6"><label style="font-family:var(--font-head);font-weight:600;font-size:.82rem;color:var(--djama-blue);margin-bottom:6px;display:block;">Nom complet</label><input type="text" class="form-control" placeholder="Votre nom" style="border-radius:10px;border-color:rgba(31,78,121,0.15);font-size:.88rem;" /></div>
-                    <div class="col-md-6"><label style="font-family:var(--font-head);font-weight:600;font-size:.82rem;color:var(--djama-blue);margin-bottom:6px;display:block;">Email</label><input type="email" class="form-control" placeholder="votre@email.com" style="border-radius:10px;border-color:rgba(31,78,121,0.15);font-size:.88rem;" /></div>
-                    <div class="col-12"><label style="font-family:var(--font-head);font-weight:600;font-size:.82rem;color:var(--djama-blue);margin-bottom:6px;display:block;">Objet</label><select class="form-select" style="border-radius:10px;border-color:rgba(31,78,121,0.15);font-size:.88rem;">
-                        <option>Je souhaite faire un don</option>
-                        <option>Je veux parrainer une élève</option>
-                        <option>Je veux devenir bénévole</option>
-                        <option>Proposition de partenariat</option>
-                        <option>Autre demande</option>
-                      </select></div>
-                    <div class="col-12"><label style="font-family:var(--font-head);font-weight:600;font-size:.82rem;color:var(--djama-blue);margin-bottom:6px;display:block;">Message</label><textarea class="form-control" rows="4" placeholder="Votre message..." style="border-radius:10px;border-color:rgba(31,78,121,0.15);font-size:.88rem;resize:none;"></textarea></div>
-                    <div class="col-12"><button class="btn btn-don w-100 py-3" style="font-size:.92rem;"><i class="bi bi-send-fill me-2"></i>Envoyer le message</button></div>
-                  </div>
-                </div>
-              </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="actu-card">
+            <div class="actu-img img-orange"><img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=600&auto=format&fit=crop" alt="Micro-crédits" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+              <div class="actu-img-ph" style="display:none;flex-direction:column;align-items:center;">💼<span>Économie</span></div><span class="actu-cat-badge" style="background:#FFF8E1;color:#F57F17;">Économie</span>
             </div>
+            <div class="actu-body">
+              <h6>Remise de micro-crédits à 15 jeunes entrepreneures</h6>
+              <p>15 jeunes femmes ont reçu leur financement pour démarrer ou développer leur activité génératrice de revenus.</p><a href="#" class="btn-prog btn-prog-outline mt-auto">Lire l'article <i class="bi bi-arrow-right"></i></a>
+            </div>
+            <div class="actu-footer-bar"><span class="actu-date-txt"><i class="bi bi-calendar3"></i>20 Juin 2024</span><span style="font-size:.75rem;color:#9aacbe;">3 min</span></div>
           </div>
-        </section>
+        </div>
+      </div>
+    </div>
+  </section> -->
+  <section class="section-pad" id="actualites" style="background:var(--djama-light-bg);">
+    <div class="container">
 
-        <!-- ════ FOOTER ════ -->
-        <footer class="footer-djama py-5">
-          <div class="container">
-            <div class="row gy-4">
-              <div class="col-lg-4">
-                <div class="d-flex align-items-center gap-2 mb-2">
-                  <img src="{{ asset('assets/images/logo.jpeg') }}" class="navbar-brand-logo" alt="Logo">
-                  <div class="footer-brand">Fondation Djama Éducation</div>
-                </div>
-                <div class="footer-slogan">« Offrir l'éducation, construire l'avenir »</div>
-                <p style="font-size:.82rem;color:rgba(255,255,255,0.55);margin-top:1rem;line-height:1.7;">Fondée en 2013, la Fondation Djama œuvre pour l'éducation, l'autonomie et la santé des populations vulnérables de Côte d'Ivoire.</p>
-                <div class="d-flex gap-2 mt-3">
-                  <a href="#" class="social-btn"><i class="bi bi-facebook"></i></a>
-                  <a href="#" class="social-btn"><i class="bi bi-instagram"></i></a>
-                  <a href="#" class="social-btn"><i class="bi bi-twitter-x"></i></a>
-                  <a href="#" class="social-btn"><i class="bi bi-linkedin"></i></a>
-                  <a href="#" class="social-btn"><i class="bi bi-youtube"></i></a>
-                </div>
+      <div class="row align-items-center mb-5">
+        <div class="col-lg-7">
+          <div class="section-eyebrow">Actualités</div>
+          <h2 class="section-title mb-0">
+            Restez informés<br />de nos <span>actions</span>
+          </h2>
+        </div>
+
+        <div class="col-lg-5 text-lg-end mt-3 mt-lg-0">
+          <a href="{{ route('news.all') }}"
+            style="font-family:var(--font-head);font-weight:600;color:var(--djama-blue);text-decoration:none;font-size:.88rem;">
+            Toutes les actualités <i class="bi bi-arrow-right ms-1"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="row g-4">
+
+        @foreach($news as $item)
+        <div class="col-md-6 col-lg-4">
+
+          <div class="actu-card">
+
+            {{-- IMAGE --}}
+            <div class="actu-img">
+
+              @if($item->image)
+              <img src="{{ asset('storage/'.$item->image) }}"
+                alt="{{ $item->title }}">
+              @endif
+
+              {{-- fallback --}}
+              <div class="actu-img-ph" style="display:none;flex-direction:column;align-items:center;">
+                📌 <span>{{ $item->category }}</span>
               </div>
-              <div class="col-6 col-lg-2">
-                <div class="footer-title">Navigation</div>
-                <a class="footer-link" href="#">Accueil</a><a class="footer-link" href="#apropos">À propos</a>
-                <a class="footer-link" href="#programmes">Programmes</a><a class="footer-link" href="#realisations">Réalisations</a>
-                <a class="footer-link" href="#projets">Projets</a>
-              </div>
-              <div class="col-6 col-lg-2">
-                <div class="footer-title">Ressources</div>
-                <a class="footer-link" href="#galerie">Galerie</a><a class="footer-link" href="#mediatheque">Médiathèque</a>
-                <a class="footer-link" href="#actualites">Actualités</a><a class="footer-link" href="#temoignages">Témoignages</a>
-                <a class="footer-link" href="#contact">Contact</a>
-              </div>
-              <div class="col-lg-4">
-                <div class="footer-title">Agir maintenant</div>
-                <p style="font-size:.82rem;color:rgba(255,255,255,0.55);margin-bottom:1rem;line-height:1.7;">Rejoignez notre communauté et recevez nos actualités terrain.</p>
-                <div class="input-group" style="max-width:320px;"><input type="email" class="form-control" placeholder="Votre email" style="border-radius:10px 0 0 10px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);color:#fff;font-size:.85rem;" /><button class="btn btn-don" style="border-radius:0 10px 10px 0;">S'inscrire</button></div>
-                <div class="mt-3"><a href="#agir" class="btn btn-don" style="max-width:320px;width:100%;display:block;text-align:center;"><i class="bi bi-heart-fill me-2"></i>Faire un don</a></div>
-              </div>
+
+              <span class="actu-cat-badge">
+                {{ $item->category }}
+              </span>
+
             </div>
-            <hr class="footer-divider my-4" />
-            <div class="d-flex flex-wrap justify-content-between align-items-center gap-2">
-              <div class="footer-copy">© 2025 Fondation Djama Éducation. Tous droits réservés. · Siège : Abidjan Cocody, Riviera 2</div>
-              <div class="d-flex gap-3"><a href="#" style="font-size:.75rem;color:rgba(255,255,255,0.35);text-decoration:none;">Mentions légales</a><a href="#" style="font-size:.75rem;color:rgba(255,255,255,0.35);text-decoration:none;">Politique de confidentialité</a></div>
+
+            {{-- BODY --}}
+            <div class="actu-body">
+
+              <h6>{{ $item->title }}</h6>
+
+              <p>
+                {{ \Illuminate\Support\Str::limit($item->content, 120) }}
+              </p>
+
+              <a href="{{ route('news.show', $item->slug) }}"
+                class="btn-prog btn-prog-outline mt-auto">
+                Lire l'article <i class="bi bi-arrow-right"></i>
+              </a>
+
             </div>
+
+            {{-- FOOTER --}}
+            <div class="actu-footer-bar">
+
+              <span class="actu-date-txt">
+                <i class="bi bi-calendar3"></i>
+                {{ $item->published_at ? $item->published_at->format('d M Y') : 'Non publié' }}
+              </span>
+
+              <span style="font-size:.75rem;color:#9aacbe;">
+                {{ $item->reading_time }} min
+              </span>
+
+            </div>
+
           </div>
-        </footer>
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-        <script>
-          /* ── NAVBAR ── */
-          const nav = document.getElementById('mainNav');
-          window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 30));
-          // STYLE LINK NAV
+        </div>
+        @endforeach
 
-          /* ── HERO SLIDER ── */
-          const SLIDES_COUNT = 4,
-            AUTO_DELAY = 5500;
-          let current = 0;
-          const track = document.getElementById('sliderTrack');
-          const dots = document.querySelectorAll('.slider-dot');
-          const progress = document.getElementById('sliderProgress');
-          let timer = null;
+      </div>
 
-          function goTo(idx) {
-            document.getElementById('slide-' + current).classList.remove('active');
-            dots[current].classList.remove('active');
-            current = (idx + SLIDES_COUNT) % SLIDES_COUNT;
-            document.getElementById('slide-' + current).classList.add('active');
-            dots[current].classList.add('active');
-            track.style.transform = 'translateX(-' + (current * 100) + '%)';
-            resetProgress();
-          }
+    </div>
+  </section>
+  <!-- ════ AGIR & SOUTENIR ════ -->
+  <section class="section-pad" id="agir">
+    <div class="container">
+      <div class="text-center mb-5">
+        <div class="section-eyebrow justify-content-center">Agir & Soutenir</div>
+        <h2 class="section-title">Choisissez votre<br /><span>façon d'aider</span></h2>
+      </div>
+      <div class="row g-4">
+        <div class="col-sm-6 col-lg-3">
+          <div class="agir-card">
+            <div class="agir-icon" style="background:#FFF3E0;">💰</div>
+            <h5>Faire un don</h5>
+            <p>Votre contribution finance directement la scolarité, les fournitures et les soins des bénéficiaires.</p><a href="{{ route('agir.donation') }}" class="btn-agir" style="background:var(--djama-orange);color:#fff;">Faire un don</a>
+          </div>
+        </div>
+        <div class="col-sm-6 col-lg-3">
+          <div class="agir-card">
+            <div class="agir-icon" style="background:#E8F5E9;">👧</div>
+            <h5>Parrainer une élève</h5>
+            <p>Prenez en charge une jeune fille et suivez son parcours scolaire personnellement tout au long de l'année.</p><a href="{{ route('agir.sponsorship') }}" class="btn-agir" style="background:var(--djama-green);color:#fff;">Je parraine</a>
+          </div>
+        </div>
+        <div class="col-sm-6 col-lg-3">
+          <div class="agir-card">
+            <div class="agir-icon" style="background:#E3F2FD;">🤝</div>
+            <h5>Devenir bénévole</h5>
+            <p>Offrez votre temps et vos compétences : enseignement, conseil, logistique ou terrain.</p><a href="{{ route('agir.volunteer') }}" class="btn-agir" style="background:var(--djama-blue);color:#fff;">Je m'engage</a>
+          </div>
+        </div>
+        <div class="col-sm-6 col-lg-3">
+          <div class="agir-card">
+            <div class="agir-icon" style="background:#EDE7F6;">🏢</div>
+            <h5>Partenariat</h5>
+            <p>Associez votre entreprise ou ONG à notre mission et financez un programme complet.</p><a href="#contact" class="btn-agir" style="border:1.5px solid var(--djama-blue);color:var(--djama-blue);">Nous contacter</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-          function resetProgress() {
-            clearTimeout(timer);
-            progress.style.transition = 'none';
-            progress.style.width = '0%';
-            setTimeout(() => {
-              progress.style.transition = 'width ' + AUTO_DELAY + 'ms linear';
-              progress.style.width = '100%';
-            }, 30);
-            timer = setTimeout(() => goTo(current + 1), AUTO_DELAY);
-          }
-          document.getElementById('sliderNext').addEventListener('click', () => goTo(current + 1));
-          document.getElementById('sliderPrev').addEventListener('click', () => goTo(current - 1));
-          dots.forEach((d, i) => d.addEventListener('click', () => goTo(i)));
-          let tx = 0;
-          const hs = document.getElementById('heroSlider');
-          hs.addEventListener('touchstart', e => {
-            tx = e.touches[0].clientX;
-          }, {
-            passive: true
-          });
-          hs.addEventListener('touchend', e => {
-            const d = tx - e.changedTouches[0].clientX;
-            if (Math.abs(d) > 50) d > 0 ? goTo(current + 1) : goTo(current - 1);
-          });
-          document.addEventListener('keydown', e => {
-            if (e.key === 'ArrowRight') goTo(current + 1);
-            if (e.key === 'ArrowLeft') goTo(current - 1);
-          });
-          resetProgress();
+  <!-- ════ ÉQUIPE ════ -->
+  <section class="section-pad" id="equipe" style="background:var(--djama-light-bg);">
+    <div class="container">
+      <div class="text-center mb-5">
+        <div class="section-eyebrow justify-content-center">Notre équipe</div>
+        <h2 class="section-title">Les femmes et hommes qui <span>portent la mission</span></h2>
+      </div>
+      <div class="row g-4 justify-content-center">
+        <div class="col-6 col-md-4 col-lg-3">
+          <div class="equipe-card">
+            <div class="equipe-avatar" style="background:#E3F2FD;color:var(--djama-blue);">OA</div>
+            <h6>Mlle Ouattara Abran Fatoumata</h6><span>Présidente</span>
+          </div>
+        </div>
+        <div class="col-6 col-md-4 col-lg-3">
+          <div class="equipe-card">
+            <div class="equipe-avatar" style="background:#E8F5E9;color:var(--djama-green);">OM</div>
+            <h6>Mlle Ouattara Affoua Mandinan</h6><span>Vice-Présidente</span>
+          </div>
+        </div>
+        <div class="col-6 col-md-4 col-lg-3">
+          <div class="equipe-card">
+            <div class="equipe-avatar" style="background:#FFF8E1;color:#F57F17;">OY</div>
+            <h6>Mlle Ouattara Yah Mariame</h6><span>Secrétaire Générale</span>
+          </div>
+        </div>
+        <div class="col-6 col-md-4 col-lg-3">
+          <div class="equipe-card">
+            <div class="equipe-avatar" style="background:#EDE7F6;color:#4527A0;">AA</div>
+            <h6>M. Adaman Amara</h6><span>Trésorier Général</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-          /* ── PROJETS CARROUSEL ── */
-          let projetIdx = 0;
-          const pTrack = document.getElementById('projetsTrack');
-          const pDots = document.querySelectorAll('#projetDots .slider-dot');
+  <!-- ════ CTA BANDE ════ -->
+  <section class="cta-bande section-pad-sm">
+    <div class="container text-center position-relative">
+      <h2 class="mb-2">Ensemble, construisons un avenir meilleur</h2>
+      <p class="mb-4">Votre soutien, quelle que soit sa forme, change concrètement des vies.</p>
+      <div class="d-flex flex-wrap justify-content-center gap-3">
+        <a href="#agir" class="btn-cta-white btn"><i class="bi bi-heart-fill me-2" style="color:var(--djama-orange);"></i>Faire un don maintenant</a>
+        <a href="#contact" class="btn" style="background:rgba(255,255,255,0.15);color:#fff;border:2px solid rgba(255,255,255,0.4);border-radius:10px;font-family:var(--font-head);font-weight:600;padding:.7rem 1.8rem;">Nous contacter</a>
+      </div>
+    </div>
+  </section>
 
-          function getProjetVisible() {
-            const w = document.getElementById('projetsWrap').offsetWidth;
-            if (w < 640) return 1;
-            if (w < 992) return 2;
-            return 3;
-          }
+  <!-- ════ CONTACT ════ -->
+  <section class="section-pad" id="contact">
+    <div class="container">
+      <div class="row gy-5">
+        <div class="col-lg-5">
+          <div class="section-eyebrow">Contact</div>
+          <h2 class="section-title">Parlons de<br /><span>votre engagement</span></h2>
+          <p style="color:#4a5568;font-size:.92rem;line-height:1.75;margin-bottom:1.5rem;">Vous souhaitez faire un don, devenir partenaire ou simplement en savoir plus ? Notre équipe vous répond.</p>
+          <div class="d-flex flex-column gap-3">
+          </div>
+        </div>
 
-          function getProjetMax() {
-            return Math.max(0, 5 - getProjetVisible());
-          }
+        <div class="col-lg-7">
+          <div style="background:#fff;border:1px solid rgba(31,78,121,0.10);border-radius:16px;padding:2rem;">
 
-          function goProjet(idx) {
-            const max = getProjetMax();
-            projetIdx = Math.max(0, Math.min(idx, max));
-            const itemW = pTrack.querySelector('.projet-slide').offsetWidth + 24;
-            pTrack.style.transform = 'translateX(-' + (projetIdx * itemW) + 'px)';
-            pDots.forEach((d, i) => d.classList.toggle('active', i === Math.floor(projetIdx / getProjetVisible())));
-            document.getElementById('projetPrev').disabled = projetIdx <= 0;
-            document.getElementById('projetNext').disabled = projetIdx >= max;
-          }
-          document.getElementById('projetNext').addEventListener('click', () => goProjet(projetIdx + 1));
-          document.getElementById('projetPrev').addEventListener('click', () => goProjet(projetIdx - 1));
-          goProjet(0);
-          window.addEventListener('resize', () => goProjet(projetIdx));
+            <form action="{{ route('contact.store') }}" method="POST">
+              @csrf <div class="row g-3">
+                <div class="col-md-6">
+                  <label style="font-family:var(--font-head);font-weight:600;font-size:.82rem;color:var(--djama-blue);margin-bottom:6px;display:block;">Nom complet</label>
+                  <input type="text" name="name" class="form-control" placeholder="Votre nom" style="border-radius:10px;border-color:rgba(31,78,121,0.15);font-size:.88rem;" required />
+                </div>
 
-          /* ── MEDIA FILTER ── */
-          function filterMedia(btn, cat) {
-            document.querySelectorAll('.media-tab-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            document.querySelectorAll('.media-item').forEach(item => {
-              item.style.display = (cat === 'all' || item.dataset.cat === cat) ? '' : 'none';
-            });
-          }
-        </script>
+                <div class="col-md-6">
+                  <label style="font-family:var(--font-head);font-weight:600;font-size:.82rem;color:var(--djama-blue);margin-bottom:6px;display:block;">Email</label>
+                  <input type="email" name="email" class="form-control" placeholder="votre@email.com" style="border-radius:10px;border-color:rgba(31,78,121,0.15);font-size:.88rem;" required />
+                </div>
+
+                <div class="col-12">
+                  <label style="font-family:var(--font-head);font-weight:600;font-size:.82rem;color:var(--djama-blue);margin-bottom:6px;display:block;">Objet</label>
+                  <select name="subject" class="form-select" style="border-radius:10px;border-color:rgba(31,78,121,0.15);font-size:.88rem;" required>
+                    <option value="Je souhaite faire un don">Je souhaite faire un don</option>
+                    <option value="Je veux parrainer une élève">Je veux parrainer une élève</option>
+                    <option value="Je veux devenir bénévole">Je veux devenir bénévole</option>
+                    <option value="Proposition de partenariat">Proposition de partenariat</option>
+                    <option value="Autre demande">Autre demande</option>
+                  </select>
+                </div>
+
+                <div class="col-12">
+                  <label style="font-family:var(--font-head);font-weight:600;font-size:.82rem;color:var(--djama-blue);margin-bottom:6px;display:block;">Message</label>
+                  <textarea name="message" class="form-control" rows="4" placeholder="Votre message..." style="border-radius:10px;border-color:rgba(31,78,121,0.15);font-size:.88rem;resize:none;" required></textarea>
+                </div>
+
+                <div class="col-12">
+                  <button type="submit" class="btn btn-don w-100 py-3" style="font-size:.92rem;">
+                    <i class="bi bi-send-fill me-2"></i>Envoyer le message
+                  </button>
+                </div>
+              </div>
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ════ FOOTER ════ -->
+  <footer class="footer-djama py-5">
+    <div class="container">
+      <div class="row gy-4">
+        <div class="col-lg-4">
+          <div class="d-flex align-items-center gap-2 mb-2">
+            <img src="{{ asset('assets/images/logo.jpeg') }}" class="navbar-brand-logo" alt="Logo">
+            <div class="footer-brand">Fondation Djama Éducation</div>
+          </div>
+          <div class="footer-slogan">« Offrir l'éducation, construire l'avenir »</div>
+          <p style="font-size:.82rem;color:rgba(255,255,255,0.55);margin-top:1rem;line-height:1.7;">Fondée en 2013, la Fondation Djama œuvre pour l'éducation, l'autonomie et la santé des populations vulnérables de Côte d'Ivoire.</p>
+          <div class="d-flex gap-2 mt-3">
+            <a href="#" class="social-btn"><i class="bi bi-facebook"></i></a>
+            <a href="#" class="social-btn"><i class="bi bi-instagram"></i></a>
+            <a href="#" class="social-btn"><i class="bi bi-twitter-x"></i></a>
+            <a href="#" class="social-btn"><i class="bi bi-linkedin"></i></a>
+            <a href="#" class="social-btn"><i class="bi bi-youtube"></i></a>
+          </div>
+        </div>
+        <div class="col-6 col-lg-2">
+          <div class="footer-title">Navigation</div>
+          <a class="footer-link" href="#">Accueil</a><a class="footer-link" href="#apropos">À propos</a>
+          <a class="footer-link" href="#programmes">Programmes</a><a class="footer-link" href="#realisations">Réalisations</a>
+          <a class="footer-link" href="#projets">Projets</a>
+        </div>
+        <div class="col-6 col-lg-2">
+          <div class="footer-title">Ressources</div>
+          <a class="footer-link" href="#galerie">Galerie</a><a class="footer-link" href="#mediatheque">Médiathèque</a>
+          <a class="footer-link" href="#actualites">Actualités</a><a class="footer-link" href="#temoignages">Témoignages</a>
+          <a class="footer-link" href="#contact">Contact</a>
+        </div>
+        <div class="col-lg-4">
+          <div class="footer-title">Agir maintenant</div>
+          <p style="font-size:.82rem;color:rgba(255,255,255,0.55);margin-bottom:1rem;line-height:1.7;">Rejoignez notre communauté et recevez nos actualités terrain.</p>
+          <div class="input-group" style="max-width:320px;"><input type="email" class="form-control" placeholder="Votre email" style="border-radius:10px 0 0 10px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);color:#fff;font-size:.85rem;" /><button class="btn btn-don" style="border-radius:0 10px 10px 0;">S'inscrire</button></div>
+          <div class="mt-3"><a href="#agir" class="btn btn-don" style="max-width:320px;width:100%;display:block;text-align:center;"><i class="bi bi-heart-fill me-2"></i>Faire un don</a></div>
+        </div>
+      </div>
+      <hr class="footer-divider my-4" />
+      <div class="d-flex flex-wrap justify-content-between align-items-center gap-2">
+        <div class="footer-copy">© 2025 Fondation Djama Éducation. Tous droits réservés. · Siège : Abidjan Cocody, Riviera 2</div>
+        <div class="d-flex gap-3"><a href="#" style="font-size:.75rem;color:rgba(255,255,255,0.35);text-decoration:none;">Mentions légales</a><a href="#" style="font-size:.75rem;color:rgba(255,255,255,0.35);text-decoration:none;">Politique de confidentialité</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    /* ── NAVBAR ── */
+    const nav = document.getElementById('mainNav');
+    window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 30));
+    // STYLE LINK NAV
+
+    /* ── HERO SLIDER ── */
+    const SLIDES_COUNT = 4,
+      AUTO_DELAY = 5500;
+    let current = 0;
+    const track = document.getElementById('sliderTrack');
+    const dots = document.querySelectorAll('.slider-dot');
+    const progress = document.getElementById('sliderProgress');
+    let timer = null;
+
+    function goTo(idx) {
+      document.getElementById('slide-' + current).classList.remove('active');
+      dots[current].classList.remove('active');
+      current = (idx + SLIDES_COUNT) % SLIDES_COUNT;
+      document.getElementById('slide-' + current).classList.add('active');
+      dots[current].classList.add('active');
+      track.style.transform = 'translateX(-' + (current * 100) + '%)';
+      resetProgress();
+    }
+
+    function resetProgress() {
+      clearTimeout(timer);
+      progress.style.transition = 'none';
+      progress.style.width = '0%';
+      setTimeout(() => {
+        progress.style.transition = 'width ' + AUTO_DELAY + 'ms linear';
+        progress.style.width = '100%';
+      }, 30);
+      timer = setTimeout(() => goTo(current + 1), AUTO_DELAY);
+    }
+    document.getElementById('sliderNext').addEventListener('click', () => goTo(current + 1));
+    document.getElementById('sliderPrev').addEventListener('click', () => goTo(current - 1));
+    dots.forEach((d, i) => d.addEventListener('click', () => goTo(i)));
+    let tx = 0;
+    const hs = document.getElementById('heroSlider');
+    hs.addEventListener('touchstart', e => {
+      tx = e.touches[0].clientX;
+    }, {
+      passive: true
+    });
+    hs.addEventListener('touchend', e => {
+      const d = tx - e.changedTouches[0].clientX;
+      if (Math.abs(d) > 50) d > 0 ? goTo(current + 1) : goTo(current - 1);
+    });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'ArrowRight') goTo(current + 1);
+      if (e.key === 'ArrowLeft') goTo(current - 1);
+    });
+    resetProgress();
+
+    /* ── PROJETS CARROUSEL ── */
+    let projetIdx = 0;
+    const pTrack = document.getElementById('projetsTrack');
+    const pDots = document.querySelectorAll('#projetDots .slider-dot');
+
+    function getProjetVisible() {
+      const w = document.getElementById('projetsWrap').offsetWidth;
+      if (w < 640) return 1;
+      if (w < 992) return 2;
+      return 3;
+    }
+
+    function getProjetMax() {
+      return Math.max(0, 5 - getProjetVisible());
+    }
+
+    function goProjet(idx) {
+      const max = getProjetMax();
+      projetIdx = Math.max(0, Math.min(idx, max));
+      const itemW = pTrack.querySelector('.projet-slide').offsetWidth + 24;
+      pTrack.style.transform = 'translateX(-' + (projetIdx * itemW) + 'px)';
+      pDots.forEach((d, i) => d.classList.toggle('active', i === Math.floor(projetIdx / getProjetVisible())));
+      document.getElementById('projetPrev').disabled = projetIdx <= 0;
+      document.getElementById('projetNext').disabled = projetIdx >= max;
+    }
+    document.getElementById('projetNext').addEventListener('click', () => goProjet(projetIdx + 1));
+    document.getElementById('projetPrev').addEventListener('click', () => goProjet(projetIdx - 1));
+    goProjet(0);
+    window.addEventListener('resize', () => goProjet(projetIdx));
+
+    /* ── MEDIA FILTER ── */
+    function filterMedia(btn, cat) {
+      document.querySelectorAll('.media-tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('.media-item').forEach(item => {
+        item.style.display = (cat === 'all' || item.dataset.cat === cat) ? '' : 'none';
+      });
+    }
+  </script>
 </body>
 
 </html>
