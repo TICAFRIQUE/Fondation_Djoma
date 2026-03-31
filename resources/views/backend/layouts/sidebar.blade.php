@@ -28,29 +28,21 @@
             @endif --}}
             <ul class="navbar-nav" id="navbar-nav">
 
+
                 {{-- TABLEAU DE BORD --}}
                 @can('voir-tableau de bord')
                 <li class="nav-item">
-                    <a class="nav-link menu-link {{ Route::is('dashboard.*') ? 'active' : '' }}"
-                        href="{{ route('dashboard.index') }}">
+                    <a class="nav-link menu-link {{ Route::is('dashboard.*') ? 'active' : '' }}" href="{{ route('dashboard.index') }}">
                         <i class="ri-dashboard-2-line"></i> <span>TABLEAU DE BORD</span>
                     </a>
                 </li>
                 @endcan
 
-                {{-- SLIDERS --}}
-                @can('voir-sliders')
+                {{-- AGIRS --}}
+                @can('voir-agirs')
                 <li class="nav-item">
-                    <a class="nav-link menu-link {{ Route::is('sliders.*') ? 'active' : '' }}" href="{{ route('sliders.index') }}">
-                        <i class="ri-slideshow-4-line"></i> <span>Sliders</span>
-                    </a>
-                </li>
-                @endcan
-                <!-- Impacts -->
-                @can('voir-impacts')
-                <li class="nav-item">
-                    <a class="nav-link menu-link {{ Route::is('impacts.*') ? 'active' : '' }}" href="{{ route('impacts.index') }}">
-                        <i class="ri-bar-chart-line"></i> <span>Impacts</span>
+                    <a class="nav-link menu-link {{ Route::is('agirs.*') ? 'active' : '' }}" href="{{ route('agirs.index') }}">
+                        <i class="ri-heart-line"></i> <span>Actions (Agir)</span>
                     </a>
                 </li>
                 @endcan
@@ -67,9 +59,53 @@
                 {{-- GALERIE --}}
                 @can('voir-galerie')
                 <li class="nav-item">
-                    <a class="nav-link menu-link {{ Route::is('galerie.*') ? 'active' : '' }}"
-                        href="{{ route('galerie.index') }}">
-                        <i class="ri-image-line"></i> <span>GALERIE</span>
+                    <a class="nav-link menu-link {{ Route::is('galerie.*') ? 'active' : '' }}" href="{{ route('galerie.index') }}">
+                        <i class="ri-image-line"></i> <span>Galerie</span>
+                    </a>
+                </li>
+                @endcan
+
+                {{-- IMPACTS --}}
+                @can('voir-impacts')
+                <li class="nav-item">
+                    <a class="nav-link menu-link {{ Route::is('impacts.*') ? 'active' : '' }}" href="{{ route('impacts.index') }}">
+                        <i class="ri-bar-chart-line"></i> <span>Impacts</span>
+                    </a>
+                </li>
+                @endcan
+
+                {{-- MESSAGES --}}
+                @can('voir-messages')
+                <li class="nav-item">
+                    <a class="nav-link menu-link {{ Route::is('messages.*') ? 'active' : '' }}" href="{{ route('messages.index') }}">
+                        <i class="ri-mail-line"></i> <span>Messages</span>
+                    </a>
+                </li>
+                @endcan
+
+                {{-- NEWS --}}
+                @can('voir-actualites')
+                <li class="nav-item">
+                    <a class="nav-link menu-link {{ Route::is('news.*') ? 'active' : '' }}" href="{{ route('news.index') }}">
+                        <i class="ri-newspaper-line"></i> <span>Actualités</span>
+                    </a>
+                </li>
+                @endcan
+
+                {{-- PROGRAMMES --}}
+                @can('voir-programmes')
+                <li class="nav-item">
+                    <a class="nav-link menu-link {{ Route::is('programmes.*') ? 'active' : '' }}" href="{{ route('programmes.index') }}">
+                        <i class="ri-briefcase-line"></i> <span>Programmes</span>
+                    </a>
+                </li>
+                @endcan
+
+                {{-- PROJETS --}}
+                @can('voir-projets')
+                <li class="nav-item">
+                    <a class="nav-link menu-link {{ Route::is('projets.*') ? 'active' : '' }}" href="{{ route('projets.index') }}">
+                        <i class="ri-briefcase-line"></i> <span>Projets</span>
                     </a>
                 </li>
                 @endcan
@@ -77,52 +113,31 @@
                 {{-- REALISATIONS --}}
                 @can('voir-realisations')
                 <li class="nav-item">
-                    <a class="nav-link menu-link {{ Route::is('realisations.*') ? 'active' : '' }}"
-                        href="{{ route('realisations.index') }}">
+                    <a class="nav-link menu-link {{ Route::is('realisations.*') ? 'active' : '' }}" href="{{ route('realisations.index') }}">
                         <i class="ri-award-line"></i> <span>Réalisations</span>
                     </a>
                 </li>
                 @endcan
-                
-                <!-- projets -->
-                 @can('voir-projets')
-                <li class="nav-item">
-                    <a class="nav-link menu-link {{ Route::is('projets.*') ? 'active' : '' }}"
-                        href="{{ route('projets.index') }}">
-                        <i class="ri-briefcase-line"></i> <span>Projets</span>
-                    </a>
-                </li>
-                @endcan
 
-                <!-- Messages -->
+                {{-- ENGAGEMENTS --}}
                 @can('voir-messages')
                 <li class="nav-item">
-                    <a class="nav-link menu-link {{ Route::is('messages.*') ? 'active' : '' }}"
-                        href="{{ route('messages.index') }}">
-                        <i class="ri-mail-line"></i> <span>Messages</span>
+                    <a class="nav-link menu-link {{ Route::is('engagements.*') ? 'active' : '' }}" href="{{ route('engagements.index') }}">
+                        <i class="ri-heart-handshake-line"></i> <span>Engagements</span>
                     </a>
                 </li>
                 @endcan
 
-                    {{-- NEWS --}}  
-                @can('voir-actualites')
+                {{-- SLIDERS --}}
+                @can('voir-sliders')
                 <li class="nav-item">
-                    <a class="nav-link menu-link {{ Route::is('news.*') ? '         active' : '' }}"
-                        href="{{ route('news.index') }}">
-                        <i class="ri-newspaper-line"></i> <span>Actualités</span>
-                    </a>
-                </li>
-                @endcan 
-
-                <!-- Programmes  -->
-                @can('voir-programmes')
-                <li class="nav-item">
-                    <a class="nav-link menu-link {{ Route::is('programmes.*') ? 'active' : '' }}"
-                        href="{{ route('programmes.index') }}">
-                        <i class="ri-briefcase-line"></i> <span>Programmes</span>
+                    <a class="nav-link menu-link {{ Route::is('sliders.*') ? 'active' : '' }}" href="{{ route('sliders.index') }}">
+                        <i class="ri-slideshow-4-line"></i> <span>Sliders</span>
                     </a>
                 </li>
                 @endcan
+
+
                 {{-- SECTION PARAMÈTRES --}}
                 @if (in_array(Auth::user()->role, ['superadmin', 'developpeur']) || Auth::user()->can('voir-parametre'))
                 <li class="nav-item">

@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::table('sliders', function (Blueprint $table) {
             // Ajouter les colonnes manquantes si elles n'existent pas
-            if (!Schema::hasColumn('sliders', 'is_active')) {
-                $table->boolean('is_active')->default(true)->after('order');
-            }
             if (!Schema::hasColumn('sliders', 'order')) {
                 $table->integer('order')->default(0)->after('stats');
+            }
+            if (!Schema::hasColumn('sliders', 'is_active')) {
+                $table->boolean('is_active')->default(true)->after('order');
             }
         });
     }
@@ -28,8 +28,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('sliders', function (Blueprint $table) {
-            $table->dropColumnIfExists('is_active');
-            $table->dropColumnIfExists('order');
+            $table->dropColumn(['is_active', 'order']);
         });
     }
 };

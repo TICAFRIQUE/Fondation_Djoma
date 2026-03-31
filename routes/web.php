@@ -1,7 +1,7 @@
 <?php
 
+use App\Http\Controllers\AgirController;
 use App\Http\Controllers\AproposController;
-use App\Http\Controllers\ImpactController;
 use App\Http\Controllers\backend\AdminController;
 use App\Http\Controllers\backend\DashboardController;
 use App\Http\Controllers\backend\ModuleController;
@@ -11,8 +11,10 @@ use App\Http\Controllers\backend\PermissionController;
 use App\Http\Controllers\Backend\ProgrammeController;
 use App\Http\Controllers\backend\RoleController;
 use App\Http\Controllers\ContactMessageController;
+use App\Http\Controllers\EngagementController;
 use App\Http\Controllers\frontend\indexController;
 use App\Http\Controllers\GalerieController;
+use App\Http\Controllers\ImpactController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\ProjetController;
 use App\Http\Controllers\RealisationController;
@@ -49,6 +51,9 @@ Route::name('agir.')->group(function () {
 
 // Route d'envoi du formulaire de contact (Doit être hors du middleware admin)
 Route::post('/contact/store', [ContactMessageController::class, 'store'])->name('contact.store');
+
+// Route d'envoi du formulaire d'engagement
+Route::post('/engagement/store', [EngagementController::class, 'store'])->name('engagement.store');
 
 
 /*
@@ -193,6 +198,20 @@ Route::middleware(['admin'])->prefix('admin')->group(function () {
         Route::post('/store', 'store')->name('programmes.store');
         Route::put('/update/{programme}', 'update')->name('programmes.update');
         Route::delete('/delete/{programme}', 'destroy')->name('programmes.destroy');
+    });
+
+    // Agirs (Actions)
+    Route::prefix('agirs')->controller(AgirController::class)->group(function () {
+        Route::get('/', 'index')->name('agirs.index');
+        Route::post('/store', 'store')->name('agirs.store');
+        Route::put('/update/{agir}', 'update')->name('agirs.update');
+        Route::delete('/delete/{agir}', 'destroy')->name('agirs.destroy');
+    });
+
+    // Engagements (Engagements reçus)
+    Route::prefix('engagements')->controller(EngagementController::class)->group(function () {
+        Route::get('/', 'index')->name('engagements.index');
+        Route::delete('/delete/{engagement}', 'destroy')->name('engagements.destroy');
     });
 
 });

@@ -53,7 +53,8 @@ class ProjetController extends Controller
         Alert::success('Opération réussie', 'Le projet a été créé avec succès');
         return back();
     }
-: JsonResponse
+
+    public function destroy(Projet $projet): JsonResponse
     {
         // supprimer image si existe
         if ($projet->image && Storage::disk('public')->exists($projet->image)) {
@@ -62,10 +63,7 @@ class ProjetController extends Controller
 
         $projet->delete();
 
-        return response()->json([
-            'status' => 200,
-        ]
-        return back()->with('success', 'Projet supprimé');
+        return response()->json(['status' => 200]);
     }
 
 
@@ -106,8 +104,6 @@ class ProjetController extends Controller
         $projet->date_end = $request->date_end;
 
         Alert::success('Opération réussie', 'Le projet a été modifié avec succès');
-        return back(
-
-        return back()->with('success', 'Projet modifié avec succès');
+        return back();
     }
 }

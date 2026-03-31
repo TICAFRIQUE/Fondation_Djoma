@@ -37,11 +37,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('apropos', function (Blueprint $table) {
-            $table->dropColumnIfExists('description');
-            $table->dropColumnIfExists('stat_1_value');
-            $table->dropColumnIfExists('stat_1_label');
-            $table->dropColumnIfExists('stat_2_value');
-            $table->dropColumnIfExists('stat_2_label');
+            $table->dropColumn(['description', 'stat_1_value', 'stat_1_label', 'stat_2_value', 'stat_2_label']);
         });
     }
 };
