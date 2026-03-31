@@ -2,14 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
-
-namespace App\Http\Controllers;
-
 use App\Models\Slider;
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Storage;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class SliderController extends Controller
 {
@@ -23,60 +20,95 @@ class SliderController extends Controller
     {
         $request->validate([
             'title' => 'required|string|max:255',
-            'subtitle' => 'nullable|string|max:255',
+            'highlight' => 'nullable|string|max:255',
             'description' => 'nullable|string',
-            'image' => 'required|image',
-            'order' => 'required|integer|min:0',
+            'btn1_text' => 'nullable|string|max:100',
+            'btn1_link' => 'nullable|string|max:255',
+            'btn2_text' => 'nullable|string|max:100',
+            'btn2_link' => 'nullable|string|max:255',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'order' => 'nullable|integer|min:0',
+            'is_active' => 'nullable|boolean',
         ]);
 
-        $path = $request->file('image')->store('sliders', 'public');
-
-        Slider::create([
-            'title' => $request->title,
-            'subtitle' => $request->subtitle,
-            'description' => $request->description,
-            'image' => $path,
-            'order' => $request->order,
+        $data = $request->only([
+            'title',
+            'highlight',
+            'description',
+            'btn1_text',
+            'btn1_link',
+            'btn2_text',
+            'btn2_link',
+            'order',
+            'is_active',
         ]);
 
-        return back()->with('success', 'Slider ajouté');
+        if ($request->hasFile('image')) {
+            $data['image'] = $request->file('image')->store('sliders', 'public');
+        }
+
+        $data['is_active'] = $request->is_active ?? 1;
+        $data['order'] = $request->order ?? 0;
+
+        Slider::create($data);
+
+        Alert::success('Opération réussie', 'Le slider a été créé avec succès');
+        return back();
     }
 
     public function update(Request $request, Slider $slider)
     {
         $request->validate([
             'title' => 'required|string|max:255',
-            'subtitle' => 'nullable|string|max:255',
+            'highlight' => 'nullable|string|max:255',
             'description' => 'nullable|string',
-            'image' => 'nullable|image',
-            'order' => 'required|integer|min:0',
+            'btn1_text' => 'nullable|string|max:100',
+            'btn1_link' => 'nullable|string|max:255',
+            'btn2_text' => 'nullable|string|max:100',
+            'btn2_link' => 'nullable|string|max:255',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'order' => 'nullable|integer|min:0',
+            'is_active' => 'nullable|boolean',
+        ]);
+
+        $data = $request->only([
+            'title',
+            'highlight',
+            'description',
+            'btn1_text',
+            'btn1_link',
+            'btn2_text',
+            'btn2_link',
+            'order',
+            'is_active',
         ]);
 
         if ($request->hasFile('image')) {
-            if ($slider->image) {
+            if ($slider->image && Storage::disk('public')->exists($slider->image)) {
                 Storage::disk('public')->delete($slider->image);
             }
-            $slider->image = $request->file('image')->store('sliders', 'public');
+            $data['image'] = $request->file('image')->store('sliders', 'public');
         }
 
-        $slider->update([
-            'title' => $request->title,
-            'subtitle' => $request->subtitle,
-            'description' => $request->description,
-            'order' => $request->order,
-        ]);
+        $data['is_active'] = $request->is_active ?? $slider->is_active;
+        $data['order'] = $request->order ?? $slider->order;
 
-        return back()->with('success', 'Slider modifié');
+        $slider->update($data);
+
+        Alert::success('Opération réussie', 'Le slider a été modifié avec succès');
+        return back();
     }
 
-    public function destroy(Slider $slider)
+    public function destroy(Slider $slider): JsonResponse
     {
-        if ($slider->image) {
+        if ($slider->image && Storage::disk('public')->exists($slider->image)) {
             Storage::disk('public')->delete($slider->image);
         }
 
         $slider->delete();
 
-        return back()->with('success', 'Slider supprimé');
+        return response()->json([
+            'status' => 200,
+        ]);
     }
 }

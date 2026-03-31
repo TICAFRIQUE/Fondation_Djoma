@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Projet;
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class ProjetController extends Controller
 {
@@ -47,13 +50,11 @@ class ProjetController extends Controller
             'order' => 0
         ]);
 
-        return back()->with('success', 'Projet ajouté avec succès');
+        Alert::success('Opération réussie', 'Le projet a été créé avec succès');
+        return back();
     }
-
-    public function destroy($id)
+: JsonResponse
     {
-        $projet = \App\Models\Projet::findOrFail($id);
-
         // supprimer image si existe
         if ($projet->image && Storage::disk('public')->exists($projet->image)) {
             Storage::disk('public')->delete($projet->image);
@@ -61,14 +62,16 @@ class ProjetController extends Controller
 
         $projet->delete();
 
+        return response()->json([
+            'status' => 200,
+        ]
         return back()->with('success', 'Projet supprimé');
     }
 
 
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Projet $projet)
     {
-        $projet = \App\Models\Projet::findOrFail($id);
 
         $request->validate([
             'title' => 'required|string|max:255',
@@ -102,7 +105,8 @@ class ProjetController extends Controller
         $projet->date_start = $request->date_start;
         $projet->date_end = $request->date_end;
 
-        $projet->save();
+        Alert::success('Opération réussie', 'Le projet a été modifié avec succès');
+        return back(
 
         return back()->with('success', 'Projet modifié avec succès');
     }

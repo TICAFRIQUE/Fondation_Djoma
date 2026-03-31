@@ -1,122 +1,121 @@
 @extends('backend.layouts.master')
-
 @section('title')
-Gestion des Sliders
+   Sliders
 @endsection
-
+@section('css')
+    <!--datatable css-->
+    <link href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css" rel="stylesheet" type="text/css" />
+    <!--datatable responsive css-->
+    <link href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.bootstrap.min.css" rel="stylesheet"
+        type="text/css" />
+    <link href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css" rel="stylesheet" type="text/css" />
+@endsection
 @section('content')
+    @component('backend.components.breadcrumb')
+        @slot('li_1')
+            Liste
+        @endslot
+        @slot('title')
+            Sliders
+        @endslot
+    @endcomponent
 
-<div class="row">
-    <div class="col-12">
-        <div class="card">
-
-            <div class="card-header d-flex justify-content-between">
-                <h5>Sliders</h5>
-                <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addModal">
-                    Ajouter
-                </button>
-            </div>
-
-            <div class="card-body">
-                @if(session('success'))
-                <div class="alert alert-success">{{ session('success') }}</div>
-                @endif
-
-                <table class="table table-bordered align-middle">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Image</th>
-                            <th>Titre</th>
-                            <th>Ordre</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($sliders as $slider)
-                        <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td>
-                                <img src="{{ asset('storage/'.$slider->image) }}" width="80">
-                            </td>
-                            <td>{{ $slider->title }}</td>
-                            <td>{{ $slider->order }}</td>
-                            <td>
-                                <button class="btn btn-primary btn-sm" data-bs-toggle="modal"
-                                    data-bs-target="#editModal{{ $slider->id }}">Edit</button>
-
-                                <form action="{{ route('sliders.destroy', $slider->id) }}" method="POST" style="display:inline;">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button class="btn btn-danger btn-sm"
-                                        onclick="return confirm('Supprimer ?')">Delete</button>
-                                </form>
-                            </td>
-                        </tr>
-
-                        {{-- MODAL EDIT --}}
-                        <div class="modal fade" id="editModal{{ $slider->id }}">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <form action="{{ route('sliders.update', $slider->id) }}" method="POST" enctype="multipart/form-data">
-                                        @csrf
-                                        @method('PUT')
-
-                                        <div class="modal-header">
-                                            <h5>Modifier</h5>
-                                        </div>
-
-                                        <div class="modal-body">
-                                            <input type="text" name="title" value="{{ $slider->title }}" class="form-control mb-2">
-                                            <input type="text" name="subtitle" value="{{ $slider->subtitle }}" class="form-control mb-2">
-                                            <textarea name="description" class="form-control mb-2">{{ $slider->description }}</textarea>
-                                            <input type="number" name="order" value="{{ $slider->order }}" class="form-control mb-2">
-                                            <input type="file" name="image" class="form-control">
-                                        </div>
-
-                                        <div class="modal-footer">
-                                            <button class="btn btn-primary">Update</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-
-                        @endforeach
-                    </tbody>
-                </table>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between">
+                    <h5 class="card-title mb-0">Liste des sliders</h5>
+                    <button type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#myModal">Créer un slider</button>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table id="buttons-datatables" class="display table table-bordered" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Titre</th>
+                                    <th>Image</th>
+                                    <th>Bouton 1</th>
+                                    <th>Ordre</th>
+                                    <th>Statut</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($sliders as $key => $item)
+                                    <tr id="row_{{ $item['id'] }}">
+                                        <td> {{ ++$key }} </td>
+                                        <td>{{ $item['title'] }}</td>
+                                        <td>
+                                            @if($item['image'])
+                                                <img src="{{ asset('storage/' . $item['image']) }}" alt="{{ $item['title'] }}" style="max-width: 50px; height: auto;">
+                                            @else
+                                                -
+                                            @endif
+                                        </td>
+                                        <td>{{ $item['btn1_text'] ?? '-' }}</td>
+                                        <td>{{ $item['order'] ?? '-' }}</td>
+                                        <td>
+                                            @if($item['is_active'])
+                                                <span class="badge bg-success">Actif</span>
+                                            @else
+                                                <span class="badge bg-danger">Inactif</span>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            <div class="dropdown d-inline-block">
+                                                <button class="btn btn-soft-secondary btn-sm dropdown" type="button"
+                                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                                    <i class="ri-more-fill align-middle"></i>
+                                                </button>
+                                                <ul class="dropdown-menu dropdown-menu-end">
+                                                    <li><a type="button" class="dropdown-item edit-item-btn"
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#myModalEdit{{ $item['id'] }}"><i
+                                                                class="ri-pencil-fill align-bottom me-2 text-muted"></i>
+                                                            Modifier</a></li>
+                                                    <li>
+                                                        <a href="#" class="dropdown-item remove-item-btn delete"
+                                                            data-id="{{ $item['id'] }}">
+                                                            <i class="ri-delete-bin-fill align-bottom me-2 text-muted"></i>
+                                                            Supprimer
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    @include('backend.pages.sliders.edit')
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
+    <!--end row-->
 
-{{-- MODAL ADD --}}
-<div class="modal fade" id="addModal">
-    <div class="modal-dialog">
-        <div class="modal-content">
+    @include('backend.pages.sliders.create')
+@endsection
+@section('script')
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
-            <form action="{{ route('sliders.store') }}" method="POST" enctype="multipart/form-data">
-                @csrf
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.2/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.print.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
 
-                <div class="modal-header">
-                    <h5>Ajouter un slider</h5>
-                </div>
+    <script src="{{ URL::asset('build/js/pages/datatables.init.js') }}"></script>
 
-                <div class="modal-body">
-                    <input type="text" name="title" placeholder="Titre" class="form-control mb-2" required>
-                    <input type="text" name="subtitle" placeholder="Sous-titre" class="form-control mb-2">
-                    <textarea name="description" placeholder="Description" class="form-control mb-2"></textarea>
-                    <input type="number" name="order" placeholder="Ordre" class="form-control mb-2" required>
-                    <input type="file" name="image" class="form-control" required>
-                </div>
+    <script src="{{ URL::asset('build/js/app.js') }}"></script>
 
-                <div class="modal-footer">
-                    <button class="btn btn-success">Ajouter</button>
-                </div>
-
-            </form>
-        </div>
-    </div>
-</div>
-
+   <script>
+         window.routeName = "sliders";
+    </script>
 @endsection

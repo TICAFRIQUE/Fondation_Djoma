@@ -9,13 +9,20 @@ class Apropos extends Model
 {
     use HasFactory;
 
-    // Optionnel : Forcer le nom de la table si Laravel tente de la pluraliser bizarrement
     protected $table = 'apropos';
 
-    // Autoriser l'assignation de masse pour ces champs
     protected $fillable = [
-        'image',
         'title',
-        'nombre_eleves_soutenus',
+        'description',
+        'image',
+        'stat_1_value',
+        'stat_1_label',
+        'stat_2_value',
+        'stat_2_label',
     ];
+
+    public function items()
+    {
+        return $this->hasMany(AproposItem::class)->orderBy('order');
+    }
 }

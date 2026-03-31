@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Realisation;
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class RealisationController extends Controller
 {
@@ -44,7 +46,8 @@ class RealisationController extends Controller
        
     ]);
 
-    return back()->with('success', 'Réalisation ajoutée avec succès !');
+    Alert::success('Opération réussie', 'La réalisation a été créée avec succès');
+    return back();
 }
     public function update(Request $request, Realisation $realisation)
     {
@@ -68,15 +71,20 @@ class RealisationController extends Controller
             'date_end' => $request->date_end,
         ]);
 
-        return back()->with('success', 'Modification réussie');
+        Alert::success('Opération réussie', 'La réalisation a été modifiée avec succès');
+        return back();
     }
 
-    public function destroy(Realisation $realisation)
+    public function destroy(Realisation $realisation): JsonResponse
     {
-        Storage::disk('public')->delete($realisation->image);
+        if ($realisation->image && Storage::disk('public')->exists($realisation->image)) {
+            Storage::disk('public')->delete($realisation->image);
+        }
         $realisation->delete();
 
-        return back()->with('success', 'Supprimé');
+        return response()->json([
+            'status' => 200,
+        ]);
     }
 
     public function reorder(Request $request)

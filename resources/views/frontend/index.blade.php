@@ -1694,6 +1694,88 @@
         background: linear-gradient(to bottom, rgba(13, 43, 69, 0.75), rgba(13, 43, 69, 0.65))
       }
     }
+
+
+
+    /* ===== MODAL PREMIUM ===== */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.45);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: 0.3s ease;
+      z-index: 999;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-box {
+      background: white;
+      border-radius: 20px;
+      padding: 30px;
+      max-width: 550px;
+      width: 90%;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.2);
+      transform: translateY(40px) scale(0.9);
+      transition: 0.35s ease;
+      position: relative;
+    }
+
+    .modal-overlay.active .modal-box {
+      transform: translateY(0) scale(1);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      font-size: 22px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .modal-title {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--djama-dark);
+      margin-bottom: 15px;
+    }
+
+    .modal-content {
+      color: #475569;
+      line-height: 1.7;
+    }
+
+
+    .impact-section {
+      background: linear-gradient(135deg, #f8fafc, #eaf4ff);
+    }
+
+    .impact-num {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: #1F4E79;
+      margin-bottom: 8px;
+    }
+
+    .impact-label {
+      font-size: 0.95rem;
+      color: #475569;
+      line-height: 1.5;
+    }
+
+    .impact-divider {
+      width: 1px;
+      background: linear-gradient(to bottom, transparent, #ddd, transparent);
+    }
   </style>
 </head>
 
@@ -1727,7 +1809,91 @@
   </nav>
 
   <!-- ════ HERO SLIDER ════ -->
+  <!-- ════ HERO SLIDER DYNAMIQUE ════ -->
   <div class="hero-slider" id="heroSlider">
+
+    <div class="slider-track" id="sliderTrack">
+
+      @foreach($sliders as $key => $slide)
+      <div class="slide {{ $key === 0 ? 'active' : '' }}">
+
+        <div class="slide-bg"
+          style="background-image:url('{{ asset('storage/'.$slide->image) }}');">
+        </div>
+
+        <div class="slide-overlay"></div>
+
+        <div class="slide-content">
+          <div class="container py-5">
+            <div class="row">
+              <div class="col-lg-7 col-xl-6">
+
+                @if($slide->badge)
+                <div class="slide-badge">
+                  {!! $slide->badge !!}
+                </div>
+                @endif
+
+                <h1 class="slide-title">
+                  {{ $slide->title }}<br>
+                  @if($slide->highlight)
+                  <span>{{ $slide->highlight }}</span>
+                  @endif
+                </h1>
+
+                <p class="slide-desc">{{ $slide->description }}</p>
+
+                <div class="slide-btns">
+                  @if($slide->btn1_text)
+                  <a href="#{{ $slide->btn1_link }}" class="btn-slide-primary">
+                    {{ $slide->btn1_text }}
+                  </a>
+                  @endif
+
+                  @if($slide->btn2_text)
+                  <a href="#{{ $slide->btn2_link }}" class="btn-slide-secondary">
+                    {{ $slide->btn2_text }}
+                  </a>
+                  @endif
+                </div>
+
+                {{-- STATS --}}
+                @if($slide->stats)
+                <div class="slider-stats">
+                  @foreach($slide->stats as $stat)
+                  <div class="slider-stat">
+                    <div class="slider-stat-num">{{ $stat['value'] }}</div>
+                    <div class="slider-stat-label">{{ $stat['label'] }}</div>
+                  </div>
+                  @endforeach
+                </div>
+                @endif
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      @endforeach
+
+    </div>
+
+    <!-- CONTROLES -->
+    <button class="slider-arrow prev" id="sliderPrev">‹</button>
+    <button class="slider-arrow next" id="sliderNext">›</button>
+
+    <!-- DOTS -->
+    <div class="slider-dots" id="sliderDots">
+      @foreach($sliders as $key => $slide)
+      <button class="slider-dot {{ $key === 0 ? 'active' : '' }}"></button>
+      @endforeach
+    </div>
+
+    <div class="slider-progress" id="sliderProgress"></div>
+
+  </div>
+  <!-- <div class="hero-slider" id="heroSlider">
     <div class="slider-track" id="sliderTrack">
       <div class="slide active" id="slide-0">
         <div class="slide-bg img-blue" style="background-image:url('https://images.unsplash.com/photo-1617854818583-09e7f077a156?w=1400&auto=format&fit=crop');"></div>
@@ -1819,10 +1985,38 @@
       <button class="slider-dot"></button><button class="slider-dot"></button>
     </div>
     <div class="slider-progress" id="sliderProgress"></div>
-  </div>
+  </div> -->
 
   <!-- ════ IMPACT ════ -->
+  <!-- ════ IMPACT DYNAMIQUE ════ -->
   <section class="impact-section section-pad-sm">
+    <div class="container">
+      <div class="row justify-content-center text-center gy-4">
+
+        @foreach($impacts as $impact)
+        <div class="col-6 col-md-3">
+
+          <div class="impact-num counter"
+            data-target="{{ preg_replace('/[^0-9]/', '', $impact->value) }}">
+            0
+          </div>
+
+          <div class="impact-label">
+            {!! nl2br(e($impact->label)) !!}
+          </div>
+
+        </div>
+
+        @if(!$loop->last)
+        <div class="col-1 d-none d-md-block impact-divider"></div>
+        @endif
+
+        @endforeach
+
+      </div>
+    </div>
+  </section>
+  <!-- <section class="impact-section section-pad-sm">
     <div class="container">
       <div class="row justify-content-center text-center gy-4">
         <div class="col-6 col-md-3">
@@ -1846,78 +2040,84 @@
         </div>
       </div>
     </div>
-  </section>
+  </section> -->
 
   <!-- ════ À PROPOS — 2 blocs côte à côte ════ -->
+  @php $apropos = $apropos ?? null; @endphp
+
   <section class="section-pad" id="apropos">
     <div class="container">
-      <div class="row g-0 align-items-stretch" style="border-radius:20px;overflow:hidden;box-shadow:0 20px 60px rgba(31,78,121,0.12);border:1px solid rgba(31,78,121,0.08);">
+      <div class="row g-0 align-items-stretch"
+        style="border-radius:20px;overflow:hidden;box-shadow:0 20px 60px rgba(31,78,121,0.12);border:1px solid rgba(31,78,121,0.08);">
 
-        <!-- Bloc gauche — image verticale -->
+        <!-- IMAGE -->
         <div class="col-lg-5 d-none d-lg-block">
           <div class="apropos-img-block">
-            <img src="{{ asset('assets/images/Une_fondation_au_service.jpg') }}" alt="Jeunes filles à l'école"
-              onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
-            <div class="apropos-img-ph" style="display:none;">
-              <div style="font-size:4rem;">👧</div>
-              <div style="font-family:var(--font-head);font-weight:700;font-size:1rem;color:rgba(255,255,255,0.8);">Nos bénéficiaires</div>
-            </div>
-            <!-- Badge flottant -->
+
+            @if($apropos && $apropos->image)
+            <img src="{{ asset('storage/'.$apropos->image) }}">
+            @else
+            <img src="{{ asset('assets/images/Une_fondation_au_service.jpg') }}">
+            @endif
+
+            <!-- STATS -->
             <div class="apropos-img-badge">
               <div class="d-flex gap-3">
+
                 <div>
-                  <div class="num">+500</div>
-                  <div class="lbl">élèves soutenues</div>
+                  <div class="num">{{ $apropos->stat_1_value ?? '+500' }}</div>
+                  <div class="lbl">{{ $apropos->stat_1_label ?? 'élèves soutenues' }}</div>
                 </div>
+
                 <div style="width:1px;background:#e0e0e0;"></div>
+
                 <div>
-                  <div class="num">12</div>
-                  <div class="lbl">ans d'action</div>
+                  <div class="num">{{ $apropos->stat_2_value ?? '12' }}</div>
+                  <div class="lbl">{{ $apropos->stat_2_label ?? 'ans d\'action' }}</div>
                 </div>
+
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Bloc droit — contenu -->
+        <!-- CONTENU -->
         <div class="col-lg-7" style="background:#fff;padding:3rem 2.5rem;">
+
           <div class="section-eyebrow">À propos</div>
-          <h2 class="section-title">Une fondation au service<br />des <span>plus vulnérables</span></h2>
-          <p style="color:#4a5568;font-size:.95rem;line-height:1.8;margin-bottom:1.8rem;">
-            Créée le <strong>30 janvier 2013</strong> à Abidjan Cocody, la Fondation Djama Éducation s'engage pour l'accès à l'éducation, la santé et l'autonomie des populations, avec une attention particulière pour les jeunes filles de l'Est du pays. En plus de 12 années d'action, nous avons transformé des centaines de vies.
+
+          <h2 class="section-title">
+            {{ $apropos->title ?? 'Une fondation au service des plus vulnérables' }}
+          </h2>
+
+          <p style="color:#4a5568;">
+            {{ $apropos->description ?? 'Texte par défaut...' }}
           </p>
+
+          <!-- ITEMS -->
           <div class="d-flex flex-column gap-3 mb-4">
+            @foreach($apropos->items ?? [] as $item)
             <div class="apropos-info-item">
-              <div class="apropos-info-icon" style="background:#E3F2FD;">📚</div>
-              <div>
-                <h6>Scolarisation des filles</h6>
-                <p>Promouvoir l'accès à l'éducation pour les jeunes filles de l'Est et lutter contre l'abandon scolaire.</p>
+
+              <div class="apropos-info-icon"
+                style="background:{{ $item->color ?? '#E3F2FD' }};">
+                {{ $item->icon ?? '📌' }}
               </div>
-            </div>
-            <div class="apropos-info-item">
-              <div class="apropos-info-icon" style="background:#E8F5E9;">🌱</div>
+
               <div>
-                <h6>Lutte contre la pauvreté</h6>
-                <p>Financement de micro-projets pour l'autonomisation économique des jeunes filles et femmes.</p>
+                <h6>{{ $item->title }}</h6>
+                <p>{{ $item->description }}</p>
               </div>
+
             </div>
-            <div class="apropos-info-item">
-              <div class="apropos-info-icon" style="background:#FFF8E1;">🏥</div>
-              <div>
-                <h6>Santé & alimentation</h6>
-                <p>Répondre aux besoins sanitaires, agricoles et alimentaires urgents des populations rurales.</p>
-              </div>
-            </div>
-            <div class="apropos-info-item">
-              <div class="apropos-info-icon" style="background:#EDE7F6;">📍</div>
-              <div>
-                <h6>Siège — Abidjan Cocody</h6>
-                <p>Riviera 2 les Jardins, en face de la Mosquée · 23 B.P 1990 Abidjan 23</p>
-              </div>
-            </div>
+            @endforeach
           </div>
+
           <a href="#agir" class="btn btn-don px-4 me-2">Nous soutenir</a>
-          <a href="#programmes" class="btn btn-prog-outline btn-prog">Nos programmes <i class="bi bi-arrow-right"></i></a>
+          <a href="#programmes" class="btn btn-prog-outline btn-prog">
+            Nos programmes <i class="bi bi-arrow-right"></i>
+          </a>
+
         </div>
 
       </div>
@@ -1962,7 +2162,8 @@
 
         </div>
 
-        <!-- LISTE -->
+
+        <!-- ===== LISTE PROGRAMMES ===== -->
         <div class="programmes-list">
           @foreach($programmes as $prog)
           <div class="prog-list-item">
@@ -1974,15 +2175,33 @@
 
             <div>
               <h6>{{ $prog->title }}</h6>
-              <p>{{ $prog->description }}</p>
 
-              <a href="{{ route('projets.show', $prog->slug) }}" class="prog-list-link">
+              <p>
+                {{ \Illuminate\Support\Str::limit($prog->description, 100) }}
+              </p>
+
+              <!-- IMPORTANT : bouton modal -->
+              <a href="javascript:void(0)"
+                class="prog-list-link open-modal"
+                data-title="{{ $prog->title }}"
+                data-content="{{ $prog->description }}">
                 En savoir plus <i class="bi bi-arrow-right"></i>
               </a>
             </div>
 
           </div>
           @endforeach
+        </div>
+
+        <div class="modal-overlay" id="modal">
+          <div class="modal-box">
+
+            <span class="modal-close">&times;</span>
+
+            <h3 class="modal-title" id="modalTitle"></h3>
+            <p class="modal-content" id="modalContent"></p>
+
+          </div>
         </div>
 
       </div>
@@ -2977,6 +3196,140 @@
         item.style.display = (cat === 'all' || item.dataset.cat === cat) ? '' : 'none';
       });
     }
+
+
+
+    const modal = document.getElementById('modal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalContent = document.getElementById('modalContent');
+
+    // OUVERTURE (compatible Laravel foreach)
+    document.addEventListener('click', function(e) {
+      const btn = e.target.closest('.open-modal');
+
+      if (btn) {
+        modalTitle.textContent = btn.dataset.title;
+        modalContent.textContent = btn.dataset.content;
+
+        modal.classList.add('active');
+      }
+    });
+
+    // FERMETURE (croix)
+    document.querySelector('.modal-close').addEventListener('click', () => {
+      modal.classList.remove('active');
+    });
+
+    // FERMETURE (clic extérieur)
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.classList.remove('active');
+      }
+    });
+
+    // ESC clavier
+    document.addEventListener('keydown', (e) => {
+      if (e.key === "Escape") {
+        modal.classList.remove('active');
+      }
+    });
+
+
+    const counters = document.querySelectorAll('.counter');
+
+    const animateCounters = () => {
+      counters.forEach(counter => {
+        const target = +counter.getAttribute('data-target');
+        let count = 0;
+
+        const update = () => {
+          const increment = target / 80;
+
+          if (count < target) {
+            count += increment;
+            counter.innerText = Math.ceil(count);
+            requestAnimationFrame(update);
+          } else {
+            counter.innerText = target;
+          }
+        };
+
+        update();
+      });
+    };
+
+    // déclenchement au scroll
+    let started = false;
+
+    window.addEventListener('scroll', () => {
+      const section = document.querySelector('.impact-section');
+      const position = section.getBoundingClientRect().top;
+
+      if (position < window.innerHeight && !started) {
+        animateCounters();
+        started = true;
+      }
+    });
+
+
+
+    const slides = document.querySelectorAll('.slide');
+    const dots = document.querySelectorAll('.slider-dot');
+    const nextBtn = document.getElementById('sliderNext');
+    const prevBtn = document.getElementById('sliderPrev');
+    const progress = document.getElementById('sliderProgress');
+
+    let index = 0;
+    let interval;
+
+    function showSlide(i) {
+      slides.forEach(s => s.classList.remove('active'));
+      dots.forEach(d => d.classList.remove('active'));
+
+      slides[i].classList.add('active');
+      dots[i].classList.add('active');
+
+      index = i;
+      resetProgress();
+    }
+
+    function nextSlide() {
+      index = (index + 1) % slides.length;
+      showSlide(index);
+    }
+
+    function prevSlide() {
+      index = (index - 1 + slides.length) % slides.length;
+      showSlide(index);
+    }
+
+    nextBtn.onclick = nextSlide;
+    prevBtn.onclick = prevSlide;
+
+    dots.forEach((dot, i) => {
+      dot.addEventListener('click', () => showSlide(i));
+    });
+
+    function startAutoSlide() {
+      interval = setInterval(nextSlide, 6000);
+      animateProgress();
+    }
+
+    function resetProgress() {
+      progress.style.transition = 'none';
+      progress.style.width = '0%';
+
+      setTimeout(() => {
+        progress.style.transition = 'width 6s linear';
+        progress.style.width = '100%';
+      }, 50);
+    }
+
+    function animateProgress() {
+      progress.style.width = '100%';
+    }
+
+    startAutoSlide();
   </script>
 </body>
 

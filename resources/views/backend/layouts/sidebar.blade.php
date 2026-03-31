@@ -46,6 +46,14 @@
                     </a>
                 </li>
                 @endcan
+                <!-- Impacts -->
+                @can('voir-impacts')
+                <li class="nav-item">
+                    <a class="nav-link menu-link {{ Route::is('impacts.*') ? 'active' : '' }}" href="{{ route('impacts.index') }}">
+                        <i class="ri-bar-chart-line"></i> <span>Impacts</span>
+                    </a>
+                </li>
+                @endcan
 
                 {{-- APROPOS --}}
                 @can('voir-apropos')
@@ -75,6 +83,7 @@
                     </a>
                 </li>
                 @endcan
+                
                 <!-- projets -->
                  @can('voir-projets')
                 <li class="nav-item">
@@ -84,6 +93,7 @@
                     </a>
                 </li>
                 @endcan
+
                 <!-- Messages -->
                 @can('voir-messages')
                 <li class="nav-item">
@@ -103,6 +113,7 @@
                     </a>
                 </li>
                 @endcan 
+
                 <!-- Programmes  -->
                 @can('voir-programmes')
                 <li class="nav-item">

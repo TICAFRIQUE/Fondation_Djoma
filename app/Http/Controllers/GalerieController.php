@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Galerie;
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Storage;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class GalerieController extends Controller
 {
@@ -39,9 +41,8 @@ class GalerieController extends Controller
         return back()->with('success', 'Média ajouté avec succès');
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Galerie $galerie)
     {
-        $galerie = Galerie::findOrFail($id);
 
         $request->validate([
             'media' => 'nullable|file|mimes:jpg,jpeg,png,mp4,mov,avi|max:2048',
@@ -65,13 +66,12 @@ class GalerieController extends Controller
         $galerie->title = $request->title;
         $galerie->save();
 
-        return back()->with('success', 'Média modifié');
+        Alert::success('Opération réussie', 'Le média a été modifié avec succès');
+        return back();
     }
 
-    public function destroy($id)
+    public function destroy(Galerie $galerie): JsonResponse
     {
-        $galerie = Galerie::findOrFail($id);
-
         // supprimer fichier
         if ($galerie->path && Storage::disk('public')->exists($galerie->path)) {
             Storage::disk('public')->delete($galerie->path);
@@ -79,6 +79,8 @@ class GalerieController extends Controller
 
         $galerie->delete();
 
-        return back()->with('success', 'Média supprimé');
+        return response()->json([
+            'status' => 200,
+        ]);
     }
 }

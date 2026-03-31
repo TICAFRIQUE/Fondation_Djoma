@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\News;
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class NewsController extends Controller
 {
@@ -46,13 +48,13 @@ class NewsController extends Controller
             'reading_time' => $request->reading_time ?? 3,
         ]);
 
-        return back()->with('success', 'Article ajouté');
+        Alert::success('Opération réussie', 'L\'article a été créé avec succès');
+        return back();
     }
 
     // UPDATE
-    public function update(Request $request, $id)
+    public function update(Request $request, News $news)
     {
-        $news = News::findOrFail($id);
 
         $request->validate([
             'title' => 'required|string|max:255',
@@ -81,20 +83,21 @@ class NewsController extends Controller
             'reading_time' => $request->reading_time ?? 3,
         ]);
 
-        return back()->with('success', 'Article modifié');
+        Alert::success('Opération réussie', 'L\'article a été modifié avec succès');
+        return back();
     }
 
     // DELETE
-    public function destroy($id)
+    public function destroy(News $news): JsonResponse
     {
-        $news = News::findOrFail($id);
-
         if ($news->image && Storage::disk('public')->exists($news->image)) {
             Storage::disk('public')->delete($news->image);
         }
 
         $news->delete();
 
-        return back()->with('success', 'Article supprimé');
+        return response()->json([
+            'status' => 200,
+        ]);
     }
 }

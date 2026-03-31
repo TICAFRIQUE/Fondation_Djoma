@@ -75,7 +75,7 @@ Galerie
                                             </li>
 
                                             <li>
-                                                <form action="{{ route('galerie.delete',$item->id) }}" method="POST">
+                                                <form action="{{ route('galerie.destroy',$item->id) }}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button class="dropdown-item text-danger">

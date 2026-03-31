@@ -3,82 +3,166 @@
 namespace App\Http\Controllers;
 
 use App\Models\Apropos;
+use App\Models\AproposItem;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Storage;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class AproposController extends Controller
 {
-    /**
-     * Affiche la liste.
-     */
     public function index(): View
     {
-        $aproposList = Apropos::all();
-        return view('backend.pages.apropos.index', compact('aproposList'));
+        $data_apropos = Apropos::with('items')->get();
+        return view('backend.pages.apropos.index', compact('data_apropos'));
     }
 
-    /**
-     * Enregistre une nouvelle image.
-     */
-    public function storeApropos(Request $request): RedirectResponse
+    public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
-            'nombre_eleves_soutenus' => 'nullable|integer',
-            'title' => 'nullable|string|max:255',
-            
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'stat_1_value' => 'nullable|string',
+            'stat_1_label' => 'nullable|string',
+            'stat_2_value' => 'nullable|string',
+            'stat_2_label' => 'nullable|string',
         ]);
 
-        $path = $request->file('image')->store('apropos', 'public');
-
-        Apropos::create([
-            'image' => $path,
-            'title' => $request->title,
+        $data = $request->only([
+            'title',
+            'description',
+            'stat_1_value',
+            'stat_1_label',
+            'stat_2_value',
+            'stat_2_label',
         ]);
 
-        return redirect()->back()->with('success', 'Image ajoutée avec succès.');
+        if ($request->hasFile('image')) {
+            $data['image'] = $request->file('image')->store('apropos', 'public');
+        }
+
+        Apropos::create($data);
+
+        Alert::success('Opération réussie', 'La section À propos a été créée avec succès');
+        return back();
     }
 
-    /**
-     * Met à jour une image existante.
-     */
-    public function updateApropos(Request $request, $id): RedirectResponse
+    public function update(Request $request, $id): RedirectResponse
     {
         $request->validate([
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
-            'title' => 'nullable|string|max:255',
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'stat_1_value' => 'nullable|string',
+            'stat_1_label' => 'nullable|string',
+            'stat_2_value' => 'nullable|string',
+            'stat_2_label' => 'nullable|string',
         ]);
 
         $apropos = Apropos::findOrFail($id);
-        
+
+        $data = $request->only([
+            'title',
+            'description',
+            'stat_1_value',
+            'stat_1_label',
+            'stat_2_value',
+            'stat_2_label',
+        ]);
+
         if ($request->hasFile('image')) {
-            // Supprimer l'ancienne image du storage
-            if ($apropos->image) {
-                Storage::disk('public')->delete($apropos->image);
+            // Supprimer l'ancienne image si elle existe
+            if ($apropos->image && Storage::exists('public/' . $apropos->image)) {
+                Storage::delete('public/' . $apropos->image);
             }
-            // Stocker la nouvelle
-            $apropos->image = $request->file('image')->store('apropos', 'public');
+            $data['image'] = $request->file('image')->store('apropos', 'public');
         }
 
-        $apropos->title = $request->title;
-        $apropos->save();
+        $apropos->update($data);
 
-        return redirect()->back()->with('success', 'Image mise à jour avec succès.');
+        Alert::success('Opération réussie', 'La section À propos a été mise à jour avec succès');
+        return back();
     }
 
-   public function destroy($id)
-{
-    $apropos = Apropos::findOrFail($id);
-    
-    // Supprimer le fichier physique si nécessaire
-    if ($apropos->image) {
-        \Storage::disk('public')->delete($apropos->image);
+    public function destroy($id): JsonResponse
+    {
+        $apropos = Apropos::findOrFail($id);
+
+        // Supprimer l'image si elle existe
+        if ($apropos->image && Storage::exists('public/' . $apropos->image)) {
+            Storage::delete('public/' . $apropos->image);
+        }
+
+        // Supprimer tous les items liés
+        $apropos->items()->forceDelete();
+
+        // Supprimer le record apropos
+        $apropos->forceDelete();
+
+        return response()->json([
+            'status' => 200,
+        ]);
     }
 
-    $apropos->delete();
+    // Gestion des items
+    public function storeItem(Request $request, $apropos_id): RedirectResponse
+    {
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'icon' => 'nullable|string',
+            'color' => 'nullable|string',
+            'order' => 'nullable|integer',
+        ]);
 
-    return redirect()->back()->with('success', 'Image supprimée avec succès.');
-}
+        $apropos = Apropos::findOrFail($apropos_id);
+
+        $apropos->items()->create([
+            'title' => $request->title,
+            'description' => $request->description,
+            'icon' => $request->icon,
+            'color' => $request->color,
+            'order' => $request->order ?? 0,
+        ]);
+
+        Alert::success('Opération réussie', 'L\'item a été ajouté avec succès');
+        return back();
+    }
+
+    public function updateItem(Request $request, $apropos_id, $item_id): RedirectResponse
+    {
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'icon' => 'nullable|string',
+            'color' => 'nullable|string',
+            'order' => 'nullable|integer',
+        ]);
+
+        $item = AproposItem::where('apropos_id', $apropos_id)->findOrFail($item_id);
+
+        $item->update([
+            'title' => $request->title,
+            'description' => $request->description,
+            'icon' => $request->icon,
+            'color' => $request->color,
+            'order' => $request->order ?? 0,
+        ]);
+
+        Alert::success('Opération réussie', 'L\'item a été mis à jour avec succès');
+        return back();
+    }
+
+    public function destroyItem($apropos_id, $item_id): JsonResponse
+    {
+        $item = AproposItem::where('apropos_id', $apropos_id)->findOrFail($item_id);
+        $item->forceDelete();
+
+        return response()->json([
+            'status' => 200,
+        ]);
+    }
 }

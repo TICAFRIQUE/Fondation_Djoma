@@ -1,6 +1,6 @@
 @extends('backend.layouts.master')
 @section('title')
-   À Propos
+   Impacts
 @endsection
 @section('css')
     <!--datatable css-->
@@ -16,7 +16,7 @@
             Liste
         @endslot
         @slot('title')
-            À Propos
+            Impacts
         @endslot
     @endcomponent
 
@@ -24,8 +24,8 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header d-flex justify-content-between">
-                    <h5 class="card-title mb-0">Liste des sections À propos</h5>
-                    <button type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#myModal">Créer une section</button>
+                    <h5 class="card-title mb-0">Liste des impacts</h5>
+                    <button type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#myModal">Créer un impact</button>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -33,21 +33,27 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Titre</th>
-                                    <th>Stat 1</th>
-                                    <th>Stat 2</th>
-                                    <th>Date création</th>
+                                    <th>Valeur</th>
+                                    <th>Libellé</th>
+                                    <th>Ordre</th>
+                                    <th>Statut</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($data_apropos as $key => $item)
+                                @foreach ($impacts as $key => $item)
                                     <tr id="row_{{ $item['id'] }}">
                                         <td> {{ ++$key }} </td>
-                                        <td>{{ $item['title'] }}</td>
-                                        <td>{{ $item['stat_1_value'] ?? '-' }} {{ $item['stat_1_label'] ?? '' }}</td>
-                                        <td>{{ $item['stat_2_value'] ?? '-' }} {{ $item['stat_2_label'] ?? '' }}</td>
-                                        <td> {{ $item['created_at'] }} </td>
+                                        <td>{{ $item['value'] }}</td>
+                                        <td>{{ $item['label'] }}</td>
+                                        <td>{{ $item['order'] ?? '-' }}</td>
+                                        <td>
+                                            @if($item['is_active'])
+                                                <span class="badge bg-success">Actif</span>
+                                            @else
+                                                <span class="badge bg-danger">Inactif</span>
+                                            @endif
+                                        </td>
                                         <td>
                                             <div class="dropdown d-inline-block">
                                                 <button class="btn btn-soft-secondary btn-sm dropdown" type="button"
@@ -71,7 +77,7 @@
                                             </div>
                                         </td>
                                     </tr>
-                                    @include('backend.pages.apropos.edit')
+                                    @include('backend.pages.impact.edit')
                                 @endforeach
                             </tbody>
                         </table>
@@ -82,7 +88,7 @@
     </div>
     <!--end row-->
 
-    @include('backend.pages.apropos.create')
+    @include('backend.pages.impact.create')
 @endsection
 @section('script')
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
@@ -102,6 +108,6 @@
     <script src="{{ URL::asset('build/js/app.js') }}"></script>
 
    <script>
-         window.routeName = "apropos";
+         window.routeName = "impacts";
     </script>
 @endsection

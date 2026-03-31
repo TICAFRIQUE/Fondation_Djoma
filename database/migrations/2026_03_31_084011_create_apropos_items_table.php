@@ -11,20 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('apropos', function (Blueprint $table) {
+       Schema::create('apropos_items', function (Blueprint $table) {
     $table->id();
+    $table->foreignId('apropos_id')->constrained()->cascadeOnDelete();
 
     $table->string('title');
     $table->text('description');
 
-    $table->string('image')->nullable();
+    $table->string('icon')->nullable(); // emoji ou icon class
+    $table->string('color')->nullable();
 
-    // Stats
-    $table->string('stat_1_value')->nullable();
-    $table->string('stat_1_label')->nullable();
-
-    $table->string('stat_2_value')->nullable();
-    $table->string('stat_2_label')->nullable();
+    $table->integer('order')->default(0);
 
     $table->timestamps();
 });
@@ -35,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('apropos');
+        Schema::dropIfExists('apropos_items');
     }
 };

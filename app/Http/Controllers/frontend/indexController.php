@@ -4,10 +4,12 @@ namespace App\Http\Controllers\frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Galerie;
+use App\Models\Impact;
 use App\Models\News;
 use App\Models\Programme;
 use App\Models\Projet;
 use App\Models\Realisation;
+use App\Models\Slider;
 use Illuminate\Http\Request;
 
 class indexController extends Controller
@@ -21,7 +23,14 @@ class indexController extends Controller
         $programmes = Programme::where('is_active', true)
                 ->orderBy('order')
                 ->get();
-        return view('frontend.index', compact('realisations', 'projets', 'news', 'programmes'));
+                 $apropos = \App\Models\Apropos::with('items')->first();
+                   $impacts = Impact::where('is_active', 1)
+        ->orderBy('order')
+        ->get();
+        $sliders = Slider::where('is_active', 1)
+        ->orderBy('order')
+        ->get();
+        return view('frontend.index', compact('realisations', 'projets', 'news', 'programmes', 'apropos', 'impacts', 'sliders'));
     }
 
     // GALERIE - Page galerie

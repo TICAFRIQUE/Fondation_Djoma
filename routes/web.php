@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AproposController;
+use App\Http\Controllers\ImpactController;
 use App\Http\Controllers\backend\AdminController;
 use App\Http\Controllers\backend\DashboardController;
 use App\Http\Controllers\backend\ModuleController;
@@ -120,61 +121,79 @@ Route::middleware(['admin'])->prefix('admin')->group(function () {
     });
 
     // Galerie
-    Route::prefix('galerie')->group(function () {
-        Route::get('/', [GalerieController::class, 'index'])->name('galerie.index');
-        Route::post('/store', [GalerieController::class, 'store'])->name('galerie.store');
-        Route::put('/update/{id}', [GalerieController::class, 'update'])->name('galerie.update');
-        Route::delete('/delete/{id}', [GalerieController::class, 'destroy'])->name('galerie.delete');
+    Route::prefix('galerie')->controller(GalerieController::class)->group(function () {
+        Route::get('/', 'index')->name('galerie.index');
+        Route::post('/store', 'store')->name('galerie.store');
+        Route::put('/update/{id}', 'update')->name('galerie.update');
+        Route::delete('/delete/{id}', 'destroy')->name('galerie.destroy');
     });
 
     // Apropos
     Route::prefix('apropos')->controller(AproposController::class)->group(function () {
         Route::get('/', 'index')->name('apropos.index');
-        Route::post('/store', 'storeApropos')->name('apropos.store');
-        Route::put('/update/{id}', 'updateApropos')->name('apropos.update');
+        Route::post('/store', 'store')->name('apropos.store');
+        Route::put('/update/{id}', 'update')->name('apropos.update');
         Route::delete('/delete/{id}', 'destroy')->name('apropos.destroy');
+        // Routes pour les items
+        Route::post('/{apropos_id}/items/store', 'storeItem')->name('apropos.items.store');
+        Route::put('/{apropos_id}/items/{item_id}', 'updateItem')->name('apropos.items.update');
+        Route::delete('/{apropos_id}/items/{item_id}', 'destroyItem')->name('apropos.items.destroy');
+    });
+
+    // Impacts
+    Route::prefix('impacts')->controller(ImpactController::class)->group(function () {
+        Route::get('/', 'index')->name('impacts.index');
+        Route::post('/store', 'store')->name('impacts.store');
+        Route::put('/update/{impact}', 'update')->name('impacts.update');
+        Route::delete('/delete/{impact}', 'destroy')->name('impacts.destroy');
     });
 
     // Sliders
-    Route::prefix('sliders')->group(function () {
-        Route::get('/', [SliderController::class, 'index'])->name('sliders.index');
-        Route::post('/', [SliderController::class, 'store'])->name('sliders.store');
-        Route::put('/{slider}', [SliderController::class, 'update'])->name('sliders.update');
-        Route::delete('/{slider}', [SliderController::class, 'destroy'])->name('sliders.destroy');
+    Route::prefix('sliders')->controller(SliderController::class)->group(function () {
+        Route::get('/', 'index')->name('sliders.index');
+        Route::post('/store', 'store')->name('sliders.store');
+        Route::put('/update/{slider}', 'update')->name('sliders.update');
+        Route::delete('/delete/{slider}', 'destroy')->name('sliders.destroy');
     });
 
     // Réalisations
-    Route::prefix('realisations')->group(function () {
-        Route::get('/', [RealisationController::class, 'index'])->name('realisations.index');
-        Route::post('/', [RealisationController::class, 'store'])->name('realisations.store');
-        Route::put('/{realisation}', [RealisationController::class, 'update'])->name('realisations.update');
-        Route::delete('/{realisation}', [RealisationController::class, 'destroy'])->name('realisations.destroy');
-        Route::post('/reorder', [RealisationController::class, 'reorder'])->name('realisations.reorder');
+    Route::prefix('realisations')->controller(RealisationController::class)->group(function () {
+        Route::get('/', 'index')->name('realisations.index');
+        Route::post('/store', 'store')->name('realisations.store');
+        Route::put('/update/{realisation}', 'update')->name('realisations.update');
+        Route::delete('/delete/{realisation}', 'destroy')->name('realisations.destroy');
+        Route::post('/reorder', 'reorder')->name('realisations.reorder');
     });
 
     // Projets
-    Route::prefix('projets')->group(function () {
-        Route::get('/', [ProjetController::class, 'index'])->name('projets.index');
-        Route::post('/', [ProjetController::class, 'store'])->name('projets.store');
-        Route::put('/{id}', [ProjetController::class, 'update'])->name('projets.update');
-        Route::delete('/{id}', [ProjetController::class, 'destroy'])->name('projets.destroy');
+    Route::prefix('projets')->controller(ProjetController::class)->group(function () {
+        Route::get('/', 'index')->name('projets.index');
+        Route::post('/store', 'store')->name('projets.store');
+        Route::put('/update/{projet}', 'update')->name('projets.update');
+        Route::delete('/delete/{projet}', 'destroy')->name('projets.destroy');
     });
 
     // Gestion des Messages reçus (Admin seulement)
-    Route::prefix('messages')->group(function () {
-        Route::get('/', [ContactMessageController::class, 'index'])->name('messages.index');
-        Route::delete('/{id}', [ContactMessageController::class, 'destroy'])->name('messages.destroy');
+    Route::prefix('messages')->controller(ContactMessageController::class)->group(function () {
+        Route::get('/', 'index')->name('messages.index');
+        Route::delete('/delete/{contactMessage}', 'destroy')->name('messages.destroy');
     });
 
     // News (Actualités)
-    Route::prefix('news')->group(function () {
-        Route::get('/', [NewsController::class, 'index'])->name('news.index');
-        Route::post('/', [NewsController::class, 'store'])->name('news.store');
-        Route::put('/{id}', [NewsController::class, 'update'])->name('news.update');
-        Route::delete('/{id}', [NewsController::class, 'destroy'])->name('news.destroy');
+    Route::prefix('news')->controller(NewsController::class)->group(function () {
+        Route::get('/', 'index')->name('news.index');
+        Route::post('/store', 'store')->name('news.store');
+        Route::put('/update/{news}', 'update')->name('news.update');
+        Route::delete('/delete/{news}', 'destroy')->name('news.destroy');
     });
 
-    Route::resource('programmes', ProgrammeController::class);
+    // Programmes
+    Route::prefix('programmes')->controller(ProgrammeController::class)->group(function () {
+        Route::get('/', 'index')->name('programmes.index');
+        Route::post('/store', 'store')->name('programmes.store');
+        Route::put('/update/{programme}', 'update')->name('programmes.update');
+        Route::delete('/delete/{programme}', 'destroy')->name('programmes.destroy');
+    });
 
 });
 
